@@ -17,8 +17,8 @@ title: Zhuo CAI
 email: zcaiam@connect.ust.hk
 description: >- # this means to ignore newlines until "baseurl:"
   Explore the Unknowns 
-baseurl: "/_posts" # the subpath of your site, e.g. /blog
-url: "http://zhuocai.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://zhuocai.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: caizhuo3
 github_username:  zhuocai
 
