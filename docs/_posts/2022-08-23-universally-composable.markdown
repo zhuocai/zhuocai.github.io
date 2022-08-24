@@ -21,7 +21,14 @@ The core idea of UC framework is to decompose a complicated protocol to smaller 
 
 The UC framework is a general framework for security analysis. Detailed examples include its application to Bitcoin [Bitcoin as a Transaction Ledger: A Composable Treatment](https://eprint.iacr.org/2017/149.pdf), security analysis of Ouroboros protocols. 
 
+## 2. Quick Overview
+
+
+
+
+
 ## Reference
 <ol>
   <li> Universally Composable Security: A New Paradigm for Cryptographic Protocols.  </li>
+  <li> Bitcoin as a Transaction Ledger: A Composable Treatment. </li>
 </ol>

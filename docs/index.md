@@ -5,6 +5,7 @@
 layout: home
 ---
 
+
 I am currently an MPhil student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://www.goharshady.com). I am interested in theoretical computer science, especially in blockchain, cryptography and game theory. 
 
 Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University. 
@@ -12,5 +13,21 @@ Before coming to HKUST, I received my Bechalor's degree in Automation from Tsing
 <figure>
     <img src="images/zcaiam.jpg" 
         width="200" height="250"
-         alt="Albuquerque, New Mexico">
+        style="float: right"
+         alt="I Am Beautiful">
 </figure>
+
+# Publication 
+
+Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe9XMAAAAJ&hl=en). 
+
+## 2021
+
+<ul>
+    <li>
+        <p>(ACL'2021) Towards Visual Question Answering on Pathology Images. </p>
+        <iframe src="https://aclanthology.org/2021.acl-short.90/" style="height:200px; width:500px"></iframe>
+    </li>
+</ul>
+
+
