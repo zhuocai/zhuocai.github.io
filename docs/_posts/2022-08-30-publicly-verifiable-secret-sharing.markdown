@@ -5,8 +5,8 @@ date:   2022-08-30 20:39:00 +0800
 categories: cryptography and blockchain protocol
 ---
 
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
 Publicly verifiable secret sharing is an interesting cryptography application in multi-party communication. In proof-of-stake blockchain protocols, PVSS can be used to generate decentralized randomness and achieve consensus. 
