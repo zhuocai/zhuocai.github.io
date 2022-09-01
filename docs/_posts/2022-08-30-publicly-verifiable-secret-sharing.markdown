@@ -28,3 +28,4 @@ Consider the problem that a prover wants to prove to a verifier that \\(\log_{g_
 * Prover sends to Verifier: \\( r=w-\alpha c (\text{mod }q) \\). 
 * The verifier checks that \\( a_1 = g_1^r h_1^c\\) and \\( a_2=g_2^r h_2^c \\). 
 
+$\pi = \frac{1}{2}$
