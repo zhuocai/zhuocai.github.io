@@ -11,7 +11,7 @@ categories: cryptography and blockchain protocol
 
 Publicly verifiable secret sharing is an interesting cryptography application in multi-party communication. In proof-of-stake blockchain protocols, PVSS can be used to generate decentralized randomness and achieve consensus. 
 
-In this post, I will introduce the [A Simple Publicly Verifiable Secret Sharing Scheme and Its Application to Electronic](https://dl.acm.org/doi/10.5555/646764.703956) construction of PVSS. At the time of writing, I am especially interested in the communication assumptions and its security guarantees. 
+In this post, I will introduce the [A Simple Publicly Verifiable Secret Sharing Scheme and Its Application to Electronic Voting](https://dl.acm.org/doi/10.5555/646764.703956) construction of PVSS. At the time of writing, I am especially interested in the communication assumptions and its security guarantees. 
 
 ## 1. Introduction
 Publicly verifiable secret sharing (PVSS) is a task to distribute shares of a secret among a group of \\(n\\) participants, such that any set of at least \\(t\\) participants can collaborate to reconstruct the secret. The distribution phase and reconstrution phase are both publicly verifiable. In detail, anyone can verify the correctness of each share of the secret without learning the secret itself. Anyone can verify the correctness of the values submitted by each participant to resonstruct the values without learning the secret share itself. 
@@ -75,7 +75,30 @@ Directly breaking the encryptions of secret shares implies breaking the Diffie-H
 
 **Result:** If a set of \\(t-1\\) participants can obtain the secret by pooling their shares, then we can break the Diffie-Hellman assumption. 
 
-Given \\(g^\alpha\\), \\(g^\beta\\), 
+Given \\(g^\alpha\\), \\(g^\beta\\), we want to know \\(g^{\alpha
+\beta}\\) through breaking the \\(t\\) pooling threshold security. A construction is the following: 
+
+Suppose w.l.o.g that \\(P_1, P_2, \dots, P_{t-1}\\) can collaborate to obtain the secret. Put \\(G=g^\alpha\\), \\(C_0=g^\beta\\). This implicitly defines \\(p(0)\\) since \\(C_0=g^{p(0)}\\). Choose randomly \\( p(1), p(2), \dots, p(t-1) \\). Together with the implicit \\(p(0)\\), the polynomial \\(p\\) is fixed (implicitly). We can explicitly compute the secret shares and encrypted secret shares for the first \\(t-1\\) participants: \\(X_i = g^{p(i)}, Y_i = y_i^{p(i)}\\). We cannot compute the points \\(p(t), \dots, p(n)\\), but we can compute the secret share \\(X_i = g^{p(i)}\\) using Lagrange interpolation. Since we are playing against only the first \\(t-1\\) participants, we can fake the other participants \\(P_t, P_n\\). Compute their public keys as \\(y_i = g^{w_i}\\). Then set the encrypted secret share as \\(Y_i = X_i^{w_i}\\) such that \\(Y_i = y_i^{p(i)}\\). 
+
+In the view of the first \\(t-1\\) participants, they can decrypt their secret shares and see the encrypted shares of other participants. By the assumption that \\(t-1\\) participants can break the secret, they can provide the secret value \\(G^{p(0)} = g^{\alpha\beta}\\). 
+
+### 4.3 Chaum-Pedersen proof 
+The Chaum-Pedersen proof is honest-verifier zero-knowledge that releases no information under the random oracle assumption. 
+
+### 4.4 Reveal no partial information under the Decision DH assumption
+Although 4.2 + 4.3 shows that no set of \\(t-1\\) participants can obtain the secret value, it might be possible that they can obtain some partial information about the secret. The stronger result, that the participants cannot get partial information about the secret, holds under the Decision DH assumption. The Decision DH assumption states that it is infeasible to determine whether a given triple is of the form (\\(g^\alpha, g^\beta, g^\{\alpha\beta}\\)) or (\\(g^\alpha, g^\beta, g^\gamma\\)) for random \\(\alpha, \beta, \gamma\\). 
+
+## 5. Extention to arbitrary value secret sharing
+
+The secret to share in the above scheme is \\(G^s\\), which cannot be arbitrarily chosen. However, it is easy to achieve sharing arbitrary value secrets. If the dealer wants to share secret \\(\sigma\\), he can randomly choose a \\(s\\). He firstly publish the value \\(\sigma G^s\\) and then run the above protocol for s. After reconstructing the \\(G^s\\), the \\(\sigma\\) can be computed. 
+
+## 6. Communication setting
+The PVSS protocol requires a public-key setup for all participants. The dealer must be aware of the public keys of all the \\(n\\) participants. 
+
+If we run PVSS protocol on a blockchain as part of the blockchain protocol, the dealer must wait until he knows the identity of enough participants.  
 
 
- 
+## Reference
+<ol>
+  <li> A Simple Publicly Verifiable Secret Sharing Scheme and Its Application to Electronic Voting. </li>
+</ol>
