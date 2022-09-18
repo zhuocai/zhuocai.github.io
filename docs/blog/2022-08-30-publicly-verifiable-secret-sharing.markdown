@@ -1,8 +1,5 @@
 ---
 layout: post
-title:  "Publicly Verifiable Secret Sharing"
-date:   2022-08-30 20:39:00 +0800
-categories: cryptography and blockchain protocol
 ---
 
 <script type="text/javascript" id="MathJax-script" async

@@ -25,7 +25,7 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(ACL'2021) Towards Visual Question Answering on Pathology Images. </p>
+        <p>(ACL'2021) <a href="https://aclanthology.org/2021.acl-short.90" > Towards Visual Question Answering on Pathology Images</a>. </p>
         <iframe src="https://aclanthology.org/2021.acl-short.90/" style="height:200px; width:500px"></iframe>
     </li>
 </ul>

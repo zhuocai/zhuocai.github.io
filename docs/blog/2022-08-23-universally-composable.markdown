@@ -1,8 +1,5 @@
 ---
 layout: post
-title:  "Universally Composable Security Framework"
-date:   2022-08-23 17:16:52 +0800
-categories: cryptography and blockchain protocol
 ---
 
 <script type="text/javascript" id="MathJax-script" async
