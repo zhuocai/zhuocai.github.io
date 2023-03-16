@@ -6,7 +6,7 @@ layout: home
 ---
 
 
-I am currently an MPhil student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://www.goharshady.com). I am interested in theoretical computer science, especially in blockchain, cryptography and game theory. 
+I am currently an MPhil student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://amir.goharshady.com). I am interested in theoretical computer science, especially in blockchain, cryptography and game theory. 
 
 Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University. 
 
@@ -25,13 +25,13 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(SAC'2023) Trustless and bias-resistant game-theoretic distributed randomness. (Under review)</p>
+        <p>(ICBC'2023) Trustless and bias-resistant game-theoretic distributed randomness. </p>
     </li>
     <li>
-        <p>(ECOOP'2023) Algebro-geometric algorithms for optimizing the gas usage of ethereum smart contracts. (Under review)</p>
+        <p>(OOPSLA'2023) Algebro-geometric algorithms for optimizing the gas usage of ethereum smart contracts. (Under review)</p>
     </li>
     <li>
-        <p>(ICBC'2023) Democratic Proof-of-Stake. (Under review)</p>
+        <p>(IEEE Blockchain'2023) Democratic Proof-of-Stake. (Under review)</p>
     </li>
 </ul>
 
