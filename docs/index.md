@@ -28,6 +28,9 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
         <p>(ICBC'2023) Trustless and bias-resistant game-theoretic distributed randomness. </p>
     </li>
     <li>
+        <p>(MARBLE'2023) Game-theoretic Randomness for Proof-of-Stake. </p>
+    </li>
+    <li>
         <p>(OOPSLA'2023) Algebro-geometric algorithms for optimizing the gas usage of ethereum smart contracts. (Under review)</p>
     </li>
     <li>
