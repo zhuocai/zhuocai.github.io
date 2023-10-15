@@ -31,10 +31,10 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
         <p>(MARBLE'2023) Game-theoretic Randomness for Proof-of-Stake. </p>
     </li>
     <li>
-        <p>(OOPSLA'2023) Algebro-geometric algorithms for optimizing the gas usage of ethereum smart contracts. (Under review)</p>
+        <p>(OOPSLA'2023) Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. </p>
     </li>
     <li>
-        <p>(IEEE Blockchain'2023) Democratic Proof-of-Stake. (Under review)</p>
+        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. </p>
     </li>
 </ul>
 
