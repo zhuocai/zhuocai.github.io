@@ -8,7 +8,7 @@ layout: home
 
 I am currently a first-year PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://amir.goharshady.com). I am interested in the intersection of applied cryptography, blockchains, security & privacy, algorithms, game theory and formal verification. 
 
-Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University. 
+Before starting PhD, I was a MPhil in the same group during 2021~2023. Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University in 2021. 
 
 <figure>
     <img src="images/eiffel-night.jpg" 
