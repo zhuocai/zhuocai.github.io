@@ -6,13 +6,13 @@ layout: home
 ---
 
 
-I am currently an MPhil student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://amir.goharshady.com). I am interested in theoretical computer science, especially in blockchain, cryptography and game theory. 
+I am currently a first-year PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology. My supervisor is [Amir Goharshady](https://amir.goharshady.com). I am interested in the intersection of applied cryptography, blockchains, security & privacy, algorithms, game theory and formal verification. 
 
 Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University. 
 
 <figure>
-    <img src="images/zcaiam.jpg" 
-        width="200" height="250"
+    <img src="images/eiffel-night.jpg" 
+        width="220" height="400"
         style="float: right"
          alt="I Am Beautiful">
 </figure>
