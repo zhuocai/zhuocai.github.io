@@ -25,16 +25,24 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(ICBC'2023) Trustless and bias-resistant game-theoretic distributed randomness. </p>
+        <p>(ICBC'2023) Trustless and bias-resistant game-theoretic distributed randomness. 
+        <a href="https://ieeexplore.ieee.org/document/10174917">paper </a>
+        <a href="https://hal.science/hal-04268410/document">hal</a>
+        </p>
     </li>
     <li>
-        <p>(MARBLE'2023) Game-theoretic Randomness for Proof-of-Stake. </p>
+        <p>(MARBLE'2023) Game-theoretic Randomness for Proof-of-Stake. 
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-48731-6_2">paper</a>
+        <a href="https://hal.science/hal-04213085/document">hal</a>
+        </p>
     </li>
     <li>
-        <p>(OOPSLA'2023) Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. </p>
+        <p>(OOPSLA'2023) Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. 
+        <a href="https://dl.acm.org/doi/10.1145/3622829">paper</a>
+        </p>
     </li>
     <li>
-        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. </p>
+        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. <a href="https://hal.science/hal-04268058v1/file/paper.pdf">hal</a></p>
     </li>
 </ul>
 
@@ -42,8 +50,7 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(ACL'2021) <a href="https://aclanthology.org/2021.acl-short.90" > Towards Visual Question Answering on Pathology Images</a>. </p>
-        <iframe src="https://aclanthology.org/2021.acl-short.90/" style="height:200px; width:500px"></iframe>
+        <p>(ACL'2021) Towards Visual Question Answering on Pathology Images. <a href="https://aclanthology.org/2021.acl-short.90">ACL</a></p>
     </li>
     
 </ul>
