@@ -20,6 +20,21 @@ Before starting PhD, I was a MPhil in the same group during 2021~2023. Before co
 # Publication 
 
 Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe9XMAAAAJ&hl=en). 
+## 2023
+
+<ul>
+    <li>
+        <p>(ICBC'2024) SRNG: An efficient decentralized approach for secret random number generation. 
+        <a href="https://hal.science/hal-04518059/document">hal</a>
+        </p>
+    </li>
+    <li>
+        <p>(ICBC'2024) Gas-efficient decentralized random beacons. 
+        <a href="https://hal.science/hal-04518100/document">hal</a>
+        </p>
+    </li>
+</ul>
+
 
 ## 2023
 
