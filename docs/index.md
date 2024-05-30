@@ -54,10 +54,12 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
     <li>
         <p>(OOPSLA'2023) Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. 
         <a href="https://dl.acm.org/doi/10.1145/3622829">paper</a>
+        <a href="https://github.com/zhuocai/Asparagus/">code</a>
         </p>
     </li>
     <li>
-        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. <a href="https://hal.science/hal-04268058v1/file/paper.pdf">hal</a></p>
+        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. <a href="https://hal.science/hal-04268058v1/file/paper.pdf">hal</a>
+        <a href="https://zenodo.org/records/10716465">code</a></p>
     </li>
 </ul>
 
