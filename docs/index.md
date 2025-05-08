@@ -6,7 +6,7 @@ layout: home
 ---
 
 
-I am currently a PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology (HKUST). I am lucky to be co-advised by two great advisors, [Amir Goharshady](https://amir.goharshady.com) (now an associate professor in the University of Oxford) and [Dimitris Papadopoulos](https://www.cse.ust.hk/~dipapado/index.html). I am interested in the intersection of applied cryptography, blockchains, security & privacy, algorithms, game theory and formal verification. 
+I am currently a PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology (HKUST). I am proud to be co-advised by two great advisors, [Amir Goharshady](https://amir.goharshady.com) (now an associate professor in the University of Oxford) and [Dimitris Papadopoulos](https://www.cse.ust.hk/~dipapado/index.html). My research is generously supported by the Hong Kong PhD Fellowship Scheme (HKPFS). I am interested in the intersection of applied cryptography (especially on zkSNARKs and MPC), game theory and blockchains. 
 
 Before starting PhD, I was a MPhil in the Amir's group during 2021~2023. Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University in 2021. 
 
@@ -21,16 +21,26 @@ Before starting PhD, I was a MPhil in the Amir's group during 2021~2023. Before 
 # Publication 
 
 Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe9XMAAAAJ&hl=en). 
+
+Note: My advisor Amir Goharshady adopts the convention from theoretical computer science to order authors in <u>alphabetical</u> order. This applies to all of my publications with 'Goharshady, A.'. 
+
+## 2025 
+<ul>
+    <li>
+    <p> (IJCAI'2025) Barakbayeva, T., <strong>Cai, Z.</strong>,  Goharshady, A. & Keypoor K.  Smart Contracts for Trustless Sampling of Correlated Equilibria. 
+    </p>
+    </li>
+</ul>
 ## 2024
 
 <ul>
     <li>
-        <p>(ICBC'2024) SRNG: An efficient decentralized approach for secret random number generation. 
+        <p>(ICBC'2024) Barakbayeva T.,  <strong>Cai, Z.</strong>, & Goharshady, A. SRNG: An efficient decentralized approach for secret random number generation. 
         <a href="https://hal.science/hal-04518059/document">hal</a>
         </p>
     </li>
     <li>
-        <p>(ICBC'2024) Gas-efficient decentralized random beacons. 
+        <p>(ICBC'2024) Abidha V., Barakbayeva T., <strong>Cai, Z.</strong>, & Goharshady, A. Gas-efficient decentralized random beacons. 
         <a href="https://hal.science/hal-04518100/document">hal</a>
         </p>
     </li>
@@ -41,25 +51,25 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(ICBC'2023) Trustless and bias-resistant game-theoretic distributed randomness. 
+        <p>(ICBC'2023) <strong>Cai, Z.</strong>, & Goharshady, A. Trustless and bias-resistant game-theoretic distributed randomness. 
         <a href="https://ieeexplore.ieee.org/document/10174917">paper </a>
         <a href="https://hal.science/hal-04268410/document">hal</a>
         </p>
     </li>
     <li>
-        <p>(MARBLE'2023) Game-theoretic Randomness for Proof-of-Stake. 
+        <p>(MARBLE'2023) <strong>Cai, Z.</strong>, & Goharshady, A. Game-theoretic Randomness for Proof-of-Stake. 
         <a href="https://link.springer.com/chapter/10.1007/978-3-031-48731-6_2">paper</a>
         <a href="https://hal.science/hal-04213085/document">hal</a>
         </p>
     </li>
     <li>
-        <p>(OOPSLA'2023) Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. 
+        <p>(OOPSLA'2023) <strong>Cai, Z.</strong>, Farokhnia, S., Goharshady, A., & Hitarth, S. Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts. 
         <a href="https://dl.acm.org/doi/10.1145/3622829">paper</a>
         <a href="https://github.com/zhuocai/Asparagus/">code</a>
         </p>
     </li>
     <li>
-        <p>(IEEE Blockchain'2023) PureLottery: Fair Leader Election Without Decentralized Random Number Generation. <a href="https://hal.science/hal-04268058v1/file/paper.pdf">hal</a>
+        <p>(IEEE Blockchain'2023) Ballweg, J., <strong>Cai, Z.</strong>, & Goharshady, A. PureLottery: Fair Leader Election Without Decentralized Random Number Generation. <a href="https://hal.science/hal-04268058v1/file/paper.pdf">hal</a>
         <a href="https://zenodo.org/records/10716465">code</a></p>
     </li>
 </ul>
@@ -68,13 +78,18 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 <ul>
     <li>
-        <p>(ACL'2021) Towards Visual Question Answering on Pathology Images. <a href="https://aclanthology.org/2021.acl-short.90">ACL</a></p>
+        <p>(ACL'2021) He, X.<sup>*</sup>, <strong>Cai, Z.</strong><sup>*</sup>, Wei, W., Zhang, Y., Mou, L., Xing, E., & Xie, P. Towards Visual Question Answering on Pathology Images. <a href="https://aclanthology.org/2021.acl-short.90">ACL</a></p>
     </li>
     
 </ul>
 
 
-
+## Miscellaneous Experience
+### Academic Service
+<ul>
+    <li> <p> I served on the program committee of MARBLE'2025.  </p>
+    </li>
+</ul>
 
 # Research
 My interest in research broadly spreads in multiple areas of computer science. An ideal research project for me looks like the following: (1) evaluation is based on mathematics or can be explained deterministically, (an example of contrary is deep learning, where an algorithm is evaluated by a dataset and researchers generally cannot predict/explain the performance of an algorithm by its design choice), (2) the project directly solves an important real-world problem or provides a tool that can help other people solving real problems, (modern mathematic research might help solve problems in the future, but that day in future looks too far away), (3) I spend more time in designing a solution than its implementation and evaluation, (4) I am the only person that tries to solve the problem or I have only few strong competitors to beat. 
