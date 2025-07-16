@@ -6,7 +6,7 @@ layout: home
 ---
 
 
-I am currently a PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology (HKUST). I am proud to be co-advised by two great advisors, [Amir Goharshady](https://amir.goharshady.com) (now an associate professor in the University of Oxford) and [Dimitris Papadopoulos](https://www.cse.ust.hk/~dipapado/index.html). My research is generously supported by the Hong Kong PhD Fellowship Scheme (HKPFS). I am interested in the intersection of applied cryptography (especially on zkSNARKs and MPC), game theory and blockchains. 
+I am currently a PhD student in Computer Science and Engineering in the Hong Kong University of Science and Technology (HKUST). I am proud to be co-advised by two great advisors, [Amir Goharshady](https://amir.goharshady.com) (now an associate professor in the University of Oxford) and [Dimitris Papadopoulos](https://www.cse.ust.hk/~dipapado/index.html). During my PhD, I was a visiting scholar at the University of Oxford. My research is generously supported by the Hong Kong PhD Fellowship Scheme (HKPFS). I am interested in the intersection of applied cryptography (especially on zkSNARKs and MPC), game theory and blockchains. 
 
 Before starting PhD, I was a MPhil in the Amir's group during 2021~2023. Before coming to HKUST, I received my Bechalor's degree in Automation from Tsinghua University in 2021. 
 
