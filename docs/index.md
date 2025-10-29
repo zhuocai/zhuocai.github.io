@@ -91,21 +91,17 @@ Note: My advisor Amir Goharshady adopts the convention from theoretical computer
     </li>
 </ul>
 
-# Research
-My interest in research broadly spreads in multiple areas of computer science. An ideal research project for me looks like the following: (1) evaluation is based on mathematics or can be explained deterministically, (an example of contrary is deep learning, where an algorithm is evaluated by a dataset and researchers generally cannot predict/explain the performance of an algorithm by its design choice), (2) the project directly solves an important real-world problem or provides a tool that can help other people solving real problems, (modern mathematic research might help solve problems in the future, but that day in future looks too far away), (3) I spend more time in designing a solution than its implementation and evaluation, (4) I am the only person that tries to solve the problem or I have only few strong competitors to beat. 
 
-## Directions
+
+## Research Directions
 ### Zero-knowledge proofs and SNARKs
-I am currently developing efficient verifiable computation solutions for database and blockchain applications based on lookup arguments. Looking forward, I am motivated to bring down the time/memory overhead of verifiable computation to enable large-scale applications. 
 
 ### Blockchain and Distributed Systems
-At first glance, consensus in distributed systems might look trivial. After thinking about it once more, it becomes confusing. This feature is probably unique across all research fields. I am designing blockchain protocols with nice properties such as concurrency and democracy. 
 
 ### Formal Analysis of Distributed Systems
-Checking the correctness of a protocol in distributed systems is harder than checking a sequential algorithm. I wrote a Coq proof to formally prove the correctness of a blockchain consensus protocol designed by myself. It is meaningful to automate the procedure of generating similar machine checkable proofs, possibly by modularizng the design of distributed protocols. 
+
 
 ### Economics of Blockchain
-Blockchain introduces cryptocurrency, which adds economics to distributed systems. (1) By designing proper incentives, we can relax of assumption of honesty (follow the prescribed protocol selflessly) to rationality (selfishly maximizing their own interests) in distributed protocols, such as the random number generation protocol. (2) Miners want to maximize their revenues, even through deviating from the protocol such as hiding/delaying their block proposals. (3) With consensus and economic factors, games can be played on blockchain among participants that do not trust each other. 
 
-### Program Analysis in Blockchain Smart Contracts
-Ethereum smart contracts cause transaction fees (gas) for consuming computational resources. I designed a tool called Asparagus to estimate an parametric expression (supporting non-linear expression) of the gas cost in complicated contracts, e.g., contracts that contain loops and variable-length operations. 
+### Static Program Analysis in Blockchain Smart Contracts
+
