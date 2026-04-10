@@ -24,6 +24,15 @@ Check my [Google scholar profile](https://scholar.google.com/citations?user=1rGe
 
 Note: My advisor Amir Goharshady adopts the convention from theoretical computer science to order authors in <u>alphabetical</u> order. This applies to all of my publications with 'Goharshady, A.'. 
 
+## 2026
+
+<ul>
+    <li>
+    <p>(CCS'2026) Pappas, C., <strong>Cai, Z.</strong>, & Papadopoulos, D. Rogue: Updatable Matrix Lookup Arguments and Applications to Verifiable Databases.
+    </p>
+    </li>
+</ul>
+
 ## 2025 
 <ul>
     <li>
