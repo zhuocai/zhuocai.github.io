@@ -1,12 +1,20 @@
 {
   "title": "SRNG: An Efficient Decentralized Approach for Secret Random Number Generation",
-  "authors": ["T. Barakbayeva", "Zhuo Cai", "A. Goharshady"],
+  "authors": [
+    "T. Barakbayeva",
+    "Zhuo Cai",
+    "A. Goharshady"
+  ],
   "venue": "IEEE International Conference on Blockchain and Cryptocurrency",
   "venueShort": "ICBC 2024",
   "year": 2024,
   "type": "conference",
   "status": "Published",
-  "tags": ["distributed randomness", "random beacons", "blockchains"],
+  "tags": [
+    "distributed randomness",
+    "random beacons",
+    "blockchains"
+  ],
   "selected": true,
   "note": "Alphabetical author order with Amir Goharshady.",
   "abstract": "SRNG presents an efficient decentralized approach to secret random number generation, aiming to provide tamper-resistant randomness while preserving the privacy properties needed by higher-level blockchain protocols.",
@@ -15,5 +23,6 @@
   "contentAvailability": "local-pdf",
   "links": {
     "preprint": "https://hal.science/hal-04518059/document"
-  }
+  },
+  "alphaOrder": true
 }

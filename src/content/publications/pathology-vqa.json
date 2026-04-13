@@ -1,12 +1,24 @@
 {
   "title": "Towards Visual Question Answering on Pathology Images",
-  "authors": ["X. He*", "Zhuo Cai*", "W. Wei", "Y. Zhang", "L. Mou", "E. Xing", "P. Xie"],
+  "authors": [
+    "X. He*",
+    "Zhuo Cai*",
+    "W. Wei",
+    "Y. Zhang",
+    "L. Mou",
+    "E. Xing",
+    "P. Xie"
+  ],
   "venue": "Annual Meeting of the Association for Computational Linguistics",
   "venueShort": "ACL 2021",
   "year": 2021,
   "type": "conference",
   "status": "Published",
-  "tags": ["machine learning", "multimodal learning", "medical imaging"],
+  "tags": [
+    "machine learning",
+    "multimodal learning",
+    "medical imaging"
+  ],
   "selected": false,
   "note": "* Equal contribution.",
   "abstract": "This paper studies visual question answering over pathology images and explores how multimodal models can answer medically grounded questions in a scientific imaging domain rather than a natural-image setting.",
@@ -15,5 +27,6 @@
   "contentAvailability": "local-pdf",
   "links": {
     "paper": "https://aclanthology.org/2021.acl-short.90.pdf"
-  }
+  },
+  "alphaOrder": false
 }

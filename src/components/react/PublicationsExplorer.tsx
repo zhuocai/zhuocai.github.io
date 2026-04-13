@@ -1,5 +1,6 @@
 import { startTransition, useDeferredValue, useState } from "react";
 import type { SerializedPublication } from "../../lib/publications";
+import { parseAuthors } from "../../lib/author-utils";
 import {
   getPublicationPrimaryAction,
   getPublicationSecondaryLinks
@@ -113,6 +114,7 @@ export default function PublicationsExplorer({ publications }: Props) {
             <option value="conference">Conference</option>
             <option value="journal">Journal</option>
             <option value="workshop">Workshop</option>
+            <option value="manuscript">Manuscript</option>
           </select>
         </label>
       </div>
@@ -145,7 +147,26 @@ export default function PublicationsExplorer({ publications }: Props) {
                 </div>
 
                 <h3>{publication.title}</h3>
-                <p className="publication-card__authors">{publication.authors.join(", ")}</p>
+                {publication.authors.length > 0 && (() => {
+                  const parsed = parseAuthors(publication.authors);
+                  const hasEqualContrib = parsed.some((a) => a.equalContrib);
+                  return (
+                    <p className="publication-card__authors pub-author-list">
+                      {parsed.map((author, i) => (
+                        <span
+                          key={i}
+                          className={["pub-author", author.isMe ? "pub-author--me" : ""].filter(Boolean).join(" ")}
+                        >
+                          {author.name}
+                          {author.equalContrib && <sup>*</sup>}
+                          {publication.alphaOrder && <sup className="pub-author__marker">α</sup>}
+                        </span>
+                      ))}
+                      {publication.alphaOrder && <span className="pub-author-note"><sup>α</sup>&thinsp;Alphabetical order</span>}
+                      {hasEqualContrib && <span className="pub-author-note"><sup>*</sup>&thinsp;Equal contribution</span>}
+                    </p>
+                  );
+                })()}
                 <p className="publication-card__venue">
                   {publication.venue} <span>· {publication.year}</span>
                 </p>

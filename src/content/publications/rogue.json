@@ -1,15 +1,24 @@
 {
   "title": "Rogue: Updatable Matrix Lookup Arguments and Applications to Verifiable Databases",
-  "authors": ["C. Pappas", "Zhuo Cai", "D. Papadopoulos"],
+  "authors": [
+    "C. Pappas",
+    "Zhuo Cai",
+    "D. Papadopoulos"
+  ],
   "venue": "ACM SIGSAC Conference on Computer and Communications Security",
   "venueShort": "CCS 2026",
   "year": 2026,
   "type": "conference",
   "status": "Accepted",
-  "tags": ["zero-knowledge proofs", "lookup arguments", "verifiable databases"],
+  "tags": [
+    "zero-knowledge proofs",
+    "lookup arguments",
+    "verifiable databases"
+  ],
   "selected": true,
   "note": "To appear.",
   "abstract": "Rogue develops updatable matrix lookup arguments and studies how they can be used to support verifiable database applications, with an emphasis on proof-system expressiveness and efficient update handling.",
   "contentAvailability": "abstract-only",
-  "links": {}
+  "links": {},
+  "alphaOrder": false
 }

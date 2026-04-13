@@ -47,6 +47,7 @@ export const projects = projectsSchema.parse([
       "Mechanism design for equilibrium-oriented blockchain interactions"
     ],
     publicationIds: [
+      "strategic-mining-proof-of-stake-practical-random-election",
       "trustless-sampling-correlated-equilibria",
       "srng",
       "gas-efficient-random-beacons",

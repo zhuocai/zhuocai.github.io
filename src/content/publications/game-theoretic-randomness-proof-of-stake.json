@@ -1,12 +1,19 @@
 {
   "title": "Game-Theoretic Randomness for Proof-of-Stake",
-  "authors": ["Zhuo Cai", "A. Goharshady"],
+  "authors": [
+    "Zhuo Cai",
+    "A. Goharshady"
+  ],
   "venue": "Workshop on Mathematical Research for Blockchain Economy",
   "venueShort": "MARBLE 2023",
   "year": 2023,
   "type": "workshop",
   "status": "Published",
-  "tags": ["proof of stake", "distributed randomness", "game theory"],
+  "tags": [
+    "proof of stake",
+    "distributed randomness",
+    "game theory"
+  ],
   "selected": false,
   "note": "Alphabetical author order with Amir Goharshady.",
   "abstract": "This work studies randomness generation for proof-of-stake settings through a game-theoretic lens, focusing on protocol incentives and how strategic behavior shapes the quality of the randomness mechanism.",
@@ -16,5 +23,6 @@
   "links": {
     "paper": "https://link.springer.com/chapter/10.1007/978-3-031-48731-6_2",
     "preprint": "https://hal.science/hal-04213085/document"
-  }
+  },
+  "alphaOrder": true
 }

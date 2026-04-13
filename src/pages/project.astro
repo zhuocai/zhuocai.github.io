@@ -1,10 +1,16 @@
 ---
 import PublicationCard from "../components/PublicationCard.astro";
+import ResearchDirectionCard from "../components/ResearchDirectionCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { projects } from "../data/projects";
-import { getPublicationMap, serializePublication } from "../lib/publications";
+import { getPublicationMap, getAllPublications, serializePublication } from "../lib/publications";
+import { getAllDirections, serializeDirection } from "../lib/directions";
 
 const publicationMap = await getPublicationMap();
+const allPublications = (await getAllPublications()).map(serializePublication);
+const manuscripts = allPublications.filter((p) => p.type === "manuscript");
+const directions = (await getAllDirections()).map(serializeDirection);
+const hasOngoing = manuscripts.length > 0 || directions.length > 0;
 
 const projectGroups = projects.map((project) => ({
   ...project,
@@ -26,13 +32,50 @@ const projectGroups = projects.map((project) => ({
       <div class="section-header" data-reveal>
         <p class="eyebrow">Research themes</p>
         <h1 class="section-title">Topics, questions, and representative papers.</h1>
-        <p class="section-copy">
-          This page groups the work by theme rather than year. Each section summarizes the problem setting, the technical
-          direction, and the papers that belong to it.
-        </p>
+        <p class="section-copy">Themes across zero-knowledge, distributed randomness, game theory, and blockchain systems.</p>
       </div>
     </div>
   </section>
+
+  {hasOngoing && (
+    <section class="section" id="ongoing">
+      <div class="page-shell">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Work in Progress</p>
+          <h2 class="section-title">Ongoing directions and papers under review.</h2>
+          <p class="section-copy">
+            These include manuscripts currently under submission and active research directions
+            without a published paper yet.
+          </p>
+        </div>
+
+        {manuscripts.length > 0 && (
+          <div class="publications-grid">
+            {manuscripts.map((pub) => (
+              <PublicationCard
+                publication={pub}
+                showAbstract
+                anchorId={`paper-${pub.id}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {directions.length > 0 && (
+          <div class="home-directions-grid" style="margin-top: 1.5rem;">
+            {directions.map((direction) => (
+              <ResearchDirectionCard
+                direction={direction}
+                relatedPublicationEntries={direction.relatedPublications
+                  .map((id) => allPublications.find((p) => p.id === id))
+                  .filter((p): p is NonNullable<typeof p> => p !== undefined)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
 
   {
     projectGroups.map((project) => (

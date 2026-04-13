@@ -54,6 +54,7 @@ const contactItemSchema = z.object({
 
 const profileSchema = z.object({
   name: z.string(),
+  chineseName: z.string().optional(),
   preferredName: z.string(),
   role: z.string(),
   institution: z.string(),
@@ -111,6 +112,7 @@ const links = {
 
 export const profile = profileSchema.parse({
   name: "Zhuo Cai",
+  chineseName: "蔡卓",
   preferredName: "Joe",
   role: "PhD Student in Computer Science and Engineering",
   institution: "The Hong Kong University of Science and Technology (HKUST)",

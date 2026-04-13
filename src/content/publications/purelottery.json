@@ -1,12 +1,20 @@
 {
   "title": "PureLottery: Fair Leader Election Without Decentralized Random Number Generation",
-  "authors": ["J. Ballweg", "Zhuo Cai", "A. Goharshady"],
+  "authors": [
+    "J. Ballweg",
+    "Zhuo Cai",
+    "A. Goharshady"
+  ],
   "venue": "IEEE International Conference on Blockchain",
   "venueShort": "IEEE Blockchain 2023",
   "year": 2023,
   "type": "conference",
   "status": "Published",
-  "tags": ["leader election", "fairness", "blockchains"],
+  "tags": [
+    "leader election",
+    "fairness",
+    "blockchains"
+  ],
   "selected": false,
   "note": "Alphabetical author order with Amir Goharshady.",
   "abstract": "PureLottery studies fair leader election without relying on a decentralized random number generation service, showing how protocol design can still achieve fairness guarantees in blockchain settings.",
@@ -16,5 +24,6 @@
   "links": {
     "preprint": "https://hal.science/hal-04268058v1/file/paper.pdf",
     "code": "https://zenodo.org/records/10716465"
-  }
+  },
+  "alphaOrder": true
 }

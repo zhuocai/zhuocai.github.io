@@ -1,12 +1,19 @@
 {
   "title": "Trustless and Bias-Resistant Game-Theoretic Distributed Randomness",
-  "authors": ["Zhuo Cai", "A. Goharshady"],
+  "authors": [
+    "Zhuo Cai",
+    "A. Goharshady"
+  ],
   "venue": "IEEE International Conference on Blockchain and Cryptocurrency",
   "venueShort": "ICBC 2023",
   "year": 2023,
   "type": "conference",
   "status": "Published",
-  "tags": ["distributed randomness", "game theory", "blockchains"],
+  "tags": [
+    "distributed randomness",
+    "game theory",
+    "blockchains"
+  ],
   "selected": true,
   "note": "Alphabetical author order with Amir Goharshady.",
   "abstract": "This paper studies distributed randomness generation under strategic behavior and proposes a trustless, bias-resistant approach that aligns game-theoretic incentives with randomness quality.",
@@ -16,5 +23,6 @@
   "links": {
     "paper": "https://ieeexplore.ieee.org/document/10174917",
     "preprint": "https://hal.science/hal-04268410/document"
-  }
+  },
+  "alphaOrder": true
 }

@@ -1,0 +1,73 @@
+---
+import type { SerializedPublication } from "../lib/publications";
+import {
+  getPublicationPrimaryAction,
+  getPublicationSecondaryLinks
+} from "../lib/publication-ui";
+import { parseAuthors } from "../lib/publications";
+import Icon from "./Icon.astro";
+
+interface Props {
+  publication: SerializedPublication;
+}
+
+const { publication } = Astro.props;
+
+const primaryAction = getPublicationPrimaryAction(publication);
+const secondaryLinks = getPublicationSecondaryLinks(publication);
+const parsedAuthors = parseAuthors(publication.authors);
+---
+
+<article class="home-publication" data-reveal>
+  <div class="home-publication__content">
+    <div class="home-publication__meta">
+      <span class="pill">{publication.venueShort ?? publication.venue}</span>
+      <span class="status-badge">{publication.status}</span>
+    </div>
+
+    <h3>{publication.title}</h3>
+    {publication.authors.length > 0 && (
+      <p class="home-publication__authors pub-author-list">
+        {parsedAuthors.map((author) => (
+          <span class:list={["pub-author", author.isMe && "pub-author--me"]}>
+            {author.name}{author.equalContrib && <sup>*</sup>}{publication.alphaOrder && <sup class="pub-author__marker">α</sup>}
+          </span>
+        ))}
+      </p>
+    )}
+    <p class="home-publication__venue">
+      {publication.venue}
+      <span> · {publication.year}</span>
+    </p>
+
+    {
+      publication.note && (
+        <p class="home-publication__note">{publication.note}</p>
+      )
+    }
+
+    {
+      secondaryLinks.length > 0 && (
+        <div class="home-publication__links">
+          {secondaryLinks.map((link) => (
+            <a class="inline-link" href={link.href} target="_blank" rel="noreferrer">
+              <span>{link.label}</span>
+              <Icon name="external" class="icon icon--tiny" />
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="home-publication__actions">
+    <a
+      class="button button--ghost button--small"
+      href={primaryAction.href}
+      target={primaryAction.external ? "_blank" : undefined}
+      rel={primaryAction.external ? "noreferrer" : undefined}
+    >
+      {primaryAction.label}
+    </a>
+  </div>
+</article>

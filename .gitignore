@@ -10,6 +10,9 @@ _site/
 .bundle/
 vendor/
 
+# Local research registry — gitignored intentionally; contains private manuscripts / directions
+research/
+
 # OS and editor noise
 .DS_Store
 Thumbs.db

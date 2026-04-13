@@ -1,175 +1,135 @@
 ---
 import Icon from "../components/Icon.astro";
-import PublicationCard from "../components/PublicationCard.astro";
-import RichText from "../components/RichText.astro";
+import PublicationListItem from "../components/PublicationListItem.astro";
+import ResearchDirectionCard from "../components/ResearchDirectionCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { projects } from "../data/projects";
 import { profile } from "../data/site";
-import { getPublicationMap, getSelectedPublications, serializePublication } from "../lib/publications";
+import { getAllPublications, serializePublication } from "../lib/publications";
+import { getAllDirections, serializeDirection } from "../lib/directions";
 
-const selectedPublications = (await getSelectedPublications(4)).map(serializePublication);
-const publicationMap = await getPublicationMap();
+const publications = (await getAllPublications()).map(serializePublication);
+const directions = (await getAllDirections()).map(serializeDirection);
+const publicationMap = new Map(publications.map((p) => [p.id, p]));
+
+const destinations = [
+  {
+    eyebrow: "Research",
+    title: "Topics and questions",
+    description: "Research themes and related papers.",
+    href: "/project/",
+    label: "Open research overview"
+  },
+  {
+    eyebrow: "Publications",
+    title: "Searchable paper list",
+    description: "Browse the complete publication list with venue, year, tags, and local PDFs where available.",
+    href: "/publications/",
+    label: "Open publications"
+  },
+  {
+    eyebrow: "CV",
+    title: "Background and milestones",
+    description: "Web summary and PDF CV.",
+    href: "/cv/",
+    label: "Open CV"
+  },
+  {
+    eyebrow: "Contact",
+    title: "Profiles and email",
+    description: "Find contact details, profile links, and the best way to reach out for research discussions.",
+    href: "/contact/",
+    label: "Open contact details"
+  }
+];
 ---
 
 <BaseLayout title={profile.name} description={profile.summary} currentPath="/" bodyClass="home-page">
-  <section class="hero">
-    <div class="page-shell hero__grid">
-      <div class="hero__copy" data-reveal>
-        <p class="eyebrow">{profile.hero.eyebrow}</p>
-        <h1 class="hero__headline">{profile.hero.title}</h1>
-        <p class="hero__lede">{profile.hero.intro}</p>
+  <section class="home-overview">
+    <div class="page-shell">
+      <div class="home-overview__panel" data-reveal>
+        <div class="home-overview__grid">
+          <div class="home-overview__copy">
+            <p class="eyebrow">{profile.hero.eyebrow}</p>
+            <h1 class="home-overview__title">{profile.name}{profile.chineseName && <span class="home-overview__chinese-name" lang="zh"> ({profile.chineseName})</span>}</h1>
+            <p class="home-overview__subhead">{profile.hero.title}</p>
+            <p class="home-overview__intro">{profile.hero.intro}</p>
 
-        <div class="hero__actions">
-          <a class="button" href={profile.hero.primaryCta.href}>{profile.hero.primaryCta.label}</a>
-          <a class="button button--ghost" href={profile.hero.secondaryCta.href}>{profile.hero.secondaryCta.label}</a>
-        </div>
+            <div class="cta-actions home-overview__actions">
+              <a class="button" href={profile.hero.primaryCta.href}>{profile.hero.primaryCta.label}</a>
+              <a class="button button--ghost" href={profile.hero.secondaryCta.href}>{profile.hero.secondaryCta.label}</a>
+            </div>
 
-        <div class="quick-links" aria-label="Profile links">
-          {
-            profile.quickLinks.map((link) => (
-              <a
-                class="link-pill"
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer" : undefined}
-              >
-                <Icon name={link.icon} class="icon" />
-                <span>{link.label}</span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-
-      <aside class="hero__aside" data-reveal>
-        <div class="hero-portrait">
-          <img src="/images/zcaiam.jpg" alt={`Portrait of ${profile.name}`} />
-        </div>
-
-        <div class="hero__details">
-          <p class="snapshot-card__label">Current position</p>
-          <h2>{profile.role}</h2>
-          <p class="muted">
-            <a class="text-link" href={profile.institutionHref} target="_blank" rel="noreferrer">
-              {profile.institution}
-            </a>
-          </p>
-        </div>
-
-        <dl class="hero-facts">
-          <div>
-            <dt>Location</dt>
-            <dd>{profile.location}</dd>
+            <div class="quick-links" aria-label="Profile links">
+              {
+                profile.quickLinks.map((link) => (
+                  <a
+                    class="link-pill"
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    <Icon name={link.icon} class="icon" />
+                    <span>{link.label}</span>
+                  </a>
+                ))
+              }
+            </div>
           </div>
-          <div>
-            <dt>Support</dt>
-            <dd>Hong Kong PhD Fellowship Scheme (HKPFS)</dd>
-          </div>
-          <div>
-            <dt>Visiting scholar</dt>
-            <dd>University of Oxford</dd>
-          </div>
-        </dl>
 
-        <div class="hero-stats">
-          {
-            profile.hero.stats.map((stat) => (
-              <div class="hero-stat">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
+          <aside class="home-overview__rail" aria-label="Current academic profile">
+            <div class="home-overview__identity">
+              <div class="home-portrait">
+                <img src="/images/eiffel-night.jpg" alt="Eiffel Tower at night" />
               </div>
-            ))
-          }
+
+              <div>
+                <p class="snapshot-card__label">Institution</p>
+                <p class="home-overview__institution">
+                  <a class="text-link" href={profile.institutionHref} target="_blank" rel="noreferrer">
+                    {profile.institution}
+                  </a>
+                </p>
+                <p class="home-overview__role">{profile.role}</p>
+                <p class="home-overview__location">{profile.location}</p>
+              </div>
+            </div>
+
+            <dl class="home-facts">
+              <div>
+                <dt>Undergrad</dt>
+                <dd>B.Eng. in Automation, Tsinghua University</dd>
+              </div>
+              <div>
+                <dt>Support</dt>
+                <dd>Hong Kong PhD Fellowship Scheme (HKPFS)</dd>
+              </div>
+              <div>
+                <dt>Visiting scholar</dt>
+                <dd>University of Oxford</dd>
+              </div>
+            </dl>
+
+
+          </aside>
         </div>
-      </aside>
+      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section home-section--compact">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Profile</p>
-        <h2 class="section-title">Background, affiliations, and current research context.</h2>
+        <p class="eyebrow">Publications</p>
+        <h2 class="section-title">Full publication record.</h2>
         <p class="section-copy">
-          This page provides a concise overview of my academic background, institutional context, and current lines of work.
+          All {publications.length} papers are listed here. The publications page adds search, tags, and abstracts.
         </p>
       </div>
 
-      <div class="snapshot-grid">
-        <article class="card" data-reveal>
-          <p class="snapshot-card__label">About</p>
-          {profile.bio.map((paragraph) => <RichText block={paragraph} class="text-block" />)}
-        </article>
-
-        <article class="card" data-reveal>
-          <p class="snapshot-card__label">Affiliations</p>
-          <div class="tag-row">
-            {
-              profile.affiliations.map((item) => (
-                <span class="tag">{item.label}</span>
-              ))
-            }
-          </div>
-          <div class="footer-list footer-list--rich">
-            {
-              profile.affiliations.map((item) => (
-                <div>
-                  <strong>{item.label}:</strong> <RichText block={item.value} as="span" />
-                </div>
-              ))
-            }
-          </div>
-        </article>
-
-        <article class="card" data-reveal>
-          <p class="snapshot-card__label">Research note</p>
-          <RichText block={profile.publicationNote} class="text-block" />
-        </article>
-
-        <article class="card" data-reveal>
-          <p class="snapshot-card__label">Current focus</p>
-          <ul>
-            {profile.researchAreas.map((area) => <li>{area.title}</li>)}
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Research themes</p>
-        <h2 class="section-title">Current areas of work.</h2>
-      </div>
-
-      <div class="grid-two">
+      <div class="home-publications-list">
         {
-          profile.researchAreas.map((area) => (
-            <article class="research-card" data-reveal>
-              <h3>{area.title}</h3>
-              <p>{area.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Selected publications</p>
-        <h2 class="section-title">Recent papers and ongoing directions.</h2>
-        <p class="section-copy">
-          A complete, filterable publication list with local PDFs where available is maintained on the publications page.
-        </p>
-      </div>
-
-      <div class="publications-grid">
-        {
-          selectedPublications.map((publication) => (
-            <PublicationCard publication={publication} featured />
+          publications.map((publication) => (
+            <PublicationListItem publication={publication} />
           ))
         }
       </div>
@@ -180,112 +140,48 @@ const publicationMap = await getPublicationMap();
     </div>
   </section>
 
-  <section class="section">
+  {directions.length > 0 && (
+    <section class="section home-section--compact">
+      <div class="page-shell">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Research Directions</p>
+          <h2 class="section-title">Ongoing and planned research.</h2>
+          <p class="section-copy">
+            Topics I am actively working on or planning to pursue, beyond papers already published.
+          </p>
+        </div>
+
+        <div class="home-directions-grid">
+          {directions.map((direction) => (
+            <ResearchDirectionCard
+              direction={direction}
+              relatedPublicationEntries={direction.relatedPublications
+                .map((id) => publicationMap.get(id))
+                .filter((p): p is NonNullable<typeof p> => p !== undefined)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section home-section--compact">
     <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Research themes</p>
-        <h2 class="section-title">Themes that connect the publication list.</h2>
-        <p class="section-copy">Each group below links related papers through a shared research question.</p>
-      </div>
-
-      <div class="projects-grid">
+      <div class="home-destinations">
         {
-          projects.map((project) => {
-            const related = project.publicationIds
-              .flatMap((id) => {
-                const publication = publicationMap.get(id);
-                return publication ? [publication] : [];
-              })
-              .slice(0, 2);
-
-            return (
-              <article class="project-card" data-reveal>
-                <p class="pill">{project.period}</p>
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <ul>
-                  {project.highlights.map((highlight) => <li>{highlight}</li>)}
-                </ul>
-                {
-                  related.length > 0 && (
-                    <div class="tag-row">
-                      {related.map((publication) => <span class="tag">{publication.data.venueShort ?? publication.data.year}</span>)}
-                    </div>
-                  )
-                }
-                <div class="publication-card__actions">
-                  <a class="button button--ghost button--small" href={`/project/#${project.id}`}>
-                    View theme
-                  </a>
-                </div>
-              </article>
-            );
-          })
-        }
-      </div>
-
-      <div class="cta-actions" data-reveal>
-        <a class="button" href="/project/">Open research overview</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Academic path</p>
-        <h2 class="section-title">Training, milestones, and recent publications.</h2>
-      </div>
-
-      <div class="timeline">
-        {
-          profile.milestones.map((milestone) => (
-            <article class="timeline-item" data-reveal>
-              <div class="timeline-item__period">{milestone.period}</div>
-              <div>
-                {
-                  milestone.href ? (
-                    <h3>
-                      <a class="text-link" href={milestone.href} target="_blank" rel="noreferrer">
-                        {milestone.title}
-                      </a>
-                    </h3>
-                  ) : (
-                    <h3>{milestone.title}</h3>
-                  )
-                }
-                <RichText block={milestone.detail} class="text-block" />
+          destinations.map((destination) => (
+            <article class="card home-destination" data-reveal>
+              <p class="snapshot-card__label">{destination.eyebrow}</p>
+              <h3>{destination.title}</h3>
+              <p>{destination.description}</p>
+              <div class="publication-card__actions home-destination__link">
+                <a class="button button--ghost button--small" href={destination.href}>
+                  {destination.label}
+                </a>
               </div>
             </article>
           ))
         }
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="page-shell">
-      <div class="grid-two">
-        <article class="card" data-reveal>
-          <p class="snapshot-card__label">Service</p>
-          <h3>Academic service</h3>
-          <ul>
-            {profile.service.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-
-        <article class="cta-panel" data-reveal>
-          <p class="eyebrow">Contact</p>
-          <h3>Open to research discussions and collaboration.</h3>
-          <p>
-            If your work overlaps with zero-knowledge proofs, distributed randomness, mechanism design, or smart contract
-            analysis, feel free to get in touch.
-          </p>
-          <div class="cta-actions">
-            <a class="button" href="/contact/">Contact details</a>
-            <a class="button button--ghost" href={`mailto:${profile.email}`}>Email directly</a>
-          </div>
-        </article>
       </div>
     </div>
   </section>

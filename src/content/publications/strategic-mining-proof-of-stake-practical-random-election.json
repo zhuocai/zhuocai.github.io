@@ -1,0 +1,27 @@
+{
+  "title": "Strategic Mining in Proof-of-Stake with Practical Random Election",
+  "authors": [
+    "Zhuo Cai"
+  ],
+  "venue": "IACR Cryptology ePrint Archive",
+  "venueShort": "ePrint 2025",
+  "year": 2025,
+  "type": "manuscript",
+  "status": "Manuscript",
+  "tags": [
+    "proof of stake",
+    "strategic mining",
+    "distributed randomness",
+    "blockchains"
+  ],
+  "selected": false,
+  "note": "IACR ePrint 2025/1428.",
+  "abstract": "This manuscript studies strategic mining in proof-of-stake systems when random beacon output is fixed across multiple future slots within an epoch. It formalizes the lookahead effect created by practical random election and gives an efficient optimal attack algorithm showing profitable deviations at much lower stake fractions than earlier per-slot-randomness models.",
+  "abstractSourceUrl": "https://eprint.iacr.org/2025/1428",
+  "localPdfPath": "/papers/strategic-mining-proof-of-stake-practical-random-election-eprint-2025.pdf",
+  "contentAvailability": "local-pdf",
+  "links": {
+    "preprint": "https://eprint.iacr.org/2025/1428"
+  },
+  "alphaOrder": false
+}

@@ -10,10 +10,11 @@ export type SerializedPublication = {
   venue: string;
   venueShort?: string;
   year: number;
-  type: "conference" | "journal" | "workshop";
+  type: "conference" | "journal" | "workshop" | "manuscript";
   status: string;
   tags: string[];
   selected: boolean;
+  alphaOrder: boolean;
   note?: string;
   abstract?: string;
   abstractSourceUrl?: string;
@@ -61,6 +62,7 @@ export function serializePublication(publication: PublicationEntry): SerializedP
     status: publication.data.status,
     tags: publication.data.tags,
     selected: publication.data.selected,
+    alphaOrder: publication.data.alphaOrder,
     note: publication.data.note,
     abstract: publication.data.abstract,
     abstractSourceUrl: publication.data.abstractSourceUrl,
@@ -81,3 +83,6 @@ export function groupPublicationsByYear(publications: PublicationEntry[]) {
     new Map<number, PublicationEntry[]>()
   );
 }
+
+export type { ParsedAuthor } from "./author-utils";
+export { parseAuthors } from "./author-utils";

@@ -4,6 +4,7 @@ import {
   getPublicationPrimaryAction,
   getPublicationSecondaryLinks
 } from "../lib/publication-ui";
+import { parseAuthors } from "../lib/publications";
 import Icon from "./Icon.astro";
 
 interface Props {
@@ -22,6 +23,8 @@ const {
 
 const primaryAction = getPublicationPrimaryAction(publication);
 const secondaryLinks = getPublicationSecondaryLinks(publication);
+const parsedAuthors = parseAuthors(publication.authors);
+const hasEqualContrib = parsedAuthors.some((a) => a.equalContrib);
 ---
 
 <article
@@ -35,7 +38,17 @@ const secondaryLinks = getPublicationSecondaryLinks(publication);
   </div>
 
   <h3>{publication.title}</h3>
-  <p class="publication-card__authors">{publication.authors.join(", ")}</p>
+  {publication.authors.length > 0 && (
+    <p class="publication-card__authors pub-author-list">
+      {parsedAuthors.map((author) => (
+        <span class:list={["pub-author", author.isMe && "pub-author--me"]}>
+          {author.name}{author.equalContrib && <sup>*</sup>}{publication.alphaOrder && <sup class="pub-author__marker">α</sup>}
+        </span>
+      ))}
+      {publication.alphaOrder && <span class="pub-author-note"><sup>α</sup>&thinsp;Alphabetical order</span>}
+      {hasEqualContrib && <span class="pub-author-note"><sup>*</sup>&thinsp;Equal contribution</span>}
+    </p>
+  )}
   <p class="publication-card__venue">
     {publication.venue}
     <span> · {publication.year}</span>

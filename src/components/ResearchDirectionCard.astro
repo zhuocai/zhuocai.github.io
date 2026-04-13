@@ -1,0 +1,87 @@
+---
+import type { SerializedDirection } from "../lib/directions";
+import type { SerializedPublication } from "../lib/publications";
+
+interface Props {
+  direction: SerializedDirection;
+  relatedPublicationEntries?: SerializedPublication[];
+}
+
+const { direction, relatedPublicationEntries = [] } = Astro.props;
+
+const statusLabel: Record<SerializedDirection["status"], string> = {
+  planned: "Planned",
+  active: "Active",
+  "under-submission": "Under Submission"
+};
+---
+
+<article class="publication-card research-direction-card" data-reveal>
+  <div class="publication-card__meta">
+    <span class="pill">Research Direction</span>
+    <span class="status-badge">{statusLabel[direction.status]}</span>
+  </div>
+
+  <h3>{direction.title}</h3>
+
+  {direction.description && <p class="research-direction-card__description">{direction.description}</p>}
+
+  {
+    relatedPublicationEntries.length > 0 && (
+      <p class="research-direction-card__related-label snapshot-card__label">Related publications</p>
+      <ul class="research-direction-card__related">
+        {relatedPublicationEntries.map((pub) => (
+          <li>
+            <a class="inline-link" href={`/publications/#paper-${pub.id}`}>
+              {pub.title}
+            </a>
+            <span> · {pub.venueShort ?? pub.venue}, {pub.year}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <div class="tag-row">
+    {direction.tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+
+  {
+    (direction.links.preprint || direction.links.code) && (
+      <div class="publication-card__links">
+        {direction.links.preprint && (
+          <a class="inline-link" href={direction.links.preprint} target="_blank" rel="noreferrer">
+            Preprint
+          </a>
+        )}
+        {direction.links.code && (
+          <a class="inline-link" href={direction.links.code} target="_blank" rel="noreferrer">
+            Code
+          </a>
+        )}
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .research-direction-card__description {
+    margin-block: 0.5rem 0.75rem;
+    line-height: 1.6;
+  }
+
+  .research-direction-card__related-label {
+    margin-block-start: 0.75rem;
+    margin-block-end: 0.25rem;
+  }
+
+  .research-direction-card__related {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.875rem;
+  }
+</style>

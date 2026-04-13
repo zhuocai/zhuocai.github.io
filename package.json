@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "sync:papers": "node scripts/sync-paper-assets.mjs"
+    "sync:papers": "node scripts/sync-paper-assets.mjs",
+    "sync:research": "node scripts/sync-research.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "gray-matter": "^4.0.3",
     "typescript": "^5.9.3"
   }
 }

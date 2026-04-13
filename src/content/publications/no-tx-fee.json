@@ -1,0 +1,27 @@
+{
+  "title": "LockFee: Refundable Transaction Admission via Time-Locked Collateral",
+  "authors": [
+    "J. Ballweg",
+    "T. Barakbayeva",
+    "Zhuo Cai",
+    "A. Goharshady"
+  ],
+  "venue": "IEEE International Conference on Decentralized Applications and Infrastructures",
+  "venueShort": "IEEE DAPPS 2026",
+  "year": 2026,
+  "type": "manuscript",
+  "status": "Under submission",
+  "tags": [
+    "transaction fee mechanism",
+    "blockchain economics",
+    "incentive design",
+    "MEV",
+    "decentralization"
+  ],
+  "selected": false,
+  "alphaOrder": true,
+  "note": "Under review at IEEE DAPPS 2026.",
+  "abstract": "Irreversible transaction fees create a persistent revenue flow from users to validators, fueling MEV extraction, specialized builder markets, and the economies of scale that progressively centralize block production. We study LockFee, a principal-preserving admission primitive in which each accepted transaction locks collateral for a fixed duration and recovers the principal in full afterward; users bear only the opportunity cost of locked capital. Under a simplified equal-size-transaction model, we prove that sustaining full admission at throughput q with lock amount L and lock duration D requires aggregate locked capital of order qLD. A baseline protocol pairs this admission rule with inflation-funded validator rewards, achieving validator participation and self-spam resistance without any irreversible fee flowing from users to validators, thereby reducing centralization pressure. As a downstream effect, LockFee screens users by heterogeneous opportunity cost of capital rather than by a uniform irreversible payment.\n",
+  "contentAvailability": "abstract-only",
+  "links": {}
+}
