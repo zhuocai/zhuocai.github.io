@@ -1,0 +1,19 @@
+{
+  "title": "Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts",
+  "authors": ["Zhuo Cai", "S. Farokhnia", "A. Goharshady", "S. Hitarth"],
+  "venue": "Proceedings of the ACM on Programming Languages",
+  "venueShort": "OOPSLA 2023",
+  "year": 2023,
+  "type": "conference",
+  "status": "Published",
+  "tags": ["smart contracts", "static analysis", "formal methods"],
+  "selected": true,
+  "note": "Alphabetical author order with Amir Goharshady.",
+  "abstract": "This paper presents Asparagus, a method for automatically synthesizing parametric gas upper bounds for smart contracts so that developers can reason about cost behavior before deployment.",
+  "abstractSourceUrl": "https://dl.acm.org/doi/10.1145/3622829",
+  "contentAvailability": "abstract-only",
+  "links": {
+    "doi": "https://dl.acm.org/doi/10.1145/3622829",
+    "code": "https://github.com/zhuocai/Asparagus/"
+  }
+}

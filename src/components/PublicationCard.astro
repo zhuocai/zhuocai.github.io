@@ -1,0 +1,87 @@
+---
+import type { SerializedPublication } from "../lib/publications";
+import {
+  getPublicationPrimaryAction,
+  getPublicationSecondaryLinks
+} from "../lib/publication-ui";
+import Icon from "./Icon.astro";
+
+interface Props {
+  publication: SerializedPublication;
+  featured?: boolean;
+  showAbstract?: boolean;
+  anchorId?: string;
+}
+
+const {
+  publication,
+  featured = false,
+  showAbstract = false,
+  anchorId
+} = Astro.props;
+
+const primaryAction = getPublicationPrimaryAction(publication);
+const secondaryLinks = getPublicationSecondaryLinks(publication);
+---
+
+<article
+  id={anchorId}
+  class:list={["publication-card", featured && "publication-card--featured"]}
+  data-reveal
+>
+  <div class="publication-card__meta">
+    <span class="pill">{publication.venueShort ?? publication.venue}</span>
+    <span class="status-badge">{publication.status}</span>
+  </div>
+
+  <h3>{publication.title}</h3>
+  <p class="publication-card__authors">{publication.authors.join(", ")}</p>
+  <p class="publication-card__venue">
+    {publication.venue}
+    <span> · {publication.year}</span>
+  </p>
+
+  {
+    publication.note && (
+      <p class="publication-card__note">{publication.note}</p>
+    )
+  }
+
+  {
+    showAbstract && publication.abstract && (
+      <p class="publication-card__abstract">{publication.abstract}</p>
+    )
+  }
+
+  <div class="tag-row">
+    {
+      publication.tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))
+    }
+  </div>
+
+  <div class="publication-card__actions">
+    <a
+      class="button button--ghost button--small"
+      href={primaryAction.href}
+      target={primaryAction.external ? "_blank" : undefined}
+      rel={primaryAction.external ? "noreferrer" : undefined}
+    >
+      {primaryAction.label}
+    </a>
+  </div>
+
+  {
+    secondaryLinks.length > 0 && (
+      <div class="publication-card__links">
+        {secondaryLinks.map((link) => (
+          <a class="inline-link" href={link.href} target="_blank" rel="noreferrer">
+            <span>{link.label}</span>
+            <Icon name="external" class="icon icon--tiny" />
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

@@ -1,0 +1,34 @@
+---
+import type { RichTextBlock } from "../data/site";
+
+interface Props {
+  block: RichTextBlock;
+  as?: "p" | "span" | "div";
+  class?: string;
+}
+
+const { block, as: Tag = "p", class: className } = Astro.props as Props;
+
+function isExternal(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://") || href.startsWith("mailto:");
+}
+---
+
+<Tag class={className}>
+  {
+    block.map((segment: RichTextBlock[number]) =>
+      segment.href ? (
+        <a
+          class="text-link"
+          href={segment.href}
+          target={isExternal(segment.href) ? "_blank" : undefined}
+          rel={isExternal(segment.href) ? "noreferrer" : undefined}
+        >
+          {segment.text}
+        </a>
+      ) : (
+        segment.text
+      )
+    )
+  }
+</Tag>

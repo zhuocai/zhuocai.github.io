@@ -1,0 +1,13 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false">
+  <span class="theme-toggle__icon theme-toggle__icon--sun">
+    <Icon name="sun" class="icon" />
+  </span>
+  <span class="theme-toggle__icon theme-toggle__icon--moon">
+    <Icon name="moon" class="icon" />
+  </span>
+  <span class="theme-toggle__label" data-theme-label>Theme</span>
+</button>

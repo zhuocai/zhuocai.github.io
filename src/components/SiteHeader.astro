@@ -1,0 +1,48 @@
+---
+import { profile } from "../data/site";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/publications/", label: "Publications" },
+  { href: "/project/", label: "Project" },
+  { href: "/cv/", label: "CV" },
+  { href: "/contact/", label: "Contact" }
+];
+
+function isActive(href: string) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <div class="site-header__inner page-shell">
+    <a class="brand-mark" href="/">
+      <span class="brand-mark__eyebrow">{profile.preferredName}</span>
+      <span class="brand-mark__title">{profile.name}</span>
+    </a>
+
+    <div class="site-header__controls">
+      <nav class="site-nav" aria-label="Primary">
+        {
+          navItems.map((item) => (
+            <a class:list={["site-nav__link", isActive(item.href) && "is-active"]} href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

@@ -1,0 +1,38 @@
+---
+import RichText from "../components/RichText.astro";
+import PublicationsExplorer from "../components/react/PublicationsExplorer";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/site";
+import { getAllPublications, serializePublication } from "../lib/publications";
+
+const publications = (await getAllPublications()).map(serializePublication);
+const allTags = [...new Set(publications.flatMap((publication) => publication.tags))].sort((a, b) => a.localeCompare(b));
+const latestYear = publications[0]?.year;
+---
+
+<BaseLayout
+  title="Publications"
+  description="A searchable list of Zhuo Cai's publications across cryptography, game theory, and blockchain systems."
+  currentPath="/publications/"
+>
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Publications</p>
+        <h1 class="section-title">A filterable research archive with local PDFs where possible.</h1>
+        <div class="section-copy section-copy--stack">
+          <RichText block={profile.publicationNote} class="text-block" />
+          <p>
+            The archive currently spans {publications.length} papers and covers tags such as {allTags.slice(0, 5).join(", ")}.
+            Latest entry: {latestYear}. When a public PDF cannot be mirrored locally, the card falls back to an external PDF,
+            abstract, or project summary.
+          </p>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <PublicationsExplorer client:load publications={publications} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

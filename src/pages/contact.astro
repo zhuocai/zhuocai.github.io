@@ -1,0 +1,72 @@
+---
+import Icon from "../components/Icon.astro";
+import RichText from "../components/RichText.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/site";
+---
+
+<BaseLayout title="Contact" description={`Contact and profile links for ${profile.name}.`} currentPath="/contact/">
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Contact</p>
+        <h1 class="section-title">Simple contact details, without the usual academic-site clutter.</h1>
+        <p class="section-copy">
+          Reach out for research discussion, collaboration, or questions around proofs, randomness protocols, and blockchain
+          mechanisms.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        {
+          profile.contact.map((item) => (
+            <article class="contact-card" data-reveal>
+              <p class="snapshot-card__label">{item.label}</p>
+              {
+                item.href ? (
+                  <a class="contact-card__value inline-link" href={item.href}>
+                    {item.value}
+                  </a>
+                ) : (
+                  <span class="contact-card__value">{item.value}</span>
+                )
+              }
+              {item.note && <p>{item.note}</p>}
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="grid-two">
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">Profiles</p>
+          <div class="footer-links">
+            {
+              profile.quickLinks.map((link) => (
+                <a
+                  class="footer-link"
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
+                >
+                  <Icon name={link.icon} class="icon" />
+                  <span>{link.label}</span>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="cta-panel" data-reveal>
+          <p class="eyebrow">Current context</p>
+          <h3>{profile.role}</h3>
+          <RichText block={profile.contactContext} class="text-block" />
+          <div class="cta-actions">
+            <a class="button" href={`mailto:${profile.email}`}>Start an email</a>
+            <a class="button button--ghost" href="/publications/">See research output</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

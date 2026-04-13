@@ -1,0 +1,19 @@
+{
+  "title": "Gas-Efficient Decentralized Random Beacons",
+  "authors": ["V. Abidha", "T. Barakbayeva", "Zhuo Cai", "A. Goharshady"],
+  "venue": "IEEE International Conference on Blockchain and Cryptocurrency",
+  "venueShort": "ICBC 2024",
+  "year": 2024,
+  "type": "conference",
+  "status": "Published",
+  "tags": ["random beacons", "smart contracts", "blockchains"],
+  "selected": false,
+  "note": "Alphabetical author order with Amir Goharshady.",
+  "abstract": "This paper develops decentralized random beacon protocols with explicit attention to gas efficiency, aiming to keep randomness services practical for on-chain use without weakening decentralization goals.",
+  "abstractSourceUrl": "https://hal.science/hal-04518100",
+  "localPdfPath": "/papers/gas-efficient-random-beacons-icbc-2024.pdf",
+  "contentAvailability": "local-pdf",
+  "links": {
+    "preprint": "https://hal.science/hal-04518100/document"
+  }
+}

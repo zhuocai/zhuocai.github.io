@@ -1,0 +1,284 @@
+---
+import Icon from "../components/Icon.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import RichText from "../components/RichText.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { projects } from "../data/projects";
+import { profile } from "../data/site";
+import { getPublicationMap, getSelectedPublications, serializePublication } from "../lib/publications";
+
+const selectedPublications = (await getSelectedPublications(4)).map(serializePublication);
+const publicationMap = await getPublicationMap();
+---
+
+<BaseLayout title={profile.name} description={profile.summary} currentPath="/" bodyClass="home-page">
+  <section class="hero">
+    <div class="page-shell hero__grid">
+      <div class="hero__copy" data-reveal>
+        <p class="eyebrow">{profile.hero.eyebrow}</p>
+        <h1 class="hero__headline">{profile.hero.title}</h1>
+        <p class="hero__lede">{profile.hero.intro}</p>
+
+        <div class="hero__actions">
+          <a class="button" href={profile.hero.primaryCta.href}>{profile.hero.primaryCta.label}</a>
+          <a class="button button--ghost" href={profile.hero.secondaryCta.href}>{profile.hero.secondaryCta.label}</a>
+        </div>
+
+        <div class="quick-links" aria-label="Profile links">
+          {
+            profile.quickLinks.map((link) => (
+              <a
+                class="link-pill"
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+              >
+                <Icon name={link.icon} class="icon" />
+                <span>{link.label}</span>
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="hero-stats">
+          {
+            profile.hero.stats.map((stat) => (
+              <div class="hero-stat">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="hero__surface" data-hero-surface data-reveal>
+        <div class="hero-visual">
+          <p class="hero-visual__badge">{profile.role}</p>
+          <div class="hero-visual__ring"></div>
+          <div class="hero-visual__portrait">
+            <img src="/images/zcaiam.jpg" alt={`Portrait of ${profile.name}`} />
+          </div>
+          <div class="hero-visual__caption">
+            <div>
+              <strong>
+                <a class="hero-visual__link" href={profile.institutionHref} target="_blank" rel="noreferrer">
+                  {profile.institution}
+                </a>
+              </strong>
+              <span>Hong Kong · Oxford collaboration background · applied crypto</span>
+            </div>
+            <div>
+              <strong>{profile.preferredName}</strong>
+              <span>Researching proofs, randomness, and strategic blockchain systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Profile snapshot</p>
+        <h2 class="section-title">Research with proof-theoretic depth and systems-facing consequences.</h2>
+        <p class="section-copy">
+          The site now centers the ideas behind the work, not just a chronological list of outputs. This section gives the
+          short version of where the research comes from and how it is anchored institutionally.
+        </p>
+      </div>
+
+      <div class="snapshot-grid">
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">About</p>
+          {profile.bio.map((paragraph) => <RichText block={paragraph} class="text-block" />)}
+        </article>
+
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">Affiliations</p>
+          <div class="tag-row">
+            {
+              profile.affiliations.map((item) => (
+                <span class="tag">{item.label}</span>
+              ))
+            }
+          </div>
+          <div class="footer-list footer-list--rich">
+            {
+              profile.affiliations.map((item) => (
+                <div>
+                  <strong>{item.label}:</strong> <RichText block={item.value} as="span" />
+                </div>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="portrait-card card" data-reveal>
+          <img src="/images/eiffel-night.jpg" alt="Night skyline photograph" />
+        </article>
+
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">Research note</p>
+          <RichText block={profile.publicationNote} class="text-block" />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Research themes</p>
+        <h2 class="section-title">Four threads shaping the current research agenda.</h2>
+      </div>
+
+      <div class="grid-two">
+        {
+          profile.researchAreas.map((area) => (
+            <article class="research-card" data-reveal>
+              <h3>{area.title}</h3>
+              <p>{area.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Selected publications</p>
+        <h2 class="section-title">Recent papers at the center of the current story.</h2>
+        <p class="section-copy">
+          Featured papers are surfaced here for fast scanning. The full list, local PDFs, and abstract fallbacks live on the
+          publications page.
+        </p>
+      </div>
+
+      <div class="publications-grid">
+        {
+          selectedPublications.map((publication) => (
+            <PublicationCard publication={publication} featured />
+          ))
+        }
+      </div>
+
+      <div class="cta-actions" data-reveal>
+        <a class="button button--ghost" href="/publications/">Open full publications explorer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Project tracks</p>
+        <h2 class="section-title">Problem clusters rather than isolated papers.</h2>
+        <p class="section-copy">Each theme below opens into a fuller explanation on the new Project page.</p>
+      </div>
+
+      <div class="projects-grid">
+        {
+          projects.map((project) => {
+            const related = project.publicationIds
+              .flatMap((id) => {
+                const publication = publicationMap.get(id);
+                return publication ? [publication] : [];
+              })
+              .slice(0, 2);
+
+            return (
+              <article class="project-card" data-reveal>
+                <p class="pill">{project.period}</p>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <ul>
+                  {project.highlights.map((highlight) => <li>{highlight}</li>)}
+                </ul>
+                {
+                  related.length > 0 && (
+                    <div class="tag-row">
+                      {related.map((publication) => <span class="tag">{publication.data.venueShort ?? publication.data.year}</span>)}
+                    </div>
+                  )
+                }
+                <div class="publication-card__actions">
+                  <a class="button button--ghost button--small" href={`/project/#${project.id}`}>
+                    Read this project
+                  </a>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <div class="cta-actions" data-reveal>
+        <a class="button" href="/project/">Open the full Project page</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Academic timeline</p>
+        <h2 class="section-title">A concise view of the path so far.</h2>
+      </div>
+
+      <div class="timeline">
+        {
+          profile.milestones.map((milestone) => (
+            <article class="timeline-item" data-reveal>
+              <div class="timeline-item__period">{milestone.period}</div>
+              <div>
+                {
+                  milestone.href ? (
+                    <h3>
+                      <a class="text-link" href={milestone.href} target="_blank" rel="noreferrer">
+                        {milestone.title}
+                      </a>
+                    </h3>
+                  ) : (
+                    <h3>{milestone.title}</h3>
+                  )
+                }
+                <RichText block={milestone.detail} class="text-block" />
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page-shell">
+      <div class="grid-two">
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">Service</p>
+          <h3>Academic service and community work.</h3>
+          <ul>
+            {profile.service.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+
+        <article class="cta-panel" data-reveal>
+          <p class="eyebrow">Contact</p>
+          <h3>Open to research conversations, collaborations, and invited talks.</h3>
+          <p>
+            If your work touches zero-knowledge proofs, distributed randomness, mechanism design, or the formal analysis of
+            smart contracts, feel free to get in touch.
+          </p>
+          <div class="cta-actions">
+            <a class="button" href="/contact/">Contact details</a>
+            <a class="button button--ghost" href={`mailto:${profile.email}`}>Email directly</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

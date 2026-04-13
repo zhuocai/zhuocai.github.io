@@ -1,6 +1,6 @@
 # Welcome to Jekyll!
 #
-# This config file is meant for settings that affect your whole blog, values
+# This config file is meant for settings that affect your whole site, values
 # which you are expected to set up once and rarely edit after that. If you find
 # yourself editing this file very often, consider using Jekyll's data files
 # feature for the data you need to update frequently.
@@ -16,7 +16,7 @@
 title: Zhuo CAI
 email: zcaiam@connect.ust.hk
 description: >- # this means to ignore newlines until "baseurl:"
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /notes
 url: "https://zhuocai.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: caizhuo3
 github_username:  zhuocai

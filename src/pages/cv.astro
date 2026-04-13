@@ -1,0 +1,56 @@
+---
+import RichText from "../components/RichText.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/site";
+---
+
+<BaseLayout title="CV" description={`Curriculum vitae and academic summary for ${profile.name}.`} currentPath="/cv/">
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Curriculum vitae</p>
+        <h1 class="section-title">An HTML snapshot up front, with the full PDF one click away.</h1>
+        <p class="section-copy">
+          This page keeps the formal document accessible while making the core profile readable on the web.
+        </p>
+      </div>
+
+      <div class="cv-summary">
+        <article class="cv-panel" data-reveal>
+          <p class="snapshot-card__label">Current position</p>
+          <h3>{profile.role}</h3>
+          <RichText block={profile.positionContext} class="text-block" />
+        </article>
+
+        <article class="cv-panel" data-reveal>
+          <p class="snapshot-card__label">Location and support</p>
+          <h3>{profile.location}</h3>
+          <RichText block={profile.locationContext} class="text-block" />
+        </article>
+      </div>
+
+      <div class="grid-two">
+        <article class="cv-panel" data-reveal>
+          <p class="snapshot-card__label">Highlights</p>
+          <ul>
+            {profile.cvHighlights.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+
+        <article class="cta-panel" data-reveal>
+          <p class="eyebrow">Downloads</p>
+          <h3>Prefer the formal version?</h3>
+          <p>The PDF remains available for applications, review packets, and quick offline sharing.</p>
+          <div class="cta-actions">
+            <a class="button" href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+            <a class="button button--ghost" href="/cv/caizhuo_CV.pdf" download>Download CV</a>
+          </div>
+        </article>
+      </div>
+
+      <article class="cv-panel cv-embed" data-reveal>
+        <iframe src="/cv/caizhuo_CV.pdf" title={`${profile.name} CV PDF`}></iframe>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

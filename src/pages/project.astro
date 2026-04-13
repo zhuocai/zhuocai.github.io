@@ -1,0 +1,78 @@
+---
+import PublicationCard from "../components/PublicationCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { projects } from "../data/projects";
+import { getPublicationMap, serializePublication } from "../lib/publications";
+
+const publicationMap = await getPublicationMap();
+
+const projectGroups = projects.map((project) => ({
+  ...project,
+  publications: project.publicationIds
+    .flatMap((id) => {
+      const publication = publicationMap.get(id);
+      return publication ? [serializePublication(publication)] : [];
+    })
+}));
+---
+
+<BaseLayout
+  title="Project"
+  description="Research themes and paper-level explanations across cryptography, game theory, and blockchain systems."
+  currentPath="/project/"
+>
+  <section class="section">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Project</p>
+        <h1 class="section-title">Research themes, explained through the problems they solve and the papers behind them.</h1>
+        <p class="section-copy">
+          This page groups the work by theme rather than year. Each section explains the problem, the technical angle, and
+          why the papers fit together.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {
+    projectGroups.map((project) => (
+      <section class="section" id={project.id}>
+        <div class="page-shell">
+          <div class="section-header" data-reveal>
+            <p class="eyebrow">{project.period}</p>
+            <h2 class="section-title">{project.title}</h2>
+            <p class="section-copy">{project.narrative}</p>
+          </div>
+
+          <div class="grid-two project-overview">
+            <article class="card" data-reveal>
+              <p class="snapshot-card__label">Significance</p>
+              <h3>Why this line of work matters</h3>
+              <p>{project.significance}</p>
+            </article>
+
+            <article class="card" data-reveal>
+              <p class="snapshot-card__label">Core ideas</p>
+              <h3>Recurring technical ingredients</h3>
+              <ul>
+                {project.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+            </article>
+          </div>
+
+          <div class="publications-grid">
+            {
+              project.publications.map((publication) => (
+                <PublicationCard
+                  publication={publication}
+                  showAbstract
+                  anchorId={`paper-${publication.id}`}
+                />
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>
