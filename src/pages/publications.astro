@@ -19,13 +19,13 @@ const latestYear = publications[0]?.year;
     <div class="page-shell">
       <div class="section-header" data-reveal>
         <p class="eyebrow">Publications</p>
-        <h1 class="section-title">A filterable research archive with local PDFs where possible.</h1>
+        <h1 class="section-title">A searchable publication list with local PDFs where possible.</h1>
         <div class="section-copy section-copy--stack">
           <RichText block={profile.publicationNote} class="text-block" />
           <p>
-            The archive currently spans {publications.length} papers and covers tags such as {allTags.slice(0, 5).join(", ")}.
-            Latest entry: {latestYear}. When a public PDF cannot be mirrored locally, the card falls back to an external PDF,
-            abstract, or project summary.
+            The list currently spans {publications.length} papers and includes tags such as {allTags.slice(0, 5).join(", ")}.
+            Latest entry: {latestYear}. When a PDF is not mirrored locally, the card falls back to an external PDF, abstract,
+            or related project summary.
           </p>
         </div>
       </div>

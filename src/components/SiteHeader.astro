@@ -11,7 +11,7 @@ const { currentPath = "/" } = Astro.props;
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/publications/", label: "Publications" },
-  { href: "/project/", label: "Project" },
+  { href: "/project/", label: "Research" },
   { href: "/cv/", label: "CV" },
   { href: "/contact/", label: "Contact" }
 ];
@@ -28,7 +28,7 @@ function isActive(href: string) {
 <header class="site-header">
   <div class="site-header__inner page-shell">
     <a class="brand-mark" href="/">
-      <span class="brand-mark__eyebrow">{profile.preferredName}</span>
+      <span class="brand-mark__eyebrow">Research profile</span>
       <span class="brand-mark__title">{profile.name}</span>
     </a>
 

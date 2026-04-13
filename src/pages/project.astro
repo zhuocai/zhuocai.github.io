@@ -17,18 +17,18 @@ const projectGroups = projects.map((project) => ({
 ---
 
 <BaseLayout
-  title="Project"
+  title="Research"
   description="Research themes and paper-level explanations across cryptography, game theory, and blockchain systems."
   currentPath="/project/"
 >
   <section class="section">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Project</p>
-        <h1 class="section-title">Research themes, explained through the problems they solve and the papers behind them.</h1>
+        <p class="eyebrow">Research themes</p>
+        <h1 class="section-title">Topics, questions, and representative papers.</h1>
         <p class="section-copy">
-          This page groups the work by theme rather than year. Each section explains the problem, the technical angle, and
-          why the papers fit together.
+          This page groups the work by theme rather than year. Each section summarizes the problem setting, the technical
+          direction, and the papers that belong to it.
         </p>
       </div>
     </div>
@@ -46,8 +46,8 @@ const projectGroups = projects.map((project) => ({
 
           <div class="grid-two project-overview">
             <article class="card" data-reveal>
-              <p class="snapshot-card__label">Significance</p>
-              <h3>Why this line of work matters</h3>
+              <p class="snapshot-card__label">Context</p>
+              <h3>Why this topic matters</h3>
               <p>{project.significance}</p>
             </article>
 

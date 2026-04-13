@@ -39,6 +39,37 @@ const publicationMap = await getPublicationMap();
             ))
           }
         </div>
+      </div>
+
+      <aside class="hero__aside" data-reveal>
+        <div class="hero-portrait">
+          <img src="/images/zcaiam.jpg" alt={`Portrait of ${profile.name}`} />
+        </div>
+
+        <div class="hero__details">
+          <p class="snapshot-card__label">Current position</p>
+          <h2>{profile.role}</h2>
+          <p class="muted">
+            <a class="text-link" href={profile.institutionHref} target="_blank" rel="noreferrer">
+              {profile.institution}
+            </a>
+          </p>
+        </div>
+
+        <dl class="hero-facts">
+          <div>
+            <dt>Location</dt>
+            <dd>{profile.location}</dd>
+          </div>
+          <div>
+            <dt>Support</dt>
+            <dd>Hong Kong PhD Fellowship Scheme (HKPFS)</dd>
+          </div>
+          <div>
+            <dt>Visiting scholar</dt>
+            <dd>University of Oxford</dd>
+          </div>
+        </dl>
 
         <div class="hero-stats">
           {
@@ -50,42 +81,17 @@ const publicationMap = await getPublicationMap();
             ))
           }
         </div>
-      </div>
-
-      <div class="hero__surface" data-hero-surface data-reveal>
-        <div class="hero-visual">
-          <p class="hero-visual__badge">{profile.role}</p>
-          <div class="hero-visual__ring"></div>
-          <div class="hero-visual__portrait">
-            <img src="/images/zcaiam.jpg" alt={`Portrait of ${profile.name}`} />
-          </div>
-          <div class="hero-visual__caption">
-            <div>
-              <strong>
-                <a class="hero-visual__link" href={profile.institutionHref} target="_blank" rel="noreferrer">
-                  {profile.institution}
-                </a>
-              </strong>
-              <span>Hong Kong · Oxford collaboration background · applied crypto</span>
-            </div>
-            <div>
-              <strong>{profile.preferredName}</strong>
-              <span>Researching proofs, randomness, and strategic blockchain systems</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      </aside>
     </div>
   </section>
 
   <section class="section">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Profile snapshot</p>
-        <h2 class="section-title">Research with proof-theoretic depth and systems-facing consequences.</h2>
+        <p class="eyebrow">Profile</p>
+        <h2 class="section-title">Background, affiliations, and current research context.</h2>
         <p class="section-copy">
-          The site now centers the ideas behind the work, not just a chronological list of outputs. This section gives the
-          short version of where the research comes from and how it is anchored institutionally.
+          This page provides a concise overview of my academic background, institutional context, and current lines of work.
         </p>
       </div>
 
@@ -115,13 +121,16 @@ const publicationMap = await getPublicationMap();
           </div>
         </article>
 
-        <article class="portrait-card card" data-reveal>
-          <img src="/images/eiffel-night.jpg" alt="Night skyline photograph" />
-        </article>
-
         <article class="card" data-reveal>
           <p class="snapshot-card__label">Research note</p>
           <RichText block={profile.publicationNote} class="text-block" />
+        </article>
+
+        <article class="card" data-reveal>
+          <p class="snapshot-card__label">Current focus</p>
+          <ul>
+            {profile.researchAreas.map((area) => <li>{area.title}</li>)}
+          </ul>
         </article>
       </div>
     </div>
@@ -131,7 +140,7 @@ const publicationMap = await getPublicationMap();
     <div class="page-shell">
       <div class="section-header" data-reveal>
         <p class="eyebrow">Research themes</p>
-        <h2 class="section-title">Four threads shaping the current research agenda.</h2>
+        <h2 class="section-title">Current areas of work.</h2>
       </div>
 
       <div class="grid-two">
@@ -151,10 +160,9 @@ const publicationMap = await getPublicationMap();
     <div class="page-shell">
       <div class="section-header" data-reveal>
         <p class="eyebrow">Selected publications</p>
-        <h2 class="section-title">Recent papers at the center of the current story.</h2>
+        <h2 class="section-title">Recent papers and ongoing directions.</h2>
         <p class="section-copy">
-          Featured papers are surfaced here for fast scanning. The full list, local PDFs, and abstract fallbacks live on the
-          publications page.
+          A complete, filterable publication list with local PDFs where available is maintained on the publications page.
         </p>
       </div>
 
@@ -167,7 +175,7 @@ const publicationMap = await getPublicationMap();
       </div>
 
       <div class="cta-actions" data-reveal>
-        <a class="button button--ghost" href="/publications/">Open full publications explorer</a>
+        <a class="button button--ghost" href="/publications/">Open full publications list</a>
       </div>
     </div>
   </section>
@@ -175,9 +183,9 @@ const publicationMap = await getPublicationMap();
   <section class="section">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Project tracks</p>
-        <h2 class="section-title">Problem clusters rather than isolated papers.</h2>
-        <p class="section-copy">Each theme below opens into a fuller explanation on the new Project page.</p>
+        <p class="eyebrow">Research themes</p>
+        <h2 class="section-title">Themes that connect the publication list.</h2>
+        <p class="section-copy">Each group below links related papers through a shared research question.</p>
       </div>
 
       <div class="projects-grid">
@@ -207,7 +215,7 @@ const publicationMap = await getPublicationMap();
                 }
                 <div class="publication-card__actions">
                   <a class="button button--ghost button--small" href={`/project/#${project.id}`}>
-                    Read this project
+                    View theme
                   </a>
                 </div>
               </article>
@@ -217,7 +225,7 @@ const publicationMap = await getPublicationMap();
       </div>
 
       <div class="cta-actions" data-reveal>
-        <a class="button" href="/project/">Open the full Project page</a>
+        <a class="button" href="/project/">Open research overview</a>
       </div>
     </div>
   </section>
@@ -225,8 +233,8 @@ const publicationMap = await getPublicationMap();
   <section class="section">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Academic timeline</p>
-        <h2 class="section-title">A concise view of the path so far.</h2>
+        <p class="eyebrow">Academic path</p>
+        <h2 class="section-title">Training, milestones, and recent publications.</h2>
       </div>
 
       <div class="timeline">
@@ -260,7 +268,7 @@ const publicationMap = await getPublicationMap();
       <div class="grid-two">
         <article class="card" data-reveal>
           <p class="snapshot-card__label">Service</p>
-          <h3>Academic service and community work.</h3>
+          <h3>Academic service</h3>
           <ul>
             {profile.service.map((item) => <li>{item}</li>)}
           </ul>
@@ -268,10 +276,10 @@ const publicationMap = await getPublicationMap();
 
         <article class="cta-panel" data-reveal>
           <p class="eyebrow">Contact</p>
-          <h3>Open to research conversations, collaborations, and invited talks.</h3>
+          <h3>Open to research discussions and collaboration.</h3>
           <p>
-            If your work touches zero-knowledge proofs, distributed randomness, mechanism design, or the formal analysis of
-            smart contracts, feel free to get in touch.
+            If your work overlaps with zero-knowledge proofs, distributed randomness, mechanism design, or smart contract
+            analysis, feel free to get in touch.
           </p>
           <div class="cta-actions">
             <a class="button" href="/contact/">Contact details</a>

@@ -6,16 +6,17 @@ import Icon from "./Icon.astro";
 <footer class="site-footer">
   <div class="page-shell site-footer__grid">
     <div class="site-footer__brand">
-      <p class="eyebrow">Research profile</p>
+      <p class="eyebrow">Academic profile</p>
       <h2>{profile.name}</h2>
       <p>{profile.summary}</p>
       <div class="footer-links">
-        <a class="footer-link" href="/project/">Project page</a>
+        <a class="footer-link" href="/publications/">Publications</a>
+        <a class="footer-link" href="/project/">Research themes</a>
       </div>
     </div>
 
     <div>
-      <p class="site-footer__heading">Quick links</p>
+      <p class="site-footer__heading">Links</p>
       <div class="footer-links">
         {
           profile.quickLinks.map((link) => (
@@ -29,7 +30,7 @@ import Icon from "./Icon.astro";
     </div>
 
     <div>
-      <p class="site-footer__heading">Current focus</p>
+      <p class="site-footer__heading">Research areas</p>
       <ul class="footer-list">
         {
           profile.researchAreas.slice(0, 3).map((area) => (

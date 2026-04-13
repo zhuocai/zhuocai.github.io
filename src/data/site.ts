@@ -118,18 +118,18 @@ export const profile = profileSchema.parse({
   email: "zcaiam@connect.ust.hk",
   location: "Hong Kong",
   summary:
-    "Researcher in applied cryptography, zero-knowledge systems, game theory, and blockchain protocols.",
+    "PhD student in applied cryptography, zero-knowledge proofs, game theory, and blockchain systems.",
   hero: {
-    eyebrow: "Applied cryptography, blockchains, and strategic systems",
-    title: "Designing cryptographic systems that stay rigorous under real incentives.",
+    eyebrow: "Applied cryptography, zero-knowledge, and decentralized systems",
+    title: "Research in proof systems, distributed randomness, and blockchain mechanism design.",
     intro:
-      "I build proof systems, randomness protocols, and blockchain mechanisms with an emphasis on zero-knowledge, verifiability, and game-theoretic robustness.",
+      "I am a PhD student in Computer Science and Engineering at HKUST. My work focuses on proof systems, randomness protocols, and strategic questions in decentralized protocols.",
     primaryCta: {
-      label: "Explore publications",
+      label: "View publications",
       href: "/publications/"
     },
     secondaryCta: {
-      label: "See projects",
+      label: "Research themes",
       href: "/project/"
     },
     stats: [
@@ -365,7 +365,7 @@ export const profile = profileSchema.parse({
   cvHighlights: [
     "Research emphasis on zero-knowledge proofs, randomness protocols, and cryptographic mechanisms for decentralized systems.",
     "Publications across CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
-    "Supported by the Hong Kong PhD Fellowship Scheme and experienced with both theoretical and systems-facing research."
+    "Supported by the Hong Kong PhD Fellowship Scheme, with experience spanning both theory-oriented and systems-facing work."
   ],
   service: ["Program committee member, MARBLE 2025"],
   publicationNote: [
