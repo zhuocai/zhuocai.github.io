@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+
+# Jekyll leftovers
+_site/
+.sass-cache/
+.jekyll-metadata
+.jekyll-cache/
+.bundle/
+vendor/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
