@@ -45,6 +45,29 @@ const milestoneSchema = z.object({
   href: z.string().optional()
 });
 
+const awardSchema = z.object({
+  year: z.string(),
+  title: z.string(),
+  detail: z.string().optional()
+});
+
+const educationEntrySchema = z.object({
+  period: z.string(),
+  institution: z.string(),
+  institutionHref: z.string().url().optional(),
+  location: z.string(),
+  degree: z.string(),
+  detail: z.string().optional()
+});
+
+const teachingEntrySchema = z.object({
+  period: z.string(),
+  role: z.enum(["Instructor", "Teaching Assistant"]),
+  institution: z.string(),
+  institutionHref: z.string().url().optional(),
+  course: z.string()
+});
+
 const contactItemSchema = z.object({
   label: z.string(),
   value: z.string(),
@@ -97,7 +120,10 @@ const profileSchema = z.object({
   contactContext: richTextBlockSchema,
   cvHighlights: z.array(z.string()).min(1),
   service: z.array(z.string()).default([]),
-  publicationNote: richTextBlockSchema
+  publicationNote: richTextBlockSchema,
+  awardsAndAchievements: z.array(awardSchema).min(1),
+  education: z.array(educationEntrySchema).min(1),
+  teaching: z.array(teachingEntrySchema).default([])
 });
 
 const links = {
@@ -120,19 +146,19 @@ export const profile = profileSchema.parse({
   email: "zcaiam@connect.ust.hk",
   location: "Hong Kong",
   summary:
-    "PhD student in applied cryptography, zero-knowledge proofs, game theory, and blockchain systems.",
+    "PhD student building cryptographic and game-theoretic foundations for trustworthy decentralized protocols.",
   hero: {
-    eyebrow: "Applied cryptography, zero-knowledge, and decentralized systems",
-    title: "Research in proof systems, distributed randomness, and blockchain mechanism design.",
+    eyebrow: "Proof systems, cryptographic coordination, and blockchain mechanism design",
+    title: "Building cryptographic and game-theoretic foundations for trustworthy decentralized protocols.",
     intro:
-      "I am a PhD student in Computer Science and Engineering at HKUST. My work focuses on proof systems, randomness protocols, and strategic questions in decentralized protocols.",
+      "My research builds the cryptographic and game-theoretic foundations that make decentralized protocols trustworthy at scale. I work across three directions: (1) proof systems — constructing efficient, updatable SNARKs and lookup arguments for verifiable computation over evolving data; (2) cryptographic coordination protocols — designing bias-resistant, incentive-aware randomness and leader-election protocols secure against strategic manipulation; and (3) blockchain mechanism design — analyzing and repairing transaction fee mechanisms for modern architectures including DAG consensus, sharded execution, and parallel transaction processing. My work appears at CCS, IJCAI, OOPSLA, ICBC, and IEEE Blockchain. I am a PhD student at HKUST, supported by the Hong Kong PhD Fellowship (HKPFS), and a former visiting scholar at the University of Oxford.",
     primaryCta: {
       label: "View publications",
       href: "/publications/"
     },
     secondaryCta: {
       label: "Research themes",
-      href: "/project/"
+      href: "/research/"
     },
     stats: [
       {
@@ -140,8 +166,8 @@ export const profile = profileSchema.parse({
         label: "research papers"
       },
       {
-        value: "4",
-        label: "core research themes"
+        value: "3",
+        label: "research thrusts"
       },
       {
         value: "HKPFS",
@@ -166,7 +192,7 @@ export const profile = profileSchema.parse({
       { text: "." }
     ],
     [
-      { text: "My work sits at the intersection of applied cryptography, zero-knowledge proofs, MPC, game theory, and blockchain systems. I am supported by the " },
+      { text: "My research builds the cryptographic and game-theoretic foundations for trustworthy decentralized protocols, spanning proof systems, cryptographic coordination protocols, and mechanism design for blockchain infrastructure. I am supported by the " },
       { text: "Hong Kong PhD Fellowship Scheme (HKPFS)", href: links.hkpfs },
       { text: "." }
     ],
@@ -180,24 +206,19 @@ export const profile = profileSchema.parse({
   ],
   researchAreas: [
     {
-      title: "Zero-Knowledge and Verifiable Computation",
+      title: "Proof Systems and Verifiable Computation",
       description:
-        "Lookup arguments, verifiable databases, and cryptographic techniques for trustworthy computation."
+        "Updatable lookup arguments, verifiable databases, and SNARK constructions for trustworthy outsourced computation over evolving data."
     },
     {
-      title: "Distributed Randomness and Leader Election",
+      title: "Cryptographic Coordination Protocols",
       description:
-        "Fair randomness generation, random beacons, and incentive-aware coordination in decentralized systems."
+        "Bias-resistant randomness generation, random beacons, and incentive-aware leader-election protocols secure against strategic manipulation in decentralized systems."
     },
     {
-      title: "Game Theory for Blockchains",
+      title: "Blockchain Mechanism Design",
       description:
-        "Mechanism design and strategic analysis for blockchain protocols and smart-contract-enabled systems."
-    },
-    {
-      title: "Smart Contract Analysis",
-      description:
-        "Formal and automated analysis of smart contracts, especially around gas behavior and protocol safety."
+        "Transaction fee mechanism theory for modern architectures — DAG consensus, sharded execution, parallel processing — and strategic equilibrium design via smart contracts."
     }
   ],
   affiliations: [
@@ -219,7 +240,7 @@ export const profile = profileSchema.parse({
       ]
     },
     {
-      label: "Support",
+      label: "Fellowship",
       value: [{ text: "Hong Kong PhD Fellowship Scheme (HKPFS)", href: links.hkpfs }]
     },
     {
@@ -283,7 +304,7 @@ export const profile = profileSchema.parse({
       detail: [
         { text: "Current work at " },
         { text: "HKUST", href: links.hkust },
-        { text: " spans zero-knowledge proofs, distributed randomness, smart contract analysis, and the economics of decentralized protocols." }
+        { text: " spans proof systems, cryptographic coordination protocols, distributed randomness, and mechanism design for decentralized infrastructure." }
       ]
     },
     {
@@ -349,9 +370,9 @@ export const profile = profileSchema.parse({
     { text: "." }
   ],
   locationContext: [
-    { text: "Based in Hong Kong, supported by the " },
-    { text: "Hong Kong PhD Fellowship Scheme (HKPFS)", href: links.hkpfs },
-    { text: ", and shaped by visiting scholar experience at the " },
+    { text: "Based in Hong Kong. " },
+    { text: "Hong Kong PhD Fellowship (HKPFS)", href: links.hkpfs },
+    { text: " recipient. Visiting scholar at the " },
     { text: "University of Oxford", href: links.oxford },
     { text: "." }
   ],
@@ -362,18 +383,93 @@ export const profile = profileSchema.parse({
     { text: "HKUST", href: links.hkust },
     { text: " and " },
     { text: "HKUST CSE", href: links.hkustCse },
-    { text: ", and currently focused on zero-knowledge systems, cryptographic mechanisms, and strategic questions in decentralized protocols." }
+    { text: ", and currently focused on proof systems, cryptographic coordination protocols, and mechanism design for decentralized infrastructure." }
   ],
   cvHighlights: [
-    "Research emphasis on zero-knowledge proofs, randomness protocols, and cryptographic mechanisms for decentralized systems.",
+    "Research agenda: cryptographic and game-theoretic foundations for trustworthy decentralized protocols — spanning proof systems, cryptographic coordination protocols, and blockchain mechanism design.",
     "Publications across CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
-    "Supported by the Hong Kong PhD Fellowship Scheme, with experience spanning both theory-oriented and systems-facing work."
+    "Hong Kong PhD Fellowship (HKPFS) recipient. Young Researcher at the 10th Heidelberg Laureate Forum."
   ],
   service: ["Program committee member, MARBLE 2025"],
   publicationNote: [
     { text: "Papers coauthored with " },
     { text: "Amir Goharshady", href: links.amir },
     { text: " follow the theoretical computer science convention of alphabetical author order." }
+  ],
+  awardsAndAchievements: [
+    { year: "2023", title: "Hong Kong PhD Fellowship" },
+    { year: "2023", title: "Young Researcher, 10th Heidelberg Laureate Forum" },
+    { year: "2023", title: "Research Travel Grant, HKUST" },
+    { year: "2019", title: "Honor of Academic Excellency, Tsinghua University", detail: "Awarded to top 10% students." },
+    { year: "2018", title: "Honor of Academic Excellency, Tsinghua University" },
+    { year: "2016", title: "1st Level in National High School Mathematics League, the Chinese Mathematical Society", detail: "Ranked within the top 2% in the province of Anhui." }
+  ],
+  education: [
+    {
+      period: "July – Oct 2025",
+      institution: "University of Oxford",
+      institutionHref: links.oxford,
+      location: "UK",
+      degree: "Visiting Scholar"
+    },
+    {
+      period: "2023 – present",
+      institution: "Hong Kong University of Science and Technology",
+      institutionHref: links.hkust,
+      location: "Hong Kong",
+      degree: "PhD in Computer Science and Engineering",
+      detail: "Co-supervised by Amir Goharshady and Dimitris Papadopoulos."
+    },
+    {
+      period: "2021 – 2023",
+      institution: "Hong Kong University of Science and Technology",
+      institutionHref: links.hkust,
+      location: "Hong Kong",
+      degree: "Master of Philosophy in Computer Science and Engineering",
+      detail: "Supervised by Amir Goharshady. GPA: 3.88/4.0."
+    },
+    {
+      period: "2017 – 2021",
+      institution: "Tsinghua University",
+      institutionHref: links.tsinghua,
+      location: "Beijing",
+      degree: "Bachelor of Automation",
+      detail: "GPA: 3.81/4. GPA Ranking: 17/168."
+    },
+    {
+      period: "2019 Fall",
+      institution: "National University of Singapore",
+      location: "Singapore",
+      degree: "Visiting Undergraduate Researcher",
+      detail: "GPA: 4.0/4."
+    }
+  ],
+  teaching: [
+    {
+      period: "2026 Spring",
+      role: "Instructor",
+      institution: "ALPACAS Research Group",
+      institutionHref: "https://amir.goharshady.com/group",
+      course: "Modern Blockchain Consensus"
+    },
+    {
+      period: "2025 Spring, 2026 Spring",
+      role: "Teaching Assistant",
+      institution: "Hong Kong University of Science and Technology",
+      course: "COMP5631: Cryptography and Security"
+    },
+    {
+      period: "2024 Spring",
+      role: "Teaching Assistant",
+      institution: "Hong Kong University of Science and Technology",
+      course: "COMP4541: Blockchains, Cryptocurrencies and Smart Contracts"
+    },
+    {
+      period: "2022 Spring, 2022 Fall",
+      role: "Teaching Assistant",
+      institution: "Hong Kong University of Science and Technology",
+      course: "COMP2012: Object-Oriented Programming and Data Structures"
+    }
   ]
 });
 

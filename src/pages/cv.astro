@@ -21,7 +21,7 @@ import { profile } from "../data/site";
         </article>
 
         <article class="cv-panel" data-reveal>
-          <p class="snapshot-card__label">Location and support</p>
+          <p class="snapshot-card__label">Location</p>
           <h3>{profile.location}</h3>
           <RichText block={profile.locationContext} class="text-block" />
         </article>
@@ -34,17 +34,75 @@ import { profile } from "../data/site";
             {profile.cvHighlights.map((item) => <li>{item}</li>)}
           </ul>
         </article>
-
-        <article class="cta-panel" data-reveal>
-          <p class="eyebrow">Downloads</p>
-          <h3>Full curriculum vitae</h3>
-          <p>Open or download the full PDF.</p>
-          <div class="cta-actions">
-            <a class="button" href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Open PDF</a>
-            <a class="button button--ghost" href="/cv/caizhuo_CV.pdf" download>Download CV</a>
-          </div>
-        </article>
       </div>
+
+      <article class="cv-panel" data-reveal>
+        <p class="snapshot-card__label">Education</p>
+        <ul class="cv-timeline">
+          {profile.education.map((entry) => (
+            <li class="cv-timeline__entry">
+              <span class="cv-timeline__period">{entry.period}</span>
+              <div>
+                <strong>
+                  {entry.institutionHref
+                    ? <a class="text-link" href={entry.institutionHref} target="_blank" rel="noreferrer">{entry.institution}</a>
+                    : entry.institution
+                  }
+                </strong>
+                <span class="cv-timeline__location">, {entry.location}</span>
+                <p class="cv-timeline__degree">{entry.degree}</p>
+                {entry.detail && <p class="cv-timeline__detail">{entry.detail}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="cv-panel" data-reveal>
+        <p class="snapshot-card__label">Awards and Achievements</p>
+        <ul class="cv-timeline">
+          {profile.awardsAndAchievements.map((award) => (
+            <li class="cv-timeline__entry">
+              <span class="cv-timeline__period">{award.year}</span>
+              <div>
+                <strong>{award.title}</strong>
+                {award.detail && <p class="cv-timeline__detail">{award.detail}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="cv-panel" data-reveal>
+        <p class="snapshot-card__label">Teaching</p>
+        <ul class="cv-timeline">
+          {profile.teaching.map((entry) => (
+            <li class="cv-timeline__entry">
+              <span class="cv-timeline__period">{entry.period}</span>
+              <div>
+                <span class:list={["cv-teaching__role", entry.role === "Instructor" && "cv-teaching__role--instructor"]}>{entry.role}</span>
+                <p class="cv-timeline__degree">{entry.course}</p>
+                <p class="cv-timeline__detail">
+                  {entry.institutionHref
+                    ? <a class="text-link" href={entry.institutionHref} target="_blank" rel="noreferrer">{entry.institution}</a>
+                    : entry.institution
+                  }
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="cta-panel" data-reveal>
+        <p class="eyebrow">Downloads</p>
+        <h3>Full curriculum vitae</h3>
+        <p>Open or download the full PDF.</p>
+        <div class="cta-actions">
+          <a class="button" href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+          <a class="button button--ghost" href="/cv/caizhuo_CV.pdf" download>Download CV</a>
+        </div>
+      </article>
 
       <article class="cv-panel cv-embed" data-reveal>
         <iframe src="/cv/caizhuo_CV.pdf" title={`${profile.name} CV PDF`}></iframe>

@@ -1,9 +1,10 @@
 {
-  "title": "Blockchain Incentive Design for Next-Generation Infrastructure",
-  "summary": "Designing incentive-compatible transaction fee mechanisms and execution protocols for modern blockchain architectures—including multi-block sequencing, DAG-based consensus, sharded execution, and parallel transaction processing.\n",
+  "title": "Blockchain Mechanism Design: Transaction Fees and Strategic Equilibria",
+  "summary": "Designing incentive-compatible transaction fee mechanisms and equilibrium protocols for modern blockchain infrastructure—including multi-block sequencing, DAG-based consensus, sharded execution, and parallel transaction processing.\n",
   "description": "Most transaction fee mechanism (TFM) theory—including the foundations of EIP-1559— assumes a linear chain with one proposer per block in isolation. Real blockchain infrastructure has moved well beyond this model: strategic builders can delay transactions across multiple blocks, DAG-based consensus (Bullshark, Shoal++) runs concurrent proposers across overlapping transaction sets, sharded systems must price cross-shard atomicity, and parallel execution engines (Solana, Monad, Sui) remove ordering constraints while introducing new strategic manipulation via conflict graphs. This direction asks which classical TFM desiderata survive these architectural changes and what new mechanisms are needed to restore incentive compatibility, user welfare, and revenue adequacy. It also studies incentive design for parallel execution: whether conflict injection can be detected and penalized, how MEV manifests under parallelism, and what validator compensation models are viable when transaction ordering is no longer the primary strategic lever.\n",
   "tags": [
     "transaction fee mechanism",
+    "blockchain mechanism design",
     "incentive design",
     "blockchain economics",
     "DAG blockchain",
@@ -12,6 +13,6 @@
     "MEV"
   ],
   "status": "active",
-  "relatedPublications": [],
+  "relatedPublications": ["no-tx-fee"],
   "links": {}
 }

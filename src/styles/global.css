@@ -11,7 +11,7 @@
   --line: #e2b8a3;
   --line-strong: #c98364;
   --text: #2f211d;
-  --text-soft: #715a51;
+  --text-soft: #614d45;
   --brand: #be5a3d;
   --brand-strong: #9e4025;
   --accent: #0b7a72;
@@ -91,6 +91,13 @@ a {
 .text-block,
 .section-copy,
 .muted {
+  color: var(--text-soft);
+}
+
+.section-lead {
+  max-width: 72ch;
+  margin-top: 1.75rem;
+  line-height: 1.75;
   color: var(--text-soft);
 }
 
@@ -361,22 +368,24 @@ html:not([data-theme="dark"]) .theme-toggle__icon--moon {
 
 .home-overview__identity {
   display: grid;
-  grid-template-columns: minmax(88px, 108px) minmax(0, 1fr);
+  grid-template-columns: minmax(100px, 124px) minmax(0, 1fr);
   gap: 0.9rem;
   align-items: start;
 }
 
 .home-portrait {
   overflow: hidden;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
+  border-radius: 50%;
+  border: 2px solid var(--line);
   background: var(--surface);
 }
 
 .home-portrait img {
   width: 100%;
-  aspect-ratio: 0.88;
+  aspect-ratio: 1;
   object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
 }
 
 .home-overview__identity p {
@@ -667,6 +676,24 @@ html:not([data-theme="dark"]) .theme-toggle__icon--moon {
 .grid-three,
 .projects-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.project-prior-item {
+  margin-bottom: 3rem;
+}
+
+.project-prior-item__header {
+  margin-bottom: 1.25rem;
+}
+
+.project-prior-item__header h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-prior-item__header p {
+  color: var(--text-soft);
+  max-width: 72ch;
 }
 
 .home-destinations {
@@ -1000,6 +1027,59 @@ html:not([data-theme="dark"]) .theme-toggle__icon--moon {
   background: white;
 }
 
+/* CV timeline: 2-column period | content layout */
+.cv-timeline {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cv-timeline__entry {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 0.32fr) minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+
+.cv-timeline__period {
+  padding-top: 0.1em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+
+.cv-timeline__degree {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.cv-timeline__detail {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+/* Teaching role labels */
+.cv-teaching__role {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.cv-teaching__role--instructor {
+  color: var(--brand);
+}
+
 .contact-card__value {
   display: block;
   margin-bottom: 0.35rem;
@@ -1157,6 +1237,11 @@ html:not([data-theme="dark"]) .theme-toggle__icon--moon {
 
   .timeline-item {
     grid-template-columns: 1fr;
+  }
+
+  .cv-timeline__entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
   }
 }
 

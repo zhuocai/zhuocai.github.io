@@ -3,6 +3,7 @@ import { z } from "zod";
 const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
+  category: z.enum(["primary", "prior", "earlier"]),
   period: z.string(),
   summary: z.string(),
   narrative: z.string(),
@@ -15,40 +16,41 @@ const projectsSchema = z.array(projectSchema);
 
 export const projects = projectsSchema.parse([
   {
-    id: "verifiable-computation",
-    title: "Verifiable Computation and Database Arguments",
+    id: "proof-systems",
+    title: "Proof Systems and Verifiable Computation",
+    category: "primary",
     period: "Current",
     summary:
-      "I study proof systems and related cryptographic tools that make outsourced computation and large-scale data queries verifiable without sacrificing efficiency.",
+      "I study proof systems and cryptographic tools that make outsourced computation and large-scale data queries verifiable — efficiently and without trusting the service provider.",
     narrative:
-      "This line of work focuses on the proof-system machinery needed to make large computations and database queries trustworthy. The core challenge is to preserve succinct verification while still supporting rich query structure and practical update patterns. My work in this area uses lookup arguments and related proof components to bridge theory-heavy zero-knowledge ideas with settings closer to real systems.",
+      "The core challenge is achieving succinct verification while supporting rich query structure and practical update patterns. My work uses updatable lookup arguments and related proof components to bridge theory-heavy ZK ideas with real systems. The Rogue paper (CCS 2026) advances updatable matrix lookup arguments and connects directly to verifiable database applications, pointing toward a broader framework for dynamic SNARKs over evolving state in rollups and verifiable infrastructure.",
     significance:
-      "The payoff is broader than a single paper: it points toward cryptographic interfaces that let users trust results from outsourced computation and data services without trusting the service provider itself.",
+      "This is the technical core of my research agenda. It points toward cryptographic interfaces that let users trust results from outsourced computation and data services without trusting the provider, a primitive that becomes more important as compute and storage move off-chain.",
     highlights: [
-      "Lookup arguments and proof-system components for verifiable databases",
-      "Bridging theoretical proof techniques with concrete systems applications",
-      "Cryptographic abstractions that support trustworthy data access at scale"
+      "Updatable and dynamic lookup arguments for verifiable databases",
+      "Bridging ZK proof theory with concrete systems applications",
+      "Forward vision: dynamic SNARKs for rollup state transitions and verifiable infrastructure"
     ],
     publicationIds: ["rogue"]
   },
   {
-    id: "decentralized-randomness",
-    title: "Randomness, Leader Election, and Strategic Coordination",
-    period: "2023-present",
+    id: "cryptographic-coordination",
+    title: "Cryptographic Coordination Protocols",
+    category: "primary",
+    period: "2022–present",
     summary:
-      "A major thread of my research focuses on distributed randomness, fair leader election, and strategic behavior in blockchain protocols.",
+      "How do strategic participants coordinate without a trusted third party? I study this through bias-resistant randomness generation, fair leader election, and game-theoretic protocol design.",
     narrative:
-      "A recurring question in blockchain systems is how to coordinate strategic participants when no central authority can be trusted. My work studies this through randomness generation, leader election, and game-theoretic mechanism design. The technical angle ranges from bias-resistant random beacons to smart-contract protocols that implement richer solution concepts such as correlated equilibria without relying on a trusted mediator.",
+      "A recurring question in decentralized systems is how to achieve coordination guarantees when every participant is rational and no central authority can be trusted. My work addresses this at the cryptographic and game-theoretic level: from verifiable random functions and secret random number generation to smart-contract protocols that implement richer solution concepts without a trusted mediator. The unifying concern is robustness — bias resistance, incentive compatibility, and fairness — across adversarial and strategic settings. This is also where I study the strategic behavior of validators and miners in proof-of-stake systems, asking when rational participants deviate and how protocol design can close those gaps.",
     significance:
-      "This theme connects cryptography, distributed systems, and economics: the goal is not just to sample randomness securely, but to design coordination mechanisms that remain robust when participants are strategic and incentives matter.",
+      "This direction connects cryptography, distributed systems, and economics. The goal is not just secure randomness sampling, but coordination mechanisms that remain robust when participants are strategic and incentives diverge from protocol intent.",
     highlights: [
-      "Bias-resistant and decentralized randomness generation",
-      "Random beacons and leader election without trusted setup",
-      "Mechanism design for equilibrium-oriented blockchain interactions"
+      "Bias-resistant and gas-efficient decentralized random beacons",
+      "Leader election without trusted setup or centralized DRNG",
+      "Strategic mining analysis in proof-of-stake and its protocol implications"
     ],
     publicationIds: [
       "strategic-mining-proof-of-stake-practical-random-election",
-      "trustless-sampling-correlated-equilibria",
       "srng",
       "gas-efficient-random-beacons",
       "trustless-bias-resistant-randomness",
@@ -57,36 +59,54 @@ export const projects = projectsSchema.parse([
     ]
   },
   {
+    id: "blockchain-mechanism-design",
+    title: "Blockchain Mechanism Design",
+    category: "primary",
+    period: "2024–present",
+    summary:
+      "What incentive structures make blockchain protocols work honestly at scale? I study fee mechanisms and strategic equilibrium design for modern decentralized infrastructures.",
+    narrative:
+      "Most fee mechanism theory — including the foundations of EIP-1559 — assumes a linear chain with one proposer per block in isolation. Real infrastructure has moved beyond this: builders can delay transactions across multiple blocks, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove ordering constraints while introducing new manipulation surfaces via conflict graphs. I study what classical TFM desiderata survive these architectural changes and what new mechanisms restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
+    significance:
+      "This is the broadest and most forward-looking of my three directions. It addresses strategic design questions that become unavoidable as blockchain infrastructure scales toward DAG, sharded, and parallel execution environments.",
+    highlights: [
+      "Transaction fee mechanisms under multi-block, DAG, and parallel-execution architectures",
+      "Smart contracts as trustless mediators for correlated equilibria",
+      "MEV and incentive design for next-generation blockchain infrastructure"
+    ],
+    publicationIds: ["no-tx-fee", "trustless-sampling-correlated-equilibria"]
+  },
+  {
     id: "smart-contract-analysis",
-    title: "Smart Contract Analysis and Cost Reasoning",
+    title: "Smart Contract Resource Analysis",
+    category: "prior",
     period: "2023",
     summary:
-      "I work on static and automated reasoning techniques that make smart-contract behavior easier to analyze before deployment.",
+      "Prior work on automated static analysis for reasoning about gas consumption in smart contracts before deployment.",
     narrative:
-      "Smart contracts need more than correctness; they need predictable resource usage and deployable tooling. This track focuses on static reasoning about gas consumption and contract behavior before deployment. The work combines formal methods with tool building, aiming to turn upper-bound reasoning into something automated enough to be useful in practice.",
+      "Smart contracts need more than correctness — they need predictable resource usage. This track combines formal methods and tool building to automate gas upper-bound synthesis, turning resource-bound reasoning into something practically usable. The Asparagus tool (OOPSLA 2023) synthesizes parametric gas upper bounds for Solidity contracts automatically.",
     significance:
-      "The broader aim is to make blockchain software engineering more analyzable and less guess-driven, especially when execution costs and resource bounds directly affect security and usability.",
+      "This earlier direction contributed a formal-methods lens on blockchain software engineering and informs how I think about protocol-level safety and efficiency tradeoffs in my current work.",
     highlights: [
-      "Automated synthesis of gas upper bounds",
-      "Tool-oriented work with practical implications for contract assurance",
-      "A formal-methods lens on blockchain software engineering"
+      "Automated synthesis of parametric gas upper bounds for Solidity",
+      "Tool-oriented work with direct implications for contract assurance"
     ],
     publicationIds: ["asparagus"]
   },
   {
     id: "multimodal-learning",
-    title: "Multimodal Learning for Scientific and Medical Imaging",
+    title: "Multimodal Learning for Scientific Imaging",
+    category: "earlier",
     period: "Earlier work",
     summary:
-      "My earlier research included multimodal learning methods for visual question answering on pathology images.",
+      "Earlier work on vision-language modeling for visual question answering on pathology images.",
     narrative:
-      "Before focusing fully on cryptography and blockchains, I worked on multimodal learning problems involving pathology images and language. The central task was visual question answering in a domain where images are scientific artifacts rather than everyday photographs, which raises different challenges around representation and evaluation.",
+      "Before focusing on cryptography and decentralized systems, I worked on multimodal learning problems involving pathology images and language. The central task was scientific VQA in a domain where images are artifacts rather than everyday photographs, raising distinct challenges around representation and evaluation.",
     significance:
-      "This work sharpened my interest in building technically grounded systems for specialized, high-stakes settings, and it still informs how I think about modeling assumptions and evaluation quality.",
+      "This work sharpened my interest in principled methods for high-stakes domains and informs how I evaluate modeling assumptions and measure correctness in current research.",
     highlights: [
-      "Vision-language modeling for scientific images",
-      "Task design at the boundary of machine learning and healthcare",
-      "Applied ML experience that informs my later systems and security work"
+      "Vision-language modeling applied to pathology images",
+      "Scientific VQA at the boundary of machine learning and healthcare"
     ],
     publicationIds: ["pathology-vqa"]
   }

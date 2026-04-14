@@ -58,7 +58,7 @@ export function getPublicationPrimaryAction(publication: SerializedPublication):
   }
 
   return {
-    href: `/project/#paper-${publication.id}`,
+    href: `/research/#paper-${publication.id}`,
     label: "Summary",
     external: false
   };

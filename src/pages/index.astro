@@ -8,6 +8,7 @@ import { getAllPublications, serializePublication } from "../lib/publications";
 import { getAllDirections, serializeDirection } from "../lib/directions";
 
 const publications = (await getAllPublications()).map(serializePublication);
+const selectedPublications = publications.filter((p) => p.selected);
 const directions = (await getAllDirections()).map(serializeDirection);
 const publicationMap = new Map(publications.map((p) => [p.id, p]));
 
@@ -16,7 +17,7 @@ const destinations = [
     eyebrow: "Research",
     title: "Topics and questions",
     description: "Research themes and related papers.",
-    href: "/project/",
+    href: "/research/",
     label: "Open research overview"
   },
   {
@@ -79,7 +80,7 @@ const destinations = [
           <aside class="home-overview__rail" aria-label="Current academic profile">
             <div class="home-overview__identity">
               <div class="home-portrait">
-                <img src="/images/eiffel-night.jpg" alt="Eiffel Tower at night" />
+                <img src="/images/zcaiam.jpg" alt="Zhuo Cai" />
               </div>
 
               <div>
@@ -108,42 +109,14 @@ const destinations = [
                 </dd>
               </div>
               <div>
-                <dt>Support</dt>
-                <dd>Hong Kong PhD Fellowship Scheme (HKPFS)</dd>
-              </div>
-              <div>
-                <dt>Visiting scholar</dt>
-                <dd>University of Oxford</dd>
+                <dt>Fellowship</dt>
+                <dd>Hong Kong PhD Fellowship (HKPFS)</dd>
               </div>
             </dl>
 
 
           </aside>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section home-section--compact">
-    <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Publications</p>
-        <h2 class="section-title">Full publication record.</h2>
-        <p class="section-copy">
-          All {publications.length} papers are listed here. The publications page adds search, tags, and abstracts.
-        </p>
-      </div>
-
-      <div class="home-publications-list">
-        {
-          publications.map((publication) => (
-            <PublicationListItem publication={publication} />
-          ))
-        }
-      </div>
-
-      <div class="cta-actions" data-reveal>
-        <a class="button button--ghost" href="/publications/">Open full publications list</a>
       </div>
     </div>
   </section>
@@ -172,6 +145,30 @@ const destinations = [
       </div>
     </section>
   )}
+
+  <section class="section home-section--compact">
+    <div class="page-shell">
+      <div class="section-header" data-reveal>
+        <p class="eyebrow">Publications</p>
+        <h2 class="section-title">Selected publications.</h2>
+        <p class="section-copy">
+          {selectedPublications.length} representative papers. The publications page has the full list with search, tags, and abstracts.
+        </p>
+      </div>
+
+      <div class="home-publications-list">
+        {
+          selectedPublications.map((publication) => (
+            <PublicationListItem publication={publication} />
+          ))
+        }
+      </div>
+
+      <div class="cta-actions" data-reveal>
+        <a class="button button--ghost" href="/publications/">Open full publications list</a>
+      </div>
+    </div>
+  </section>
 
   <section class="section home-section--compact">
     <div class="page-shell">
