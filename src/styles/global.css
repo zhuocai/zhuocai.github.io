@@ -149,12 +149,18 @@ select {
   background: color-mix(in srgb, var(--bg) 92%, var(--surface) 8%);
 }
 
+/* Hidden on desktop; shown via mobile media query */
+.nav-toggle {
+  display: none;
+}
+
 .site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   min-height: 4.6rem;
+  position: relative;
 }
 
 .site-header__controls {
@@ -1073,17 +1079,60 @@ html:not([data-theme="dark"]) .theme-toggle__icon--moon {
 }
 
 @media (max-width: 760px) {
-  .site-header__inner,
+  /* --- Hamburger button: visible on mobile only --- */
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle__icon--close { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle__icon--menu { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle__icon--close { display: block; }
+
+  /* Keep brand + controls row on one line */
+  .site-header__inner {
+    align-items: center;
+  }
+
   .site-header__controls {
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .site-header__inner,
-  .site-header__controls,
+  /* Nav hidden by default; revealed when header has .is-open */
   .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
+    gap: 0;
+    background: color-mix(in srgb, var(--bg) 97%, var(--surface) 3%);
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 0;
+    z-index: 19;
   }
 
+  .site-header.is-open .site-nav {
+    display: flex;
+  }
+
+  .site-nav__link {
+    border-radius: 0;
+    padding: 0.75rem 1.25rem;
+  }
+
+  /* Single-column grids */
   .grid-two,
   .grid-three,
   .projects-grid,

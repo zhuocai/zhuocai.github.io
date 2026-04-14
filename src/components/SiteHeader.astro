@@ -1,5 +1,6 @@
 ---
 import { profile } from "../data/site";
+import Icon from "./Icon.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
@@ -33,7 +34,7 @@ function isActive(href: string) {
     </a>
 
     <div class="site-header__controls">
-      <nav class="site-nav" aria-label="Primary">
+      <nav class="site-nav" id="primary-nav" aria-label="Primary">
         {
           navItems.map((item) => (
             <a class:list={["site-nav__link", isActive(item.href) && "is-active"]} href={item.href}>
@@ -43,6 +44,54 @@ function isActive(href: string) {
         }
       </nav>
       <ThemeToggle />
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Toggle navigation"
+      >
+        <Icon name="menu" class="icon nav-toggle__icon nav-toggle__icon--menu" />
+        <Icon name="close" class="icon nav-toggle__icon nav-toggle__icon--close" />
+      </button>
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector(".site-header") as HTMLElement;
+  const toggle = header?.querySelector(".nav-toggle") as HTMLButtonElement;
+  const nav = header?.querySelector("#primary-nav") as HTMLElement;
+
+  function openMenu() {
+    toggle.setAttribute("aria-expanded", "true");
+    header.classList.add("is-open");
+  }
+
+  function closeMenu() {
+    toggle.setAttribute("aria-expanded", "false");
+    header.classList.remove("is-open");
+  }
+
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    expanded ? closeMenu() : openMenu();
+  });
+
+  // Close on nav link click (page navigation on mobile)
+  nav?.querySelectorAll(".site-nav__link").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (header && !header.contains(e.target as Node)) {
+      closeMenu();
+    }
+  });
+
+  // Close on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+</script>
