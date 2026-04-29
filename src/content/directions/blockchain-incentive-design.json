@@ -13,6 +13,9 @@
     "MEV"
   ],
   "status": "active",
-  "relatedPublications": ["no-tx-fee"],
+  "relatedPublications": [
+    "tx-order",
+    "no-tx-fee"
+  ],
   "links": {}
 }

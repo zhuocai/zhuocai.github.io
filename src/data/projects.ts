@@ -64,17 +64,17 @@ export const projects = projectsSchema.parse([
     category: "primary",
     period: "2024–present",
     summary:
-      "What incentive structures make blockchain protocols work honestly at scale? I study fee mechanisms and strategic equilibrium design for modern decentralized infrastructures.",
+      "What ordering and incentive structures make blockchain protocols work honestly at scale? I study transaction order fairness, fee mechanisms, and strategic equilibrium design for modern decentralized infrastructures.",
     narrative:
-      "Most fee mechanism theory — including the foundations of EIP-1559 — assumes a linear chain with one proposer per block in isolation. Real infrastructure has moved beyond this: builders can delay transactions across multiple blocks, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove ordering constraints while introducing new manipulation surfaces via conflict graphs. I study what classical TFM desiderata survive these architectural changes and what new mechanisms restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
+      "Real blockchain infrastructure turns transaction ordering into a strategic object: builders can exploit ordering and delay, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove some ordering constraints while introducing new manipulation surfaces via conflict graphs. My PODC brief announcement studies delay-optimal transaction order fairness, while related work asks what fee-mechanism desiderata survive modern architectures and what mechanisms restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
     significance:
       "This is the broadest and most forward-looking of my three directions. It addresses strategic design questions that become unavoidable as blockchain infrastructure scales toward DAG, sharded, and parallel execution environments.",
     highlights: [
-      "Transaction fee mechanisms under multi-block, DAG, and parallel-execution architectures",
+      "Transaction order fairness and fee mechanisms under multi-block, DAG, and parallel-execution architectures",
       "Smart contracts as trustless mediators for correlated equilibria",
       "MEV and incentive design for next-generation blockchain infrastructure"
     ],
-    publicationIds: ["no-tx-fee", "trustless-sampling-correlated-equilibria"]
+    publicationIds: ["tx-order", "no-tx-fee", "trustless-sampling-correlated-equilibria"]
   },
   {
     id: "smart-contract-analysis",

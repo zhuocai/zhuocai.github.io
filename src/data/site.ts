@@ -151,7 +151,7 @@ export const profile = profileSchema.parse({
     eyebrow: "Proof systems, cryptographic coordination, and blockchain mechanism design",
     title: "Building cryptographic and game-theoretic foundations for trustworthy decentralized protocols.",
     intro:
-      "My research builds the cryptographic and game-theoretic foundations that make decentralized protocols trustworthy at scale. I work across three directions: (1) proof systems — constructing efficient, updatable SNARKs and lookup arguments for verifiable computation over evolving data; (2) cryptographic coordination protocols — designing bias-resistant, incentive-aware randomness and leader-election protocols secure against strategic manipulation; and (3) blockchain mechanism design — analyzing and repairing transaction fee mechanisms for modern architectures including DAG consensus, sharded execution, and parallel transaction processing. My work appears at CCS, IJCAI, OOPSLA, ICBC, and IEEE Blockchain. I am a PhD student at HKUST, supported by the Hong Kong PhD Fellowship (HKPFS), and a former visiting scholar at the University of Oxford.",
+      "My research builds the cryptographic and game-theoretic foundations that make decentralized protocols trustworthy at scale. I work across three directions: (1) proof systems — constructing efficient, updatable SNARKs and lookup arguments for verifiable computation over evolving data; (2) cryptographic coordination protocols — designing bias-resistant, incentive-aware randomness and leader-election protocols secure against strategic manipulation; and (3) blockchain mechanism design — analyzing and repairing transaction ordering and fee mechanisms for modern architectures including DAG consensus, sharded execution, and parallel transaction processing. My work appears at PODC, CCS, IJCAI, OOPSLA, ICBC, and IEEE Blockchain. I am a PhD student at HKUST, supported by the Hong Kong PhD Fellowship (HKPFS), and a former visiting scholar at the University of Oxford.",
     primaryCta: {
       label: "View publications",
       href: "/publications/"
@@ -387,7 +387,7 @@ export const profile = profileSchema.parse({
   ],
   cvHighlights: [
     "Research agenda: cryptographic and game-theoretic foundations for trustworthy decentralized protocols — spanning proof systems, cryptographic coordination protocols, and blockchain mechanism design.",
-    "Publications across CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
+    "Publications across PODC, CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
     "Hong Kong PhD Fellowship (HKPFS) recipient. Young Researcher at the 10th Heidelberg Laureate Forum."
   ],
   service: ["Program committee member, MARBLE 2025"],

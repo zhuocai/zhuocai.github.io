@@ -77,7 +77,7 @@ function buildPublicationJson(fm) {
     venue: fm.venue ?? "Unpublished",
     ...(fm.venueShort ? { venueShort: fm.venueShort } : {}),
     year: fm.year ?? new Date().getFullYear(),
-    type: "manuscript",
+    type: fm.publicationType ?? "manuscript",
     status: fm.status ?? "Under submission",
     tags: fm.tags ?? [],
     selected: fm.selected ?? false,
