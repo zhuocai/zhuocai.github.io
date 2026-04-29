@@ -15,7 +15,7 @@
     "random beacons",
     "blockchains"
   ],
-  "selected": true,
+  "selected": false,
   "note": "Alphabetical author order with Amir Goharshady.",
   "abstract": "SRNG presents an efficient decentralized approach to secret random number generation, aiming to provide tamper-resistant randomness while preserving the privacy properties needed by higher-level blockchain protocols.",
   "abstractSourceUrl": "https://hal.science/hal-04518059",
