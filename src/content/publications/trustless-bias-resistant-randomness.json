@@ -16,7 +16,7 @@
   ],
   "selected": true,
   "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This paper studies distributed randomness generation under strategic behavior and proposes a trustless, bias-resistant approach that aligns game-theoretic incentives with randomness quality.",
+  "abstract": "In randomness generation smart contracts, participants are assumed but have no incentive to submit random integers rather than sending arbitrary values. This paper presents a novel matrix game to enforce uniformity of batched value generation by collision-resistant Nash equilibria.",
   "abstractSourceUrl": "https://hal.science/hal-04268410",
   "localPdfPath": "/papers/trustless-bias-resistant-randomness-icbc-2023.pdf",
   "contentAvailability": "local-pdf",

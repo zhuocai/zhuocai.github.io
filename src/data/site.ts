@@ -390,7 +390,7 @@ export const profile = profileSchema.parse({
     "Publications across PODC, CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
     "Hong Kong PhD Fellowship (HKPFS) recipient. Young Researcher at the 10th Heidelberg Laureate Forum."
   ],
-  service: ["Program committee member, MARBLE 2025"],
+  service: ["Program committee member, MARBLE'2026", "Program committee member, MARBLE'2025"],
   publicationNote: [
     { text: "Papers coauthored with " },
     { text: "Amir Goharshady", href: links.amir },

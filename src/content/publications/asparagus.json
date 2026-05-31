@@ -18,7 +18,7 @@
   ],
   "selected": true,
   "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This paper presents Asparagus, a method for automatically synthesizing parametric gas upper bounds for smart contracts so that developers can reason about cost behavior before deployment.",
+  "abstract": "This paper presents Asparagus, an automated tool for synthesizing parametric static gas upper bounds for smart contracts. The main technical contribution is to employ sound quantifier elimination techniques based on Farkas' lemma and other algebro-geometric methods. ",
   "abstractSourceUrl": "https://dl.acm.org/doi/10.1145/3622829",
   "contentAvailability": "abstract-only",
   "links": {

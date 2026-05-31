@@ -1,16 +1,12 @@
 ---
 import Icon from "../components/Icon.astro";
 import PublicationListItem from "../components/PublicationListItem.astro";
-import ResearchDirectionCard from "../components/ResearchDirectionCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
 import { getAllPublications, serializePublication } from "../lib/publications";
-import { getAllDirections, serializeDirection } from "../lib/directions";
 
 const publications = (await getAllPublications()).map(serializePublication);
 const selectedPublications = publications.filter((p) => p.selected);
-const directions = (await getAllDirections()).map(serializeDirection);
-const publicationMap = new Map(publications.map((p) => [p.id, p]));
 
 const destinations = [
   {
@@ -120,31 +116,6 @@ const destinations = [
       </div>
     </div>
   </section>
-
-  {directions.length > 0 && (
-    <section class="section home-section--compact">
-      <div class="page-shell">
-        <div class="section-header" data-reveal>
-          <p class="eyebrow">Research Directions</p>
-          <h2 class="section-title">Ongoing and planned research.</h2>
-          <p class="section-copy">
-            Topics I am actively working on or planning to pursue, beyond papers already published.
-          </p>
-        </div>
-
-        <div class="home-directions-grid">
-          {directions.map((direction) => (
-            <ResearchDirectionCard
-              direction={direction}
-              relatedPublicationEntries={direction.relatedPublications
-                .map((id) => publicationMap.get(id))
-                .filter((p): p is NonNullable<typeof p> => p !== undefined)}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <section class="section home-section--compact">
     <div class="page-shell">

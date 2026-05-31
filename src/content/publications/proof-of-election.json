@@ -1,8 +1,6 @@
 {
-  "title": "LockFee: Refundable Transaction Admission via Time-Locked Collateral",
+  "title": "Proof of Election: A Formally-Verified Democratic Blockchain Protocol",
   "authors": [
-    "J. Ballweg",
-    "T. Barakbayeva",
     "Zhuo Cai",
     "A. Goharshady"
   ],
@@ -12,16 +10,15 @@
   "type": "conference",
   "status": "Published",
   "tags": [
-    "transaction fee mechanism",
+    "blockchain consensus",
     "blockchain economics",
-    "incentive design",
     "MEV",
     "decentralization"
   ],
   "selected": false,
   "alphaOrder": true,
   "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "We present LockFee, a principal-preserving admission primitive in which each accepted transaction locks collateral for a fixed duration and recovers the principal in full afterward; users bear only the opportunity cost of locked capital. \n",
+  "abstract": "We present Proof-of-Election, a new blockchain consensus protocol that mimics real-world democratic elections, to vote based on block contents rather than blindly trust proposers, and only admit the highest voted block in each slot. \n",
   "contentAvailability": "abstract-only",
   "links": {}
 }

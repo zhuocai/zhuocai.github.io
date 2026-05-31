@@ -34,6 +34,15 @@ import { profile } from "../data/site";
             {profile.cvHighlights.map((item) => <li>{item}</li>)}
           </ul>
         </article>
+
+        {profile.service.length > 0 && (
+          <article class="cv-panel" data-reveal>
+            <p class="snapshot-card__label">Academic Service</p>
+            <ul>
+              {profile.service.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        )}
       </div>
 
       <article class="cv-panel" data-reveal>

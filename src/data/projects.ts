@@ -41,15 +41,17 @@ export const projects = projectsSchema.parse([
     summary:
       "How do strategic participants coordinate without a trusted third party? I study this through bias-resistant randomness generation, fair leader election, and game-theoretic protocol design.",
     narrative:
-      "A recurring question in decentralized systems is how to achieve coordination guarantees when every participant is rational and no central authority can be trusted. My work addresses this at the cryptographic and game-theoretic level: from verifiable random functions and secret random number generation to smart-contract protocols that implement richer solution concepts without a trusted mediator. The unifying concern is robustness — bias resistance, incentive compatibility, and fairness — across adversarial and strategic settings. This is also where I study the strategic behavior of validators and miners in proof-of-stake systems, asking when rational participants deviate and how protocol design can close those gaps.",
+      "A recurring question in decentralized systems is how to achieve coordination guarantees when every participant is rational and no central authority can be trusted. My work addresses this at the cryptographic and game-theoretic level: from verifiable random functions and secret random number generation to voting-based consensus protocols and smart-contract protocols that implement richer solution concepts without a trusted mediator. The unifying concern is robustness — bias resistance, incentive compatibility, and fairness — across adversarial and strategic settings. This is also where I study the strategic behavior of validators and miners in proof-of-stake systems, asking when rational participants deviate and how protocol design can close those gaps.",
     significance:
       "This direction connects cryptography, distributed systems, and economics. The goal is not just secure randomness sampling, but coordination mechanisms that remain robust when participants are strategic and incentives diverge from protocol intent.",
     highlights: [
       "Bias-resistant and gas-efficient decentralized random beacons",
+      "Formally verified voting-based consensus for democratic block selection",
       "Leader election without trusted setup or centralized DRNG",
       "Strategic mining analysis in proof-of-stake and its protocol implications"
     ],
     publicationIds: [
+      "proof-of-election",
       "strategic-mining-proof-of-stake-practical-random-election",
       "srng",
       "gas-efficient-random-beacons",
@@ -66,11 +68,11 @@ export const projects = projectsSchema.parse([
     summary:
       "What ordering and incentive structures make blockchain protocols work honestly at scale? I study transaction order fairness, fee mechanisms, and strategic equilibrium design for modern decentralized infrastructures.",
     narrative:
-      "Real blockchain infrastructure turns transaction ordering into a strategic object: builders can exploit ordering and delay, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove some ordering constraints while introducing new manipulation surfaces via conflict graphs. My PODC brief announcement studies delay-optimal transaction order fairness, while related work asks what fee-mechanism desiderata survive modern architectures and what mechanisms restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
+      "Real blockchain infrastructure turns transaction ordering and admission into strategic objects: builders can exploit ordering and delay, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove some ordering constraints while introducing new manipulation surfaces via conflict graphs. My PODC brief announcement studies delay-optimal transaction order fairness, while LockFee asks what fee-mechanism desiderata survive modern architectures and how refundable collateral can restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
     significance:
       "This is the broadest and most forward-looking of my three directions. It addresses strategic design questions that become unavoidable as blockchain infrastructure scales toward DAG, sharded, and parallel execution environments.",
     highlights: [
-      "Transaction order fairness and fee mechanisms under multi-block, DAG, and parallel-execution architectures",
+      "Transaction order fairness and refundable fee mechanisms under multi-block, DAG, and parallel-execution architectures",
       "Smart contracts as trustless mediators for correlated equilibria",
       "MEV and incentive design for next-generation blockchain infrastructure"
     ],

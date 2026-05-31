@@ -16,7 +16,7 @@
   ],
   "selected": false,
   "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This work studies randomness generation for proof-of-stake settings through a game-theoretic lens, focusing on protocol incentives and how strategic behavior shapes the quality of the randomness mechanism.",
+  "abstract": "PoS requires decentralized randomness. Existing randomness generation protocols either rely on pseudo-randomness, or assume that a majority of the participants are honest in submitting their randdomness share and follow the rest of the protocol. However, these participants have no incentive to contribute true random shares compared to contributing an arbitrary share in the first place. This paper presents a game-theoretic design for incentivizing participants submitting true random shares, without relying on pseudo-randomness.", 
   "abstractSourceUrl": "https://hal.science/hal-04213085",
   "localPdfPath": "/papers/game-theoretic-randomness-proof-of-stake-marble-2023.pdf",
   "contentAvailability": "local-pdf",

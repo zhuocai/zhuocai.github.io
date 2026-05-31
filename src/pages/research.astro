@@ -1,17 +1,11 @@
 ---
 import PublicationCard from "../components/PublicationCard.astro";
-import ResearchDirectionCard from "../components/ResearchDirectionCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
 import { projects } from "../data/projects";
-import { getPublicationMap, getAllPublications, serializePublication } from "../lib/publications";
-import { getAllDirections, serializeDirection } from "../lib/directions";
+import { getPublicationMap, serializePublication } from "../lib/publications";
 
 const publicationMap = await getPublicationMap();
-const allPublications = (await getAllPublications()).map(serializePublication);
-const manuscripts = allPublications.filter((p) => p.type === "manuscript");
-const directions = (await getAllDirections()).map(serializeDirection);
-const hasOngoing = manuscripts.length > 0 || directions.length > 0;
 
 const primaryProjects = projects.filter((p) => p.category === "primary");
 const nonPrimaryProjects = projects.filter((p) => p.category === "prior" || p.category === "earlier");
@@ -44,46 +38,6 @@ const nonPrimaryGroups = nonPrimaryProjects.map(makeGroup);
       <p class="section-lead" data-reveal>{profile.hero.intro}</p>
     </div>
   </section>
-
-  {hasOngoing && (
-    <section class="section" id="ongoing">
-      <div class="page-shell">
-        <div class="section-header" data-reveal>
-          <p class="eyebrow">Work in Progress</p>
-          <h2 class="section-title">Ongoing directions and papers under review.</h2>
-          <p class="section-copy">
-            These include manuscripts currently under submission and active research directions
-            without a published paper yet.
-          </p>
-        </div>
-
-        {manuscripts.length > 0 && (
-          <div class="publications-grid">
-            {manuscripts.map((pub) => (
-              <PublicationCard
-                publication={pub}
-                showAbstract
-                anchorId={`paper-${pub.id}`}
-              />
-            ))}
-          </div>
-        )}
-
-        {directions.length > 0 && (
-          <div class="home-directions-grid" style="margin-top: 1.5rem;">
-            {directions.map((direction) => (
-              <ResearchDirectionCard
-                direction={direction}
-                relatedPublicationEntries={direction.relatedPublications
-                  .map((id) => allPublications.find((p) => p.id === id))
-                  .filter((p): p is NonNullable<typeof p> => p !== undefined)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
-  )}
 
   {
     primaryGroups.map((project) => (
@@ -159,4 +113,3 @@ const nonPrimaryGroups = nonPrimaryProjects.map(makeGroup);
     </section>
   )}
 </BaseLayout>
-

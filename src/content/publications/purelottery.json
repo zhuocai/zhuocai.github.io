@@ -17,7 +17,7 @@
   ],
   "selected": false,
   "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "PureLottery studies fair leader election without relying on a decentralized random number generation service, showing how protocol design can still achieve fairness guarantees in blockchain settings.",
+  "abstract": "PureLottery studies fair leader election without relying on a decentralized random number generation service, but instead leveraging a tournament among interested participants. ",
   "abstractSourceUrl": "https://hal.science/hal-04268058",
   "localPdfPath": "/papers/purelottery-ieee-blockchain-2023.pdf",
   "contentAvailability": "local-pdf",
