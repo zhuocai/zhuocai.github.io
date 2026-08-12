@@ -76,7 +76,7 @@ export const projects = projectsSchema.parse([
       "Smart contracts as trustless mediators for correlated equilibria",
       "MEV and incentive design for next-generation blockchain infrastructure"
     ],
-    publicationIds: ["tx-order", "no-tx-fee", "trustless-sampling-correlated-equilibria"]
+    publicationIds: ["tx-order", "no-tx-fee", "trustless-sampling-correlated-equilibria", "parallel-execution-marble"]
   },
   {
     id: "smart-contract-analysis",

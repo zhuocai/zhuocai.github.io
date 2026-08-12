@@ -1,0 +1,24 @@
+{
+  "title": "Extending Programmable Blockchain Protocols to Enable and Incentivize Parallel Execution of Smart Contracts",
+  "authors": [
+    "T. Barakbayeva",
+    "X. Cai",
+    "Zhuo Cai",
+    "A. K. Goharshady"
+  ],
+  "venue": "The 7th International Conference on Mathematical Research for Blockchain Economy",
+  "venueShort": "MARBLE 2026",
+  "year": 2026,
+  "type": "conference",
+  "status": "Accepted",
+  "tags": [
+    "parallel execution",
+    "smart contracts",
+    "incentive design",
+    "programmable blockchain"
+  ],
+  "selected": true,
+  "alphaOrder": true,
+  "contentAvailability": "abstract-only",
+  "links": {}
+}
