@@ -28,14 +28,16 @@ const pageTitle = title === profile.name ? title : `${title} | ${profile.name}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#fff4eb" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171b21" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{pageTitle}</title>
     <script is:inline>
       (() => {
-        const stored = localStorage.getItem("zhuocai-theme");
         const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        document.documentElement.dataset.theme = stored ?? system;
+        let stored;
+        try { stored = localStorage.getItem("zhuocai-theme"); } catch {}
+        document.documentElement.dataset.theme = stored === "dark" || stored === "light" ? stored : system;
       })();
     </script>
     <slot name="head" />
@@ -53,7 +55,6 @@ const pageTitle = title === profile.name ? title : `${title} | ${profile.name}`;
       const initializeChrome = () => {
         const root = document.documentElement;
         const themeToggleButtons = document.querySelectorAll("[data-theme-toggle]");
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         const syncThemeLabel = () => {
           const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
@@ -75,31 +76,13 @@ const pageTitle = title === profile.name ? title : `${title} | ${profile.name}`;
           button.dataset.bound = "true";
           button.addEventListener("click", () => {
             root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
-            localStorage.setItem("zhuocai-theme", root.dataset.theme);
+            try { localStorage.setItem("zhuocai-theme", root.dataset.theme); } catch {}
             syncThemeLabel();
           });
         });
 
         syncThemeLabel();
 
-        const revealNodes = document.querySelectorAll("[data-reveal]");
-        if (reducedMotion) {
-          revealNodes.forEach((node) => node.classList.add("is-visible"));
-        } else {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-visible");
-                  observer.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
-          );
-
-          revealNodes.forEach((node) => observer.observe(node));
-        }
       };
 
       if (document.readyState === "loading") {

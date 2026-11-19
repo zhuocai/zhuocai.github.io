@@ -2,8 +2,8 @@ import { startTransition, useDeferredValue, useState } from "react";
 import type { SerializedPublication } from "../../lib/publications";
 import { parseAuthors } from "../../lib/author-utils";
 import {
-  getPublicationPrimaryAction,
-  getPublicationSecondaryLinks
+  getPublicationActions,
+  getPublicationVenueLabel
 } from "../../lib/publication-ui";
 
 type Props = {
@@ -120,7 +120,7 @@ export default function PublicationsExplorer({ publications }: Props) {
       </div>
 
       <div className="results-meta">
-        <p>
+        <p aria-live="polite" aria-atomic="true">
           Showing <strong>{filteredPublications.length}</strong> of <strong>{publications.length}</strong>{" "}
           publications
         </p>
@@ -136,73 +136,48 @@ export default function PublicationsExplorer({ publications }: Props) {
       ) : (
         <div className="results-grid">
           {filteredPublications.map((publication) => {
-            const primaryAction = getPublicationPrimaryAction(publication);
-            const secondaryLinks = getPublicationSecondaryLinks(publication);
+            const actions = getPublicationActions(publication);
+            const authors = parseAuthors(publication.authors);
+            const hasEqualContrib = authors.some((author) => author.equalContrib);
 
             return (
-              <article className="publication-card" key={publication.id}>
-                <div className="publication-card__meta">
-                  <span className="pill">{publication.venueShort ?? publication.venue}</span>
-                  <span className="status-badge">{publication.status}</span>
+              <article className="publication-row" id={`paper-${publication.id}`} key={publication.id}>
+                <div className="citation-venue">
+                  <abbr title={publication.venue}>{getPublicationVenueLabel(publication)}</abbr>
+                  <span className="citation-year">{publication.year}</span>
                 </div>
-
-                <h3>{publication.title}</h3>
-                {publication.authors.length > 0 && (() => {
-                  const parsed = parseAuthors(publication.authors);
-                  const hasEqualContrib = parsed.some((a) => a.equalContrib);
-                  return (
-                    <p className="publication-card__authors pub-author-list">
-                      {parsed.map((author, i) => (
-                        <span
-                          key={i}
-                          className={["pub-author", author.isMe ? "pub-author--me" : ""].filter(Boolean).join(" ")}
-                        >
-                          {author.name}
-                          {author.equalContrib && <sup>*</sup>}
-                          {publication.alphaOrder && <sup className="pub-author__marker">α</sup>}
-                        </span>
+                <div className="citation-content">
+                  <h3>{publication.title}</h3>
+                  <div className="citation-meta">
+                    {authors.length > 0 && (
+                      <p className="pub-author-list">
+                        {authors.map((author, index) => (
+                          <span key={index} className={["pub-author", author.isMe ? "pub-author--me" : ""].filter(Boolean).join(" ")}>
+                            {author.name}{author.equalContrib && <sup>*</sup>}{publication.alphaOrder && <sup className="pub-author__marker">α</sup>}
+                          </span>
+                        ))}
+                        {publication.alphaOrder && <span className="pub-author-note"><sup>α</sup> Alphabetical order</span>}
+                        {hasEqualContrib && <span className="pub-author-note"><sup>*</sup> Equal contribution</span>}
+                      </p>
+                    )}
+                    <div className="publication-links">
+                      {actions.map((action) => (
+                        <a key={action.href} href={action.href} target={action.external ? "_blank" : undefined} rel={action.external ? "noreferrer" : undefined}>{action.label}</a>
                       ))}
-                      {publication.alphaOrder && <span className="pub-author-note"><sup>α</sup>&thinsp;Alphabetical order</span>}
-                      {hasEqualContrib && <span className="pub-author-note"><sup>*</sup>&thinsp;Equal contribution</span>}
-                    </p>
-                  );
-                })()}
-                <p className="publication-card__venue">
-                  {publication.venue} <span>· {publication.year}</span>
-                </p>
-
-                {publication.note ? <p className="publication-card__note">{publication.note}</p> : null}
-
-                {publication.abstract ? <p className="publication-card__abstract">{publication.abstract}</p> : null}
-
-                <div className="tag-row">
-                  {publication.tags.map((entry) => (
-                    <span className="tag" key={entry}>
-                      {entry}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="publication-card__actions">
-                  <a
-                    className="button button--ghost button--small"
-                    href={primaryAction.href}
-                    target={primaryAction.external ? "_blank" : undefined}
-                    rel={primaryAction.external ? "noreferrer" : undefined}
-                  >
-                    {primaryAction.label}
-                  </a>
-                </div>
-
-                {secondaryLinks.length > 0 ? (
-                  <div className="publication-card__links">
-                    {secondaryLinks.map((link) => (
-                      <a className="inline-link" href={link.href} target="_blank" rel="noreferrer" key={link.key}>
-                        {link.label}
-                      </a>
-                    ))}
+                    </div>
                   </div>
-                ) : null}
+                  {publication.status !== "Published" && <p className="publication-status">{publication.status}</p>}
+                  {publication.note && <p className="publication-note">{publication.note}</p>}
+                  {publication.abstract && (
+                    <details className="citation-abstract">
+                      <summary>Abstract</summary>
+                      <p>{publication.abstract}</p>
+                    </details>
+                  )}
+                  <div className="tag-row">
+                    {publication.tags.map((entry) => <span className="tag" key={entry}>{entry}</span>)}
+                  </div>
+                </div>
               </article>
             );
           })}

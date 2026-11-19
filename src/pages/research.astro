@@ -1,7 +1,6 @@
 ---
 import PublicationCard from "../components/PublicationCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { profile } from "../data/site";
 import { projects } from "../data/projects";
 import { getPublicationMap, serializePublication } from "../lib/publications";
 
@@ -31,11 +30,9 @@ const nonPrimaryGroups = nonPrimaryProjects.map(makeGroup);
   <section class="section">
     <div class="page-shell">
       <div class="section-header" data-reveal>
-        <p class="eyebrow">Research</p>
-        <h1 class="section-title">Three research thrusts and representative papers.</h1>
+        <h1 class="section-title">Research</h1>
         <p class="section-copy">My research spans three interconnected directions in cryptography, distributed systems, and blockchain economics. Prior and earlier work follows below.</p>
       </div>
-      <p class="section-lead" data-reveal>{profile.hero.intro}</p>
     </div>
   </section>
 

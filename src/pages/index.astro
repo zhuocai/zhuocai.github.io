@@ -1,164 +1,69 @@
 ---
-import Icon from "../components/Icon.astro";
 import PublicationListItem from "../components/PublicationListItem.astro";
+import RichText from "../components/RichText.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
+import { projects } from "../data/projects";
 import { getAllPublications, serializePublication } from "../lib/publications";
 
 const publications = (await getAllPublications()).map(serializePublication);
-const selectedPublications = publications.filter((p) => p.selected);
-
-const destinations = [
-  {
-    eyebrow: "Research",
-    title: "Topics and questions",
-    description: "Research themes and related papers.",
-    href: "/research/",
-    label: "Open research overview"
-  },
-  {
-    eyebrow: "Publications",
-    title: "Searchable paper list",
-    description: "Browse the complete publication list with venue, year, tags, and local PDFs where available.",
-    href: "/publications/",
-    label: "Open publications"
-  },
-  {
-    eyebrow: "CV",
-    title: "Background and milestones",
-    description: "Web summary and PDF CV.",
-    href: "/cv/",
-    label: "Open CV"
-  },
-  {
-    eyebrow: "Contact",
-    title: "Profiles and email",
-    description: "Find contact details, profile links, and the best way to reach out for research discussions.",
-    href: "/contact/",
-    label: "Open contact details"
-  }
+const selectedPublications = publications.filter((publication) => publication.selected);
+const primaryProjects = projects.filter((project) => project.category === "primary");
+const researchDescriptions = [
+  "Efficient proofs for computation and queries over evolving data.",
+  "Bias-resistant randomness and leader election with strategic participants.",
+  "Transaction ordering, fee mechanisms, and incentives in decentralized systems."
 ];
 ---
 
 <BaseLayout title={profile.name} description={profile.summary} currentPath="/" bodyClass="home-page">
-  <section class="home-overview">
-    <div class="page-shell">
-      <div class="home-overview__panel" data-reveal>
-        <div class="home-overview__grid">
-          <div class="home-overview__copy">
-            <p class="eyebrow">{profile.hero.eyebrow}</p>
-            <h1 class="home-overview__title">{profile.name}{profile.chineseName && <span class="home-overview__chinese-name" lang="zh"> ({profile.chineseName})</span>}</h1>
-            <p class="home-overview__subhead">{profile.hero.title}</p>
-            <p class="home-overview__intro">{profile.hero.intro}</p>
+  <div class="page-shell academic-home">
+    <header class="home-identity">
+      <h1>{profile.name}{profile.chineseName && <span lang="zh">{profile.chineseName}</span>}</h1>
+      <p class="home-fields">Cryptography · Distributed Systems · Game Theory</p>
+    </header>
 
-            <div class="cta-actions home-overview__actions">
-              <a class="button" href={profile.hero.primaryCta.href}>{profile.hero.primaryCta.label}</a>
-              <a class="button button--ghost" href={profile.hero.secondaryCta.href}>{profile.hero.secondaryCta.label}</a>
-            </div>
-
-            <div class="quick-links" aria-label="Profile links">
-              {
-                profile.quickLinks.map((link) => (
-                  <a
-                    class="link-pill"
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noreferrer" : undefined}
-                  >
-                    <Icon name={link.icon} class="icon" />
-                    <span>{link.label}</span>
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-
-          <aside class="home-overview__rail" aria-label="Current academic profile">
-            <div class="home-overview__identity">
-              <div class="home-portrait">
-                <img src="/images/zcaiam.jpg" alt="Zhuo Cai" />
-              </div>
-
-              <div>
-                <p class="snapshot-card__label">Institution</p>
-                <p class="home-overview__institution">
-                  <a class="text-link" href={profile.institutionHref} target="_blank" rel="noreferrer">
-                    {profile.institution}
-                  </a>
-                </p>
-                <p class="home-overview__role">{profile.role}</p>
-                <p class="home-overview__location">{profile.location}</p>
-              </div>
-            </div>
-
-            <dl class="home-facts">
-              <div>
-                <dt>Undergrad</dt>
-                <dd>B.Eng. in Automation, Tsinghua University</dd>
-              </div>
-              <div>
-                <dt>Advisors</dt>
-                <dd>
-                  <a class="text-link" href="https://amir.goharshady.com" target="_blank" rel="noreferrer">Amir Goharshady</a>
-                  {" and "}
-                  <a class="text-link" href="https://www.cse.ust.hk/~dipapado/index.html" target="_blank" rel="noreferrer">Dimitris Papadopoulos</a>
-                </dd>
-              </div>
-              <div>
-                <dt>Fellowship</dt>
-                <dd>Hong Kong PhD Fellowship (HKPFS)</dd>
-              </div>
-            </dl>
-
-
-          </aside>
-        </div>
+    <aside class="profile-sidebar" aria-label="Profile and contact information">
+      <img class="profile-portrait" src="/images/zcaiam.jpg" alt={profile.name} width="140" height="140" />
+      <div class="profile-affiliation">
+        <p class="profile-role">{profile.role}</p>
+        <p><a href={profile.institutionHref} target="_blank" rel="noreferrer">{profile.institution}</a></p>
       </div>
+      <div class="profile-links">
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        {profile.quickLinks.filter((link) => link.icon === "scholar" || link.icon === "github").map((link) => (
+          <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+        ))}
+        <a href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Curriculum vitae · PDF</a>
+      </div>
+    </aside>
+
+    <div class="home-biography">
+      <p>I am a <RichText block={profile.positionContext} as="span" /> I study the cryptographic and game-theoretic foundations of decentralized protocols.</p>
+      <p>I am supported by the Hong Kong PhD Fellowship. Previously, I was a visiting scholar at the University of Oxford and received my B.Eng. in Automation from Tsinghua University.</p>
     </div>
-  </section>
 
-  <section class="section home-section--compact">
-    <div class="page-shell">
-      <div class="section-header" data-reveal>
-        <p class="eyebrow">Publications</p>
-        <h2 class="section-title">Selected publications.</h2>
-        <p class="section-copy">
-          {selectedPublications.length} representative papers. The publications page has the full list with search, tags, and abstracts.
-        </p>
+    <section class="home-research" aria-labelledby="research-heading">
+      <h2 id="research-heading">Research interests</h2>
+      <div class="home-research-list">
+        {profile.researchAreas.map((area, index) => (
+          <article>
+            <h3><a href={`/research/#${primaryProjects[index]?.id ?? ""}`}>{area.title}</a></h3>
+            <p>{researchDescriptions[index] ?? area.description}</p>
+          </article>
+        ))}
       </div>
+    </section>
 
+    <section class="home-papers" aria-labelledby="publications-heading">
+      <div class="home-section-heading">
+        <h2 id="publications-heading">Selected publications</h2>
+        <a href="/publications/">Full list</a>
+      </div>
       <div class="home-publications-list">
-        {
-          selectedPublications.map((publication) => (
-            <PublicationListItem publication={publication} />
-          ))
-        }
+        {selectedPublications.map((publication) => <PublicationListItem publication={publication} />)}
       </div>
-
-      <div class="cta-actions" data-reveal>
-        <a class="button button--ghost" href="/publications/">Open full publications list</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section home-section--compact">
-    <div class="page-shell">
-      <div class="home-destinations">
-        {
-          destinations.map((destination) => (
-            <article class="card home-destination" data-reveal>
-              <p class="snapshot-card__label">{destination.eyebrow}</p>
-              <h3>{destination.title}</h3>
-              <p>{destination.description}</p>
-              <div class="publication-card__actions home-destination__link">
-                <a class="button button--ghost button--small" href={destination.href}>
-                  {destination.label}
-                </a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+      <RichText block={profile.publicationNote} class="publication-order-note" />
+    </section>
+  </div>
 </BaseLayout>

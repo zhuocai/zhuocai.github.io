@@ -12,6 +12,20 @@ export type PublicationPrimaryAction = {
   external: boolean;
 };
 
+export function getPublicationVenueLabel(publication: SerializedPublication): string {
+  const venue = publication.venueShort ?? publication.venue;
+  return venue.replace(new RegExp(`\\s*${publication.year}$`), "").trim();
+}
+
+export function getPublicationActions(publication: SerializedPublication): PublicationPrimaryAction[] {
+  const primary = getPublicationPrimaryAction(publication);
+  const actions = [
+    { ...primary, label: /^(Local|External) PDF$/.test(primary.label) ? "PDF" : primary.label },
+    ...getPublicationSecondaryLinks(publication).map((link) => ({ ...link, external: true }))
+  ];
+  return actions.filter((action, index) => actions.findIndex((other) => other.href === action.href) === index);
+}
+
 const linkLabels: Array<[PublicationLinkEntry["key"], string]> = [
   ["paper", "Paper"],
   ["preprint", "Preprint"],
