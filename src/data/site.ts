@@ -386,11 +386,13 @@ export const profile = profileSchema.parse({
     { text: ", and currently focused on proof systems, cryptographic coordination protocols, and mechanism design for decentralized infrastructure." }
   ],
   cvHighlights: [
-    "Research agenda: cryptographic and game-theoretic foundations for trustworthy decentralized protocols — spanning proof systems, cryptographic coordination protocols, and blockchain mechanism design.",
-    "Publications across PODC, CCS, IJCAI, ICBC, OOPSLA, IEEE Blockchain, MARBLE, and ACL.",
-    "Hong Kong PhD Fellowship (HKPFS) recipient. Young Researcher at the 10th Heidelberg Laureate Forum."
+    "Selected publications at CCS, OOPSLA, and IJCAI, plus a PODC brief announcement and an ACL short paper.",
+    "Current manuscripts on transaction order fairness, Byzantine agreement in sparse networks, and robust stake-based peer discovery."
   ],
-  service: ["Program committee member, MARBLE'2026", "Program committee member, MARBLE'2025"],
+  service: [
+    "Conference reviewer: The Web Conference (WWW 2027); IEEE BCCA 2026; MARBLE 2025, 2026.",
+    "Journal reviewer: Blockchain: Research and Applications, 2026."
+  ],
   publicationNote: [
     { text: "Papers coauthored with " },
     { text: "Amir Goharshady", href: links.amir },
@@ -398,50 +400,37 @@ export const profile = profileSchema.parse({
   ],
   awardsAndAchievements: [
     { year: "2023", title: "Hong Kong PhD Fellowship" },
-    { year: "2023", title: "Young Researcher, 10th Heidelberg Laureate Forum" },
-    { year: "2023", title: "Research Travel Grant, HKUST" },
-    { year: "2019", title: "Honor of Academic Excellency, Tsinghua University", detail: "Awarded to top 10% students." },
-    { year: "2018", title: "Honor of Academic Excellency, Tsinghua University" },
-    { year: "2016", title: "1st Level in National High School Mathematics League, the Chinese Mathematical Society", detail: "Ranked within the top 2% in the province of Anhui." }
+    { year: "2023", title: "Young Researcher, 10th Heidelberg Laureate Forum" }
   ],
   education: [
-    {
-      period: "July – Oct 2025",
-      institution: "University of Oxford",
-      institutionHref: links.oxford,
-      location: "UK",
-      degree: "Visiting Scholar"
-    },
     {
       period: "2023 – present",
       institution: "Hong Kong University of Science and Technology",
       institutionHref: links.hkust,
       location: "Hong Kong",
       degree: "PhD in Computer Science and Engineering",
-      detail: "Co-supervised by Amir Goharshady and Dimitris Papadopoulos."
+      detail: "Advisors: Amir Goharshady and Dimitris Papadopoulos. Expected graduation: July 2027."
     },
     {
       period: "2021 – 2023",
       institution: "Hong Kong University of Science and Technology",
       institutionHref: links.hkust,
       location: "Hong Kong",
-      degree: "Master of Philosophy in Computer Science and Engineering",
-      detail: "Supervised by Amir Goharshady. GPA: 3.88/4.0."
+      degree: "Master of Philosophy in Computer Science and Engineering"
     },
     {
       period: "2017 – 2021",
       institution: "Tsinghua University",
       institutionHref: links.tsinghua,
       location: "Beijing",
-      degree: "Bachelor of Automation",
-      detail: "GPA: 3.81/4. GPA Ranking: 17/168."
+      degree: "Bachelor of Automation"
     },
     {
-      period: "2019 Fall",
-      institution: "National University of Singapore",
-      location: "Singapore",
-      degree: "Visiting Undergraduate Researcher",
-      detail: "GPA: 4.0/4."
+      period: "July – October 2025",
+      institution: "University of Oxford",
+      institutionHref: links.oxford,
+      location: "UK",
+      degree: "Visiting Scholar"
     }
   ],
   teaching: [

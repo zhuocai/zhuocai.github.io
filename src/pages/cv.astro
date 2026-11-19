@@ -1,7 +1,14 @@
 ---
-import RichText from "../components/RichText.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
+import { cvDocument } from "../data/cv";
+
+const updatedLabel = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC"
+}).format(new Date(`${cvDocument.updated}T00:00:00Z`));
 ---
 
 <BaseLayout title="CV" description={`Curriculum vitae and academic summary for ${profile.name}.`} currentPath="/cv/">
@@ -9,27 +16,32 @@ import { profile } from "../data/site";
     <div class="page-shell">
       <div class="section-header" data-reveal>
         <p class="eyebrow">Curriculum vitae</p>
-        <h1 class="section-title">CV and academic summary.</h1>
-        <p class="section-copy">Highlights, affiliations, and the full PDF CV.</p>
+        <h1 class="section-title">Curriculum vitae</h1>
+        <p class="section-copy">Academic background, research highlights, teaching, and service.</p>
+        <div class="cta-actions">
+          <a class="button" href={cvDocument.href} target="_blank" rel="noreferrer">Open PDF</a>
+          <a class="button button--ghost" href={cvDocument.href} download={cvDocument.downloadName}>Download CV</a>
+        </div>
+        <p class="cv-document-meta">English · {cvDocument.pageCount} pages · Updated <time datetime={cvDocument.updated}>{updatedLabel}</time></p>
       </div>
 
       <div class="cv-summary">
         <article class="cv-panel" data-reveal>
-          <p class="snapshot-card__label">Current position</p>
-          <h3>{profile.role}</h3>
-          <RichText block={profile.positionContext} class="text-block" />
+          <h2 class="snapshot-card__label">Current position</h2>
+          <h3>PhD Candidate in Computer Science and Engineering</h3>
+          <p><a href={profile.institutionHref} target="_blank" rel="noreferrer">{profile.institution}</a></p>
+          <p>Expected graduation: {cvDocument.expectedGraduation}.</p>
         </article>
 
         <article class="cv-panel" data-reveal>
-          <p class="snapshot-card__label">Location</p>
-          <h3>{profile.location}</h3>
-          <RichText block={profile.locationContext} class="text-block" />
+          <h2 class="snapshot-card__label">Research focus</h2>
+          <p>Transaction order fairness, Byzantine agreement, and applied cryptography.</p>
         </article>
       </div>
 
       <div class="grid-two">
         <article class="cv-panel" data-reveal>
-          <p class="snapshot-card__label">Highlights</p>
+          <h2 class="snapshot-card__label">Research highlights</h2>
           <ul>
             {profile.cvHighlights.map((item) => <li>{item}</li>)}
           </ul>
@@ -37,7 +49,7 @@ import { profile } from "../data/site";
 
         {profile.service.length > 0 && (
           <article class="cv-panel" data-reveal>
-            <p class="snapshot-card__label">Academic Service</p>
+            <h2 class="snapshot-card__label">Academic service</h2>
             <ul>
               {profile.service.map((item) => <li>{item}</li>)}
             </ul>
@@ -46,7 +58,7 @@ import { profile } from "../data/site";
       </div>
 
       <article class="cv-panel" data-reveal>
-        <p class="snapshot-card__label">Education</p>
+        <h2 class="snapshot-card__label">Education and research experience</h2>
         <ul class="cv-timeline">
           {profile.education.map((entry) => (
             <li class="cv-timeline__entry">
@@ -68,7 +80,7 @@ import { profile } from "../data/site";
       </article>
 
       <article class="cv-panel" data-reveal>
-        <p class="snapshot-card__label">Awards and Achievements</p>
+        <h2 class="snapshot-card__label">Honors and awards</h2>
         <ul class="cv-timeline">
           {profile.awardsAndAchievements.map((award) => (
             <li class="cv-timeline__entry">
@@ -83,7 +95,7 @@ import { profile } from "../data/site";
       </article>
 
       <article class="cv-panel" data-reveal>
-        <p class="snapshot-card__label">Teaching</p>
+        <h2 class="snapshot-card__label">Teaching</h2>
         <ul class="cv-timeline">
           {profile.teaching.map((entry) => (
             <li class="cv-timeline__entry">
@@ -103,19 +115,22 @@ import { profile } from "../data/site";
         </ul>
       </article>
 
-      <article class="cta-panel" data-reveal>
-        <p class="eyebrow">Downloads</p>
-        <h3>Full curriculum vitae</h3>
-        <p>Open or download the full PDF.</p>
-        <div class="cta-actions">
-          <a class="button" href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Open PDF</a>
-          <a class="button button--ghost" href="/cv/caizhuo_CV.pdf" download>Download CV</a>
-        </div>
-      </article>
-
       <article class="cv-panel cv-embed" data-reveal>
-        <iframe src="/cv/caizhuo_CV.pdf" title={`${profile.name} CV PDF`}></iframe>
+        <h2 class="snapshot-card__label">PDF preview</h2>
+        <iframe src={`${cvDocument.href}#view=FitH`} title={`${profile.name} English CV PDF`} loading="lazy"></iframe>
       </article>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .cv-document-meta {
+    margin-top: .75rem;
+    color: var(--text-soft);
+    font: .875rem/1.6 var(--font-ui);
+  }
+
+  .cv-embed > h2 {
+    margin-top: 1.25rem;
+  }
+</style>

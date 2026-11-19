@@ -3,6 +3,7 @@ import PublicationListItem from "../components/PublicationListItem.astro";
 import RichText from "../components/RichText.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
+import { cvDocument } from "../data/cv";
 import { projects } from "../data/projects";
 import { getAllPublications, serializePublication } from "../lib/publications";
 
@@ -34,7 +35,7 @@ const researchDescriptions = [
         {profile.quickLinks.filter((link) => link.icon === "scholar" || link.icon === "github").map((link) => (
           <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
         ))}
-        <a href="/cv/caizhuo_CV.pdf" target="_blank" rel="noreferrer">Curriculum vitae · PDF</a>
+        <a href={cvDocument.href} target="_blank" rel="noreferrer">Curriculum vitae · PDF</a>
       </div>
     </aside>
 
