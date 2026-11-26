@@ -1,5 +1,12 @@
 import type { SerializedPublication } from "./publications";
 
+export const publicationAreas = {
+  "ordering-consensus": "Transaction order fairness and consensus",
+  "incentives-resources": "Randomness, coordination, and incentives",
+  "cryptography": "Cryptographic proofs and verification",
+  "earlier-work": "Earlier research"
+} as const;
+
 export type PublicationLinkEntry = {
   key: "paper" | "preprint" | "doi" | "code" | "slides" | "video" | "scholar";
   label: string;
@@ -63,6 +70,13 @@ export function getPublicationPrimaryAction(publication: SerializedPublication):
     }
   }
 
+  for (const key of ["paper", "preprint", "doi"] as const) {
+    const href = publication.links[key];
+    if (href) {
+      return { href, label: key === "doi" ? "DOI" : key === "paper" ? "Paper" : "Preprint", external: true };
+    }
+  }
+
   if (publication.abstractSourceUrl) {
     return {
       href: publication.abstractSourceUrl,
@@ -72,7 +86,7 @@ export function getPublicationPrimaryAction(publication: SerializedPublication):
   }
 
   return {
-    href: `/research/#paper-${publication.id}`,
+    href: `/publications/#paper-${publication.id}`,
     label: "Summary",
     external: false
   };

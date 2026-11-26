@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "build:public-cv": "node scripts/build-public-cv.mjs",
     "sync:papers": "node scripts/sync-paper-assets.mjs",
     "sync:research": "node scripts/sync-research.mjs"
   },

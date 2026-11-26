@@ -1,116 +1,117 @@
 import { z } from "zod";
 
+/* RESEARCH TEXT EDITING GUIDE
+ * researchIntroduction -> opening paragraph on /research/.
+ * researchVision -> the short, general closing paragraph on /research/.
+ * For each project:
+ *   title / summary -> research heading and homepage research-area preview.
+ *   paragraphs -> the area's scientific motivation, before the paper accounts.
+ *   papers -> selected public results, with a website account of each contribution.
+ *     publicationId refers to a filename in src/content/publications/.
+ *     description is shown only on /research/; the homepage uses the publication's
+ *     shorter summary. An optional anchorId preserves an older section link.
+ *   category -> primary/supporting areas or the small earlier-work section.
+ * Keep established area ids when revising prose: homepage links use them.
+ * Explain released results here. Keep unpublished constructions, manuscript
+ * details, and specific future projects in the gitignored research registry.
+ */
+
 const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
-  category: z.enum(["primary", "prior", "earlier"]),
-  period: z.string(),
+  category: z.enum(["primary", "supporting", "earlier"]),
   summary: z.string(),
-  narrative: z.string(),
-  significance: z.string(),
-  highlights: z.array(z.string()).min(1),
-  publicationIds: z.array(z.string()).min(1)
+  paragraphs: z.array(z.string()).min(1),
+  papers: z.array(z.object({
+    publicationId: z.string(),
+    description: z.string(),
+    anchorId: z.string().optional()
+  }))
 });
 
-const projectsSchema = z.array(projectSchema);
+export const researchIntroduction =
+  "My research concerns decentralized system security and distributed algorithms, with a focus on blockchains. I study how protocols can protect transaction order, support fair randomized selection, and enable verifiable coordination among mutually distrustful participants. I combine distributed computing, game theory, cryptography, and verification to turn these goals into precise protocol guarantees.";
 
-export const projects = projectsSchema.parse([
+export const researchVision =
+  "My broader goal is to develop decentralized systems with rigorous guarantees for security, fairness, and participation. I am interested in how communication networks, cryptographic tools, and economic incentives shape those guarantees, and how theory can guide practical protocol design.";
+
+export const projects = z.array(projectSchema).parse([
   {
-    id: "proof-systems",
-    title: "Proof Systems and Verifiable Computation",
+    id: "ordering-consensus",
+    title: "Transaction Order Fairness and Consensus",
     category: "primary",
-    period: "Current",
-    summary:
-      "I study proof systems and cryptographic tools that make outsourced computation and large-scale data queries verifiable — efficiently and without trusting the service provider.",
-    narrative:
-      "The core challenge is achieving succinct verification while supporting rich query structure and practical update patterns. My work uses updatable lookup arguments and related proof components to bridge theory-heavy ZK ideas with real systems. The Rogue paper (CCS 2026) advances updatable matrix lookup arguments and connects directly to verifiable database applications, pointing toward a broader framework for dynamic SNARKs over evolving state in rollups and verifiable infrastructure.",
-    significance:
-      "This is the technical core of my research agenda. It points toward cryptographic interfaces that let users trust results from outsourced computation and data services without trusting the provider, a primitive that becomes more important as compute and storage move off-chain.",
-    highlights: [
-      "Updatable and dynamic lookup arguments for verifiable databases",
-      "Bridging ZK proof theory with concrete systems applications",
-      "Forward vision: dynamic SNARKs for rollup state transitions and verifiable infrastructure"
+    summary: "Establishing when protocols can protect transaction precedence and how participants can influence collective block selection.",
+    paragraphs: [
+      "Transaction order affects the outcomes users receive from a blockchain. A participant who can place a trade before another user's transaction may profit at that user's expense. Different nodes receive transactions at different times, so protecting precedence requires a rule for reconciling their observations in the presence of malicious participants.",
+      "My work establishes which ordering protections distributed algorithms can enforce under explicit timing and fault assumptions. I also study how consensus can incorporate participants' preferences about block contents, giving collective decisions a precise protocol guarantee."
     ],
-    publicationIds: ["rogue"]
-  },
-  {
-    id: "cryptographic-coordination",
-    title: "Cryptographic Coordination Protocols",
-    category: "primary",
-    period: "2022–present",
-    summary:
-      "How do strategic participants coordinate without a trusted third party? I study this through bias-resistant randomness generation, fair leader election, and game-theoretic protocol design.",
-    narrative:
-      "A recurring question in decentralized systems is how to achieve coordination guarantees when every participant is rational and no central authority can be trusted. My work addresses this at the cryptographic and game-theoretic level: from verifiable random functions and secret random number generation to voting-based consensus protocols and smart-contract protocols that implement richer solution concepts without a trusted mediator. The unifying concern is robustness — bias resistance, incentive compatibility, and fairness — across adversarial and strategic settings. This is also where I study the strategic behavior of validators and miners in proof-of-stake systems, asking when rational participants deviate and how protocol design can close those gaps.",
-    significance:
-      "This direction connects cryptography, distributed systems, and economics. The goal is not just secure randomness sampling, but coordination mechanisms that remain robust when participants are strategic and incentives diverge from protocol intent.",
-    highlights: [
-      "Bias-resistant and gas-efficient decentralized random beacons",
-      "Formally verified voting-based consensus for democratic block selection",
-      "Leader election without trusted setup or centralized DRNG",
-      "Strategic mining analysis in proof-of-stake and its protocol implications"
-    ],
-    publicationIds: [
-      "proof-of-election",
-      "strategic-mining-proof-of-stake-practical-random-election",
-      "srng",
-      "gas-efficient-random-beacons",
-      "trustless-bias-resistant-randomness",
-      "game-theoretic-randomness-proof-of-stake",
-      "purelottery"
+    papers: [
+      {
+        publicationId: "tx-order",
+        description: "I study approximate-order fairness: one transaction must precede another when sufficiently many nodes receive it sufficiently earlier. Using physical clocks and bounded communication delay, I derive feasibility bounds relating the protected time gap, the supporting fraction of nodes, and the number of faulty participants. These bounds establish when strict pairwise protection is achievable, including gaps smaller than the worst-case dissemination delay."
+      },
+      {
+        publicationId: "proof-of-election",
+        description: "In Proof of Election, I developed a protocol for collective block selection through stake-weighted voting. Participants can support multiple candidate blocks, and their support constrains which block consensus may accept. Assuming bounded communication delay, the analysis establishes agreement, progress, and a democracy guarantee for candidates delivered to the committee, with proofs checked by the Coq proof assistant. This provides a foundation for expressing community preferences directly in block selection."
+      }
     ]
   },
   {
-    id: "blockchain-mechanism-design",
-    title: "Blockchain Mechanism Design",
-    category: "primary",
-    period: "2024–present",
-    summary:
-      "What ordering and incentive structures make blockchain protocols work honestly at scale? I study transaction order fairness, fee mechanisms, and strategic equilibrium design for modern decentralized infrastructures.",
-    narrative:
-      "Real blockchain infrastructure turns transaction ordering and admission into strategic objects: builders can exploit ordering and delay, DAG-based consensus runs concurrent proposers across overlapping transaction sets, and parallel execution engines remove some ordering constraints while introducing new manipulation surfaces via conflict graphs. My PODC brief announcement studies delay-optimal transaction order fairness, while LockFee asks what fee-mechanism desiderata survive modern architectures and how refundable collateral can restore incentive compatibility and user welfare. My work on trustless sampling of correlated equilibria extends this to a richer question: how can smart contracts act as trustless mediators implementing solution concepts beyond Nash equilibria?",
-    significance:
-      "This is the broadest and most forward-looking of my three directions. It addresses strategic design questions that become unavoidable as blockchain infrastructure scales toward DAG, sharded, and parallel execution environments.",
-    highlights: [
-      "Transaction order fairness and refundable fee mechanisms under multi-block, DAG, and parallel-execution architectures",
-      "Smart contracts as trustless mediators for correlated equilibria",
-      "MEV and incentive design for next-generation blockchain infrastructure"
+    id: "incentives-resources",
+    title: "Randomness, Coordination, and Incentives",
+    category: "supporting",
+    summary: "Designing incentives for unbiased selection, private coordination, transaction admission, and efficient execution.",
+    paragraphs: [
+      "Decentralized protocols depend on choices made by participants with their own objectives. My work combines game theory with cryptographic protocols to make random selection and coordination possible without a trusted intermediary, and to connect transaction access and resource use to explicit economic incentives."
     ],
-    publicationIds: ["tx-order", "no-tx-fee", "trustless-sampling-correlated-equilibria", "parallel-execution-marble"]
+    papers: [
+      {
+        publicationId: "game-theoretic-randomness-proof-of-stake",
+        description: "I developed a game whose equilibrium has every participant sample uniformly: each participant's strategy is a best response to the others. I translated it into distributed protocols using commitments that bind participants to hidden choices before revelation, together with mechanisms for recovering withheld contributions. Under these equilibrium strategies, the resulting uniform randomness supports fair selection, including stake-proportional leader selection. Related published work studies direct leader election and other forms of distributed randomness."
+      },
+      {
+        publicationId: "trustless-sampling-correlated-equilibria",
+        description: "A correlated equilibrium gives players private recommendations that each has an incentive to follow when the others do. I formulated the problem of sampling these recommendations without a trusted mediator and designed smart-contract protocols for two-player games. Cryptographic tools protect the recommendations, while collateral and penalties support participation. The work establishes private, incentive-compatible coordination in the stated game model."
+      },
+      {
+        publicationId: "no-tx-fee",
+        description: "In LockFee, I developed transaction admission through temporarily locked collateral whose principal is returned after a prescribed duration. Users bear the opportunity cost of committed capital. Under an equal-size transaction model, I derive conditions linking collateral, lock duration, and system capacity to resistance against sustained capacity-exhaustion attacks. This connects transaction access to refundable resource commitments and explicit economic costs."
+      },
+      {
+        publicationId: "parallel-execution-marble",
+        description: "In this collaborative work, we make a verifiable parallel execution schedule part of a block proposal. Validators check that the schedule respects transaction dependencies, and the reward accounts for both transaction inclusion and completion time. The analysis identifies incentives for using parallel hardware effectively while accounting for strategic transaction exclusion in the model."
+      }
+    ]
   },
   {
-    id: "smart-contract-analysis",
-    title: "Smart Contract Resource Analysis",
-    category: "prior",
-    period: "2023",
-    summary:
-      "Prior work on automated static analysis for reasoning about gas consumption in smart contracts before deployment.",
-    narrative:
-      "Smart contracts need more than correctness — they need predictable resource usage. This track combines formal methods and tool building to automate gas upper-bound synthesis, turning resource-bound reasoning into something practically usable. The Asparagus tool (OOPSLA 2023) synthesizes parametric gas upper bounds for Solidity contracts automatically.",
-    significance:
-      "This earlier direction contributed a formal-methods lens on blockchain software engineering and informs how I think about protocol-level safety and efficiency tradeoffs in my current work.",
-    highlights: [
-      "Automated synthesis of parametric gas upper bounds for Solidity",
-      "Tool-oriented work with direct implications for contract assurance"
+    id: "cryptographic-protocols",
+    title: "Cryptographic Proofs and Program Verification",
+    category: "supporting",
+    summary: "Making computation verifiable through cryptographic proofs and sound analysis of smart-contract execution costs.",
+    paragraphs: [
+      "Participants need ways to check computation and understand its resource requirements. My work addresses these questions through cryptographic proofs for changing data and automated verification of smart-contract execution costs. Each approach provides a concrete guarantee that a user or another system can check."
     ],
-    publicationIds: ["asparagus"]
+    papers: [
+      {
+        publicationId: "rogue",
+        description: "A lookup argument proves that queried values belong to committed data. Rogue develops updatable matrix lookup arguments for verifiable databases, addressing the cost of maintaining proof-related data structures when tables change. I implemented algorithms and evaluated their performance as part of the collaborative work, connecting the cryptographic construction to practical queries and updates."
+      },
+      {
+        publicationId: "asparagus",
+        anchorId: "smart-contract-analysis",
+        description: "Gas measures the execution resources charged by a smart-contract platform. In Asparagus, I developed algebraic verification methods for synthesizing sound upper bounds on gas consumption that depend on program inputs. The method applies to programs whose state updates are polynomial expressions. On the 10,186-function comparison dataset, Asparagus analyzed 86.94% of functions, compared with GASTAP's 58.62%. These bounds help users estimate execution requirements and allocate resources for smart-contract applications."
+      }
+    ]
   },
   {
     id: "multimodal-learning",
-    title: "Multimodal Learning for Scientific Imaging",
+    title: "Earlier Work in Multimodal Learning",
     category: "earlier",
-    period: "Earlier work",
-    summary:
-      "Earlier work on vision-language modeling for visual question answering on pathology images.",
-    narrative:
-      "Before focusing on cryptography and decentralized systems, I worked on multimodal learning problems involving pathology images and language. The central task was scientific VQA in a domain where images are artifacts rather than everyday photographs, raising distinct challenges around representation and evaluation.",
-    significance:
-      "This work sharpened my interest in principled methods for high-stakes domains and informs how I evaluate modeling assumptions and measure correctness in current research.",
-    highlights: [
-      "Vision-language modeling applied to pathology images",
-      "Scientific VQA at the boundary of machine learning and healthcare"
+    summary: "Visual question answering on pathology images.",
+    paragraphs: [
+      "Before focusing on decentralized systems, I worked on visual question answering for pathology images. This collaboration studied how models can answer questions using medical images and associated text."
     ],
-    publicationIds: ["pathology-vqa"]
+    papers: [{ publicationId: "pathology-vqa", description: "" }]
   }
 ]);
 

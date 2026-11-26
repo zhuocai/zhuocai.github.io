@@ -1,4 +1,25 @@
 import { z } from "zod";
+import { projects, researchIntroduction } from "./projects";
+
+/* SHARED PROFILE EDITING GUIDE
+ * Edit the values in export const profile below; the schemas above it describe
+ * valid fields and are not page content.
+ * - name / chineseName: homepage name; name also supplies the shared site identity.
+ * - role / institution / email / quickLinks: homepage sidebar and contact details.
+ * - positionContext: the linked position and advisor sentence on the homepage.
+ *   Edit text inside each segment; href supplies that segment's link.
+ * - summary: homepage description metadata and default page-description metadata.
+ *   It is NOT displayed in the visible homepage biography.
+ * - hero / bio / affiliations / milestones: retained from an older design;
+ *   currently not rendered by the website's pages. Edits here will not appear.
+ * - researchAreas: derived from projects.ts. Edit project title / summary there.
+ * - cvHighlights: Research highlights on /cv/.
+ * - education / teaching / service / awardsAndAchievements: corresponding CV sections.
+ * - publicationNote: author-order note on the homepage and publications page.
+ * - contact / contactContext: contact-page content.
+ * Visible homepage research/biography prose is in src/pages/index.astro, in the
+ * home-biography block. Research-page prose is in src/data/projects.ts.
+ */
 
 const iconSchema = z.enum([
   "scholar",
@@ -90,6 +111,7 @@ const profileSchema = z.object({
   researchAreas: z
     .array(
       z.object({
+        id: z.string(),
         title: z.string(),
         description: z.string()
       })
@@ -145,13 +167,13 @@ export const profile = profileSchema.parse({
   institutionHref: links.hkust,
   email: "zcaiam@connect.ust.hk",
   location: "Hong Kong",
-  summary:
-    "PhD student building cryptographic and game-theoretic foundations for trustworthy decentralized protocols.",
+  // Page-description metadata only. Edit home-biography in index.astro for visible prose.
+  summary: "PhD student researching decentralized system security and distributed algorithms, with a focus on blockchains, transaction order fairness, coordination, and verification.",
+  // Legacy landing-page fields. The current academic homepage does not render these.
   hero: {
-    eyebrow: "Proof systems, cryptographic coordination, and blockchain mechanism design",
-    title: "Building cryptographic and game-theoretic foundations for trustworthy decentralized protocols.",
-    intro:
-      "My research builds the cryptographic and game-theoretic foundations that make decentralized protocols trustworthy at scale. I work across three directions: (1) proof systems — constructing efficient, updatable SNARKs and lookup arguments for verifiable computation over evolving data; (2) cryptographic coordination protocols — designing bias-resistant, incentive-aware randomness and leader-election protocols secure against strategic manipulation; and (3) blockchain mechanism design — analyzing and repairing transaction ordering and fee mechanisms for modern architectures including DAG consensus, sharded execution, and parallel transaction processing. My work appears at PODC, CCS, IJCAI, OOPSLA, ICBC, and IEEE Blockchain. I am a PhD student at HKUST, supported by the Hong Kong PhD Fellowship (HKPFS), and a former visiting scholar at the University of Oxford.",
+    eyebrow: "hero eyebrow",
+    title: "hero title",
+    intro: researchIntroduction,
     primaryCta: {
       label: "View publications",
       href: "/publications/"
@@ -162,12 +184,12 @@ export const profile = profileSchema.parse({
     },
     stats: [
       {
-        value: "8+",
-        label: "research papers"
+        value: "13",
+        label: "published and accepted papers"
       },
       {
         value: "3",
-        label: "research thrusts"
+        label: "research areas"
       },
       {
         value: "HKPFS",
@@ -179,6 +201,7 @@ export const profile = profileSchema.parse({
       }
     ]
   },
+  // Legacy extended biography: currently not rendered. Homepage prose is in index.astro.
   bio: [
     [
       { text: "I am a PhD student in Computer Science and Engineering at the " },
@@ -192,7 +215,7 @@ export const profile = profileSchema.parse({
       { text: "." }
     ],
     [
-      { text: "My research builds the cryptographic and game-theoretic foundations for trustworthy decentralized protocols, spanning proof systems, cryptographic coordination protocols, and mechanism design for blockchain infrastructure. I am supported by the " },
+      { text: "My current focus is transaction order fairness and distributed consensus, complemented by cryptographic protocols and incentive design. I am supported by the " },
       { text: "Hong Kong PhD Fellowship Scheme (HKPFS)", href: links.hkpfs },
       { text: "." }
     ],
@@ -204,23 +227,9 @@ export const profile = profileSchema.parse({
       { text: " in 2021." }
     ]
   ],
-  researchAreas: [
-    {
-      title: "Proof Systems and Verifiable Computation",
-      description:
-        "Updatable lookup arguments, verifiable databases, and SNARK constructions for trustworthy outsourced computation over evolving data."
-    },
-    {
-      title: "Cryptographic Coordination Protocols",
-      description:
-        "Bias-resistant randomness generation, random beacons, and incentive-aware leader-election protocols secure against strategic manipulation in decentralized systems."
-    },
-    {
-      title: "Blockchain Mechanism Design",
-      description:
-        "Transaction fee mechanism theory for modern architectures — DAG consensus, sharded execution, parallel processing — and strategic equilibrium design via smart contracts."
-    }
-  ],
+  researchAreas: projects
+    .filter((project) => project.category === "primary" || project.category === "supporting")
+    .map((project) => ({ id: project.id, title: project.title, description: project.summary })),
   affiliations: [
     {
       label: "Program",
@@ -283,12 +292,11 @@ export const profile = profileSchema.parse({
   milestones: [
     {
       period: "2026",
-      title: "CCS paper on verifiable databases",
+      title: "Transaction order fairness",
       detail: [
-        { text: "Rogue advances updatable matrix lookup arguments and connects proof-system ideas to verifiable database applications under the supervision of " },
-        { text: "Dimitris Papadopoulos", href: links.dimitris },
-        { text: "." }
-      ]
+        { text: "The PODC 2026 brief announcement and its full version establish feasibility bounds for approximate-order fairness under synchrony, relating transaction receipt times, supporting nodes, and fault tolerance." }
+      ],
+      href: "/research/#ordering-consensus"
     },
     {
       period: "2025",
@@ -304,7 +312,7 @@ export const profile = profileSchema.parse({
       detail: [
         { text: "Current work at " },
         { text: "HKUST", href: links.hkust },
-        { text: " spans proof systems, cryptographic coordination protocols, distributed randomness, and mechanism design for decentralized infrastructure." }
+        { text: " studies trustworthy decentralized systems through transaction order fairness, consensus, cryptographic protocols, and incentives." }
       ]
     },
     {
@@ -383,11 +391,11 @@ export const profile = profileSchema.parse({
     { text: "HKUST", href: links.hkust },
     { text: " and " },
     { text: "HKUST CSE", href: links.hkustCse },
-    { text: ", and currently focused on proof systems, cryptographic coordination protocols, and mechanism design for decentralized infrastructure." }
+    { text: ", and currently focused on transaction order fairness and distributed consensus, with related work in cryptography and incentive design." }
   ],
   cvHighlights: [
-    "Selected publications at CCS, OOPSLA, and IJCAI, plus a PODC brief announcement and an ACL short paper.",
-    "Current manuscripts on transaction order fairness, Byzantine agreement in sparse networks, and robust stake-based peer discovery."
+    "Selected work on order fairness (PODC), correlated-equilibrium sampling (IJCAI), updatable lookup arguments (CCS), gas analysis (OOPSLA), and parallel execution (MARBLE).",
+    "Published work on democratic block selection and refundable transaction admission (IEEE DAPPS), and game-theoretic distributed randomness (ICBC and MARBLE)."
   ],
   service: [
     "Conference reviewer: The Web Conference (WWW 2027); IEEE BCCA 2026; MARBLE 2025, 2026.",

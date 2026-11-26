@@ -16,14 +16,16 @@
     "blockchains"
   ],
   "selected": false,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "PureLottery studies fair leader election without relying on a decentralized random number generation service, but instead leveraging a tournament among interested participants. ",
-  "abstractSourceUrl": "https://hal.science/hal-04268058",
+  "abstract": "PureLottery studies leader election through a tournament structure, using strategic interaction to obtain fair selection without a standalone distributed randomness service. The paper analyzes the protocol and its incentives in the stated model. It belongs to the broader line of work on randomness and decentralized coordination.",
   "localPdfPath": "/papers/purelottery-ieee-blockchain-2023.pdf",
   "contentAvailability": "local-pdf",
   "links": {
     "preprint": "https://hal.science/hal-04268058v1/file/paper.pdf",
-    "code": "https://zenodo.org/records/10716465"
+    "code": "https://zenodo.org/records/10716465",
+    "doi": "https://www.computer.org/csdl/proceedings-article/blockchain/2023/192900a273/1U85K2DqzW8"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "summary": "Uses a tournament among participants to elect a fair leader without first running a separate distributed random-number generation service.",
+  "abstractLabel": "Technical overview"
 }

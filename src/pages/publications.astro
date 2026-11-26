@@ -10,7 +10,7 @@ const publications = (await getAllPublications()).map(serializePublication);
 
 <BaseLayout
   title="Publications"
-  description="A searchable list of Zhuo Cai's publications across cryptography, game theory, and blockchain systems."
+  description="Published and accepted papers and public preprints on decentralized system security, distributed algorithms, and blockchains."
   currentPath="/publications/"
 >
   <section class="section">
@@ -19,7 +19,7 @@ const publications = (await getAllPublications()).map(serializePublication);
         <h1 class="section-title">Publications</h1>
         <div class="section-copy section-copy--stack">
           <RichText block={profile.publicationNote} class="text-block" />
-          <p>Browse {publications.length} papers by year, venue, and tag.</p>
+          <p>Published and accepted papers are listed separately from public preprints. Search by title, author, venue, or keyword, or filter by research area.</p>
         </div>
       </div>
 

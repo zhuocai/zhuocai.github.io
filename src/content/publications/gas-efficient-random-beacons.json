@@ -17,13 +17,15 @@
     "blockchains"
   ],
   "selected": false,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This paper develops decentralized random beacon protocols with explicit attention to gas efficiency, aiming to keep randomness services practical for on-chain use without weakening decentralization goals.",
-  "abstractSourceUrl": "https://hal.science/hal-04518100",
+  "abstract": "An untrusted dealer collects signed contributions off-chain and commits to them using a Merkle tree. Participants can challenge omissions or incorrect handling through the contract. Deadlines, deposits, and on-chain fallback operations support the incentive analysis. The construction reduces ordinary-path gas use while retaining challenge paths for deviations.",
   "localPdfPath": "/papers/gas-efficient-random-beacons-icbc-2024.pdf",
   "contentAvailability": "local-pdf",
   "links": {
-    "preprint": "https://hal.science/hal-04518100/document"
+    "preprint": "https://hal.science/hal-04518100/document",
+    "doi": "https://ieeexplore.ieee.org/document/10634373"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "summary": "Moves contribution collection off-chain and uses commitments, challenges, and deposits to reduce the on-chain cost of a random beacon.",
+  "abstractLabel": "Technical overview"
 }

@@ -4,24 +4,35 @@ import RichText from "../components/RichText.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/site";
 import { cvDocument } from "../data/cv";
-import { projects } from "../data/projects";
-import { getAllPublications, serializePublication } from "../lib/publications";
+import { getSelectedPublications, serializePublication } from "../lib/publications";
 
-const publications = (await getAllPublications()).map(serializePublication);
-const selectedPublications = publications.filter((publication) => publication.selected);
-const primaryProjects = projects.filter((project) => project.category === "primary");
-const researchDescriptions = [
-  "Efficient proofs for computation and queries over evolving data.",
-  "Bias-resistant randomness and leader election with strategic participants.",
-  "Transaction ordering, fee mechanisms, and incentives in decentralized systems."
-];
+/* HOMEPAGE EDITING GUIDE
+ * This file renders the homepage at /.
+ * - Search for home-fields below to edit the subject line under your name.
+ * - Search for home-biography to edit the visible research sentence and the
+ *   fellowship / Oxford / Tsinghua paragraph. These sentences are written here.
+ * - The linked position / advisor sentence comes from positionContext in
+ *   ../data/site.ts. Name, role, affiliation and contact details also come from there.
+ * - Research-area titles and descriptions come from ../data/projects.ts:
+ *   edit title and summary in the primary/supporting project entries.
+ * - Paper titles, authors, short explanations and links come from the publication
+ *   records. selected and selectedOrder choose the five homepage papers.
+ *   See README.md for which records have website-local manuscript inputs.
+ * - The homepage shows selected published/accepted papers; public preprints are
+ *   listed only on /publications/.
+ * - profile.summary below is page metadata, not the visible biography.
+ *   The old hero and bio fields in site.ts are not used by this page.
+ * Save edits while npm run dev is running; the local preview should update.
+ */
+
+const selectedPublications = (await getSelectedPublications()).map(serializePublication);
 ---
 
 <BaseLayout title={profile.name} description={profile.summary} currentPath="/" bodyClass="home-page">
   <div class="page-shell academic-home">
     <header class="home-identity">
       <h1>{profile.name}{profile.chineseName && <span lang="zh">{profile.chineseName}</span>}</h1>
-      <p class="home-fields">Cryptography · Distributed Systems · Game Theory</p>
+      <p class="home-fields"> Decentralized System Security · Distributed Algorithms · Blockchains </p>
     </header>
 
     <aside class="profile-sidebar" aria-label="Profile and contact information">
@@ -40,17 +51,17 @@ const researchDescriptions = [
     </aside>
 
     <div class="home-biography">
-      <p>I am a <RichText block={profile.positionContext} as="span" /> I study the cryptographic and game-theoretic foundations of decentralized protocols.</p>
+      <p>I am a <RichText block={profile.positionContext} as="span" /> My research concerns decentralized system security and distributed algorithms, with a focus on blockchains. I study how protocols can protect transaction order, support fair randomized selection, and enable verifiable coordination among mutually distrustful participants.</p>
       <p>I am supported by the Hong Kong PhD Fellowship. Previously, I was a visiting scholar at the University of Oxford and received my B.Eng. in Automation from Tsinghua University.</p>
     </div>
 
     <section class="home-research" aria-labelledby="research-heading">
-      <h2 id="research-heading">Research interests</h2>
+      <h2 id="research-heading">Research</h2>
       <div class="home-research-list">
-        {profile.researchAreas.map((area, index) => (
+        {profile.researchAreas.map((area) => (
           <article>
-            <h3><a href={`/research/#${primaryProjects[index]?.id ?? ""}`}>{area.title}</a></h3>
-            <p>{researchDescriptions[index] ?? area.description}</p>
+            <h3><a href={`/research/#${area.id}`}>{area.title}</a></h3>
+            <p>{area.description}</p>
           </article>
         ))}
       </div>
@@ -62,9 +73,10 @@ const researchDescriptions = [
         <a href="/publications/">Full list</a>
       </div>
       <div class="home-publications-list">
-        {selectedPublications.map((publication) => <PublicationListItem publication={publication} />)}
+        {selectedPublications.map((publication) => <PublicationListItem publication={publication} showSummary />)}
       </div>
       <RichText block={profile.publicationNote} class="publication-order-note" />
     </section>
+
   </div>
 </BaseLayout>

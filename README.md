@@ -2,6 +2,21 @@
 
 Personal academic website for Zhuo Cai, built with [Astro](https://astro.build).
 
+## Research content and local review
+
+The human-written research archive is the sibling `../research/` folder in `career-plan`. It remains independent of this website. The website owns its public explanations, metadata, publication grouping, and selected-paper order; archive notes require no website fields or formatting.
+
+- `src/data/projects.ts` defines three research areas, accounts of selected public results, a short general vision, and earlier work. The homepage takes its area names and descriptions from this same data. Each area's `papers` contains a `publicationId`, a research-page `description`, and an optional legacy `anchorId`.
+- `src/pages/index.astro`: edit the `home-biography` block for visible homepage research and biography prose, and `home-fields` for the subject line under the name. `src/data/site.ts` supplies `positionContext` for the linked position/advisor sentence and the shared profile details. Its `summary` is description metadata only; the old `hero` and extended `bio` fields are not rendered. Editing guides are included as comments in these files and in `src/data/projects.ts` and `src/pages/research.astro`.
+- `src/content/publications/` contains public-facing paper records. `summary` is a brief explanation; `abstract` with `abstractLabel: Technical overview` is an authored website explanation rather than a verbatim publisher abstract.
+- `selectedOrder` controls the homepage selection of published/accepted papers. Public preprints appear only in the full bibliography, which remains chronological within each group.
+- The website-local `research/manuscripts/` inputs currently generate three public records: `tx-order`, `no-tx-fee`, and `parallel-execution-marble`. Edit these website inputs when changing those records, then run `npm run sync:research`; other publication JSON files are maintained directly.
+- Unreleased manuscripts and detailed future directions stay private in the gitignored registry. The sync script rejects public manuscript entries without a `links.paper` or `links.preprint` URL. The publication loader also excludes such manuscripts before rendering or serializing data for the browser. A public URL must point to an intentionally released version; it is not permission to copy private notes into website prose.
+- Creating a local preview does not publish it. GitHub Actions deploys after a push, so keep review changes local until Zhuo asks to publish.
+- The linked CV is a website copy with the unreleased-manuscript section omitted. `npm run build:public-cv` rebuilds it from the sibling `../cv-caizhuo/` sources using XeLaTeX, without changing the application CV. After a rebuild, check the PDF layout and update `src/data/cv.ts` with its date and page count. Do not overwrite the public copy with the application PDF.
+
+The 26 November revision emphasizes completed public work and replaces specific future projects with a general research vision. It supersedes the research-page structure described in the earlier local review guide.
+
 ---
 
 ## Tech Stack
@@ -23,6 +38,7 @@ npm run dev            # Start local dev server at http://localhost:4321
 npm run build          # Production build → dist/
 npm run preview        # Preview production build locally
 npm run check          # TypeScript + Astro type-check
+npm run build:public-cv # Build the website CV without unreleased manuscripts (XeLaTeX)
 npm run sync:papers    # Download PDFs listed as local-pdf in publications
 npm run sync:research  # Sync private research registry → src/content/
 ```
@@ -45,7 +61,10 @@ Each file is a `.json` conforming to the `publications` schema in `src/content/c
 | `status` | Free string (e.g., "Accepted", "Under submission") |
 | `tags` | Keyword tags for filtering |
 | `selected` | Pin to homepage featured section |
-| `abstract` | Abstract text |
+| `selectedOrder` | Order among homepage selected papers |
+| `area` | Research area used by the bibliography filter |
+| `summary` | Short explanation displayed with the paper |
+| `abstract` / `abstractLabel` | Expandable abstract or labeled technical overview |
 | `contentAvailability` | `local-pdf` \| `external-pdf` \| `abstract-only` |
 | `links` | Object with optional `paper`, `preprint`, `doi`, `code`, `slides`, `video`, `scholar` URLs |
 
@@ -97,7 +116,7 @@ Every entry has a `visibility` field in its YAML frontmatter:
 **To publish an entry:**
 
 1. Open the relevant `.md` file in `research/manuscripts/` or `research/directions/`.
-2. Change `visibility: private` → `visibility: public`.
+2. Check that the frontmatter is suitable for public release, then change `visibility: private` → `visibility: public`. A manuscript must have a public `links.paper` or `links.preprint` URL.
 3. Run `npm run sync:research`.
 4. Restart the dev server (`npm run dev`) or rebuild (`npm run build`).
 
@@ -186,7 +205,7 @@ When asking GitHub Copilot (or any AI) to help with a research entry:
 1. Open the relevant `.md` file in `research/manuscripts/` or `research/directions/`.
 2. The free-form **Notes** body provides AI with full context.
 3. For manuscripts, AI can read the LaTeX writeup at `localRepoPath` for precise assistance (abstract rewriting, related-work checks, proof gap identification).
-4. After AI edits the `abstract` or `description` frontmatter field, run `npm run sync:research` to push the update to the website.
+4. Review any edited public frontmatter for disclosure of unpublished ideas before running `npm run sync:research`. Keep private research detail in the body or in entries marked `visibility: private`.
 
 **Example prompt:** *"Read the manuscript at `localRepoPath` in `research/manuscripts/tx-order.md` and rewrite the `abstract` field to be suitable for a PODC audience."*
 

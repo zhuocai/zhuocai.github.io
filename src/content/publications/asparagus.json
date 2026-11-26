@@ -2,8 +2,8 @@
   "title": "Asparagus: Automated Synthesis of Parametric Gas Upper-Bounds for Smart Contracts",
   "authors": [
     "Zhuo Cai",
-    "S. Farokhnia",
-    "A. Goharshady",
+    "Soroush Farokhnia",
+    "Amir Kafshdar Goharshady",
     "S. Hitarth"
   ],
   "venue": "ACM SIGPLAN Conference on Object-Oriented Programming, Systems, Languages, and Applications",
@@ -17,13 +17,15 @@
     "formal methods"
   ],
   "selected": true,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This paper presents Asparagus, an automated tool for synthesizing parametric static gas upper bounds for smart contracts. The main technical contribution is to employ sound quantifier elimination techniques based on Farkas' lemma and other algebro-geometric methods. ",
-  "abstractSourceUrl": "https://dl.acm.org/doi/10.1145/3622829",
+  "abstract": "Asparagus studies static resource analysis for smart contracts whose behavior can be represented by polynomial transition systems. It uses algebraic certificates, including Farkas’ lemma and related methods, to synthesize parametric upper bounds on gas consumption. The approach supports richer bounds than constant or purely linear estimates; its practical reach depends on the program model and the cost of solving the generated constraints.",
   "contentAvailability": "abstract-only",
   "links": {
     "doi": "https://dl.acm.org/doi/10.1145/3622829",
     "code": "https://github.com/zhuocai/Asparagus/"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "cryptography",
+  "selectedOrder": 4,
+  "summary": "Automatically synthesizes gas upper bounds that depend on program inputs, using polynomial program models and sound algebraic reasoning.",
+  "abstractLabel": "Technical overview"
 }

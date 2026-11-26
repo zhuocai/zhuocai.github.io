@@ -15,14 +15,16 @@
     "game theory"
   ],
   "selected": false,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "PoS requires decentralized randomness. Existing randomness generation protocols either rely on pseudo-randomness, or assume that a majority of the participants are honest in submitting their randdomness share and follow the rest of the protocol. However, these participants have no incentive to contribute true random shares compared to contributing an arbitrary share in the first place. This paper presents a game-theoretic design for incentivizing participants submitting true random shares, without relying on pseudo-randomness.", 
-  "abstractSourceUrl": "https://hal.science/hal-04213085",
+  "note": "Full paper following the ICBC 2023 poster on game-theoretic distributed randomness.",
+  "abstract": "This work studies a game in which participants’ incentives support uniform random choices, rather than assuming that contributors faithfully generate random inputs. It develops the approach for distributed randomness and proof-of-stake protocols. The ICBC 2023 poster and this MARBLE 2023 full paper are two publication stages of the same research project.",
   "localPdfPath": "/papers/game-theoretic-randomness-proof-of-stake-marble-2023.pdf",
   "contentAvailability": "local-pdf",
   "links": {
     "paper": "https://link.springer.com/chapter/10.1007/978-3-031-48731-6_2",
     "preprint": "https://hal.science/hal-04213085/document"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "summary": "Uses game-theoretic incentives for uniform randomness and studies how the resulting randomness can support proof-of-stake protocols.",
+  "abstractLabel": "Technical overview"
 }

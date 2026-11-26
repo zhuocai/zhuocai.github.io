@@ -14,6 +14,10 @@ export type SerializedPublication = {
   status: string;
   tags: string[];
   selected: boolean;
+  selectedOrder?: number;
+  area?: "ordering-consensus" | "cryptography" | "incentives-resources" | "earlier-work";
+  summary?: string;
+  abstractLabel: string;
   alphaOrder: boolean;
   note?: string;
   abstract?: string;
@@ -28,21 +32,22 @@ export function comparePublications(a: PublicationEntry, b: PublicationEntry) {
     return b.data.year - a.data.year;
   }
 
-  if (a.data.selected !== b.data.selected) {
-    return Number(b.data.selected) - Number(a.data.selected);
-  }
-
   return a.data.title.localeCompare(b.data.title);
 }
 
 export async function getAllPublications() {
   const publications = await getCollection("publications");
-  return publications.sort(comparePublications);
+  // Unreleased manuscripts must never reach rendered pages or React island props.
+  return publications.filter((publication) => publication.data.type !== "manuscript" ||
+    Boolean(publication.data.links.paper || publication.data.links.preprint))
+    .sort(comparePublications);
 }
 
-export async function getSelectedPublications(limit = 4) {
+export async function getSelectedPublications(limit = 5) {
   const publications = await getAllPublications();
-  return publications.filter((publication) => publication.data.selected).slice(0, limit);
+  return publications.filter((publication) => publication.data.selected && publication.data.type !== "manuscript")
+    .sort((a, b) => (a.data.selectedOrder ?? 999) - (b.data.selectedOrder ?? 999))
+    .slice(0, limit);
 }
 
 export async function getPublicationMap() {
@@ -62,6 +67,10 @@ export function serializePublication(publication: PublicationEntry): SerializedP
     status: publication.data.status,
     tags: publication.data.tags,
     selected: publication.data.selected,
+    selectedOrder: publication.data.selectedOrder,
+    area: publication.data.area,
+    summary: publication.data.summary,
+    abstractLabel: publication.data.abstractLabel,
     alphaOrder: publication.data.alphaOrder,
     note: publication.data.note,
     abstract: publication.data.abstract,

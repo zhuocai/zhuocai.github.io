@@ -23,5 +23,7 @@
   "links": {
     "preprint": "https://eprint.iacr.org/2025/1428"
   },
-  "alphaOrder": false
+  "alphaOrder": false,
+  "area": "incentives-resources",
+  "abstractLabel": "Overview"
 }

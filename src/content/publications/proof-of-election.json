@@ -17,8 +17,12 @@
   ],
   "selected": false,
   "alphaOrder": true,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "We present Proof-of-Election, a new blockchain consensus protocol that mimics real-world democratic elections, to vote based on block contents rather than blindly trust proposers, and only admit the highest voted block in each slot. \n",
+  "abstract": "Proof of Election lets stakeholders approve multiple block proposals, avoiding the fragmentation of honest support that can occur with a single-choice vote. A synchronous committee protocol uses certified population support to constrain block selection. The paper formalizes consensus safety, liveness, and a democracy guarantee relative to the candidates seen by the honest committee, with proofs mechanized in Coq. This support guarantee depends on the stated voting, dissemination, and synchrony assumptions.",
   "contentAvailability": "abstract-only",
-  "links": {}
+  "links": {
+    "doi": "https://ieeexplore.ieee.org/document/11676734"
+  },
+  "area": "ordering-consensus",
+  "summary": "Lets stakeholders vote on block contents and makes their support constrain consensus, with mechanized proofs of the protocol’s guarantees.",
+  "abstractLabel": "Technical overview"
 }

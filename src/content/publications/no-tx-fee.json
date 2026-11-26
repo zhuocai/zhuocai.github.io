@@ -12,16 +12,18 @@
   "type": "conference",
   "status": "Published",
   "tags": [
-    "transaction fee mechanism",
-    "blockchain economics",
-    "incentive design",
-    "MEV",
-    "decentralization"
+    "transaction admission",
+    "refundable collateral",
+    "incentive design"
   ],
   "selected": false,
+  "area": "incentives-resources",
+  "summary": "Studies transaction admission through temporarily locked, refundable collateral: users bear the opportunity cost of capital instead of an irreversible base-admission fee.",
+  "abstractLabel": "Technical overview",
   "alphaOrder": true,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "We present LockFee, a principal-preserving admission primitive in which each accepted transaction locks collateral for a fixed duration and recovers the principal in full afterward; users bear only the opportunity cost of locked capital. \n",
+  "abstract": "LockFee requires an admitted transaction to lock collateral for a fixed duration and later returns the nominal principal. Users bear opportunity cost and asset risk. In an equal-size-transaction model, the paper relates the capital needed to occupy all admission slots to throughput, collateral, and lock duration. A baseline combines this rule with inflation-funded validator rewards and analyzes participation and self-spam resistance. Removing the base-admission fee channel does not remove every source of value from transaction ordering.",
   "contentAvailability": "abstract-only",
-  "links": {}
+  "links": {
+    "doi": "https://ieeexplore.ieee.org/document/11676714"
+  }
 }

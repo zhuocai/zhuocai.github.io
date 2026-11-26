@@ -3,13 +3,19 @@ import type { SerializedPublication } from "../lib/publications";
 import { getPublicationActions, getPublicationVenueLabel } from "../lib/publication-ui";
 import { parseAuthors } from "../lib/publications";
 
-interface Props { publication: SerializedPublication; }
-const { publication } = Astro.props;
+interface Props {
+  publication: SerializedPublication;
+  showSummary?: boolean;
+  description?: string;
+  anchorId?: string;
+}
+const { publication, showSummary = false, description, anchorId } = Astro.props;
+const summary = description ?? (showSummary ? publication.summary : undefined);
 const actions = getPublicationActions(publication);
 const authors = parseAuthors(publication.authors);
 ---
 
-<article class="publication-row">
+<article class="publication-row" id={anchorId}>
   <div class="citation-venue">
     <abbr title={publication.venue}>{getPublicationVenueLabel(publication)}</abbr>
     <span class="citation-year">{publication.year}</span>
@@ -21,12 +27,14 @@ const authors = parseAuthors(publication.authors);
         {authors.map((author) => (
           <span class:list={["pub-author", author.isMe && "pub-author--me"]}>{author.name}{author.equalContrib && <sup>*</sup>}{publication.alphaOrder && <sup class="pub-author__marker">α</sup>}</span>
         ))}
+        {publication.alphaOrder && <span class="pub-author-note"><sup>α</sup> Alphabetical order</span>}
       </p>
       <div class="publication-links">
         {actions.map((action) => <a href={action.href} target={action.external ? "_blank" : undefined} rel={action.external ? "noreferrer" : undefined}>{action.label}</a>)}
       </div>
     </div>
     {publication.status !== "Published" && <p class="publication-status">{publication.status}</p>}
+    {summary && <p class="publication-summary">{summary}</p>}
     {publication.note && <p class="publication-note">{publication.note}</p>}
   </div>
 </article>

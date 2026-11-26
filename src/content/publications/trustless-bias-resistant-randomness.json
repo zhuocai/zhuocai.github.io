@@ -14,15 +14,17 @@
     "game theory",
     "blockchains"
   ],
-  "selected": true,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "In randomness generation smart contracts, participants are assumed but have no incentive to submit random integers rather than sending arbitrary values. This paper presents a novel matrix game to enforce uniformity of batched value generation by collision-resistant Nash equilibria.",
-  "abstractSourceUrl": "https://hal.science/hal-04268410",
+  "selected": false,
+  "note": "ICBC 2023 poster; the same project was developed into the MARBLE 2023 full paper.",
+  "abstract": "The protocol studies how participants can be incentivized to contribute genuinely random choices instead of arbitrary inputs. It constructs a matrix game supporting uniform random strategies and uses this idea for distributed randomness. This ICBC poster is an early publication of the project later developed in Game-Theoretic Randomness for Proof-of-Stake.",
   "localPdfPath": "/papers/trustless-bias-resistant-randomness-icbc-2023.pdf",
   "contentAvailability": "local-pdf",
   "links": {
     "paper": "https://ieeexplore.ieee.org/document/10174917",
     "preprint": "https://hal.science/hal-04268410/document"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "summary": "Designs a game whose equilibrium incentivizes uniform random contributions to a distributed randomness protocol.",
+  "abstractLabel": "Technical overview"
 }

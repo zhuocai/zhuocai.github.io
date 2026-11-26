@@ -81,9 +81,14 @@ function buildPublicationJson(fm) {
     status: fm.status ?? "Under submission",
     tags: fm.tags ?? [],
     selected: fm.selected ?? false,
+    ...(fm.selectedOrder !== undefined ? { selectedOrder: fm.selectedOrder } : {}),
+    ...(fm.area ? { area: fm.area } : {}),
+    ...(fm.summary ? { summary: fm.summary } : {}),
+    ...(fm.abstractLabel ? { abstractLabel: fm.abstractLabel } : {}),
     alphaOrder: fm.alphaOrder ?? false,
     ...(fm.note ? { note: fm.note } : {}),
     ...(fm.abstract ? { abstract: fm.abstract } : {}),
+    ...(fm.abstractSourceUrl ? { abstractSourceUrl: fm.abstractSourceUrl } : {}),
     contentAvailability: fm.localPdfPath ? "local-pdf" : "abstract-only",
     ...(fm.localPdfPath ? { localPdfPath: fm.localPdfPath } : {}),
     links
@@ -136,6 +141,11 @@ async function main() {
     const s = slug(entry.name);
 
     if (fm.visibility !== "public") continue;
+
+    if ((fm.publicationType ?? "manuscript") === "manuscript" &&
+        !fm.links?.paper && !fm.links?.preprint) {
+      throw new Error(`Refusing to publish ${s}: manuscripts require a public paper or preprint URL. Keep unreleased work private.`);
+    }
 
     const outPath = path.join(PUBLICATIONS_OUT, `${s}.json`);
     const json = buildPublicationJson(fm);

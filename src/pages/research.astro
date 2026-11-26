@@ -1,112 +1,88 @@
 ---
-import PublicationCard from "../components/PublicationCard.astro";
+import PublicationListItem from "../components/PublicationListItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { projects } from "../data/projects";
+import { projects, researchIntroduction, researchVision } from "../data/projects";
 import { getPublicationMap, serializePublication } from "../lib/publications";
 
+/* RESEARCH PAGE EDITING GUIDE
+ * Public research accounts, area titles, and the general vision live in
+ * ../data/projects.ts. This file supplies their structure and paper links.
+ * Paper descriptions are rendered once, without duplicate expandable overviews.
+ * The full bibliography and technical overviews remain on /publications/.
+ */
+
 const publicationMap = await getPublicationMap();
-
-const primaryProjects = projects.filter((p) => p.category === "primary");
-const nonPrimaryProjects = projects.filter((p) => p.category === "prior" || p.category === "earlier");
-
 const makeGroup = (project: (typeof projects)[number]) => ({
   ...project,
-  publications: project.publicationIds
-    .flatMap((id) => {
-      const publication = publicationMap.get(id);
-      return publication ? [serializePublication(publication)] : [];
-    })
+  publications: project.papers.map((paper) => {
+    const publication = publicationMap.get(paper.publicationId);
+    if (!publication) throw new Error(`Missing public publication ${paper.publicationId} in research area ${project.id}`);
+    return { ...paper, publication: serializePublication(publication) };
+  })
 });
-
-const primaryGroups = primaryProjects.map(makeGroup);
-const nonPrimaryGroups = nonPrimaryProjects.map(makeGroup);
+const mainGroups = projects.filter((p) => p.category !== "earlier").map(makeGroup);
+const earlierGroups = projects.filter((p) => p.category === "earlier").map(makeGroup);
 ---
 
-<BaseLayout
-  title="Research"
-  description="Research thrusts and paper-level explanations across proof systems, cryptographic coordination, and blockchain mechanism design."
-  currentPath="/research/"
->
+<BaseLayout title="Research" description="Research on decentralized system security and distributed algorithms for blockchains: transaction order fairness, coordination, incentives, and verification." currentPath="/research/">
   <section class="section">
     <div class="page-shell">
-      <div class="section-header" data-reveal>
+      <div class="section-header research-introduction">
         <h1 class="section-title">Research</h1>
-        <p class="section-copy">My research spans three interconnected directions in cryptography, distributed systems, and blockchain economics. Prior and earlier work follows below.</p>
+        <p>{researchIntroduction}</p>
+      </div>
+      <nav class="research-navigation" aria-label="Research areas">
+        {mainGroups.map((project) => <a href={`#${project.id}`}>{project.title}</a>)}
+        <a href="#research-vision">Research vision</a>
+        <a href="#prior-work">Earlier work</a>
+      </nav>
+    </div>
+  </section>
+
+  {mainGroups.map((project) => (
+    <section class="section research-area" id={project.id}>
+      <div class="page-shell">
+        <div class="section-header">
+          {project.category === "primary" && <p class="eyebrow">Main research direction</p>}
+          <h2 class="section-title">{project.title}</h2>
+          <div class="research-narrative">
+            {project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
+        <div class="research-papers">
+          {project.publications.map(({ publication, description, anchorId }) => (
+            <div id={anchorId}>
+              <PublicationListItem publication={publication} description={description} anchorId={`paper-${publication.id}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section research-area" id="research-vision">
+    <div class="page-shell">
+      <div class="section-header research-narrative">
+        <h2 class="section-title">Research vision</h2>
+        <p>{researchVision}</p>
+        <p><a href="/publications/">Browse all publications and public preprints</a></p>
       </div>
     </div>
   </section>
 
-  {
-    primaryGroups.map((project) => (
-      <section class="section" id={project.id}>
-        <div class="page-shell">
-          <div class="section-header" data-reveal>
-            <p class="eyebrow">{project.period}</p>
+  <section class="section research-area" id="prior-work">
+    <div class="page-shell">
+      {earlierGroups.map((project) => (
+        <div id={project.id}>
+          <div class="section-header research-narrative">
             <h2 class="section-title">{project.title}</h2>
-            <p class="section-copy">{project.narrative}</p>
+            {project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
-
-          <div class="grid-two project-overview">
-            <article class="card" data-reveal>
-              <p class="snapshot-card__label">Context</p>
-              <h3>Why this direction matters</h3>
-              <p>{project.significance}</p>
-            </article>
-
-            <article class="card" data-reveal>
-              <p class="snapshot-card__label">Core ideas</p>
-              <h3>Recurring technical ingredients</h3>
-              <ul>
-                {project.highlights.map((highlight) => <li>{highlight}</li>)}
-              </ul>
-            </article>
-          </div>
-
-          <div class="publications-grid">
-            {
-              project.publications.map((publication) => (
-                <PublicationCard
-                  publication={publication}
-                  showAbstract
-                  anchorId={`paper-${publication.id}`}
-                />
-              ))
-            }
-          </div>
+          {project.publications.map(({ publication }) => (
+            <PublicationListItem publication={publication} anchorId={`paper-${publication.id}`} />
+          ))}
         </div>
-      </section>
-    ))
-  }
-
-  {nonPrimaryGroups.length > 0 && (
-    <section class="section" id="prior-work">
-      <div class="page-shell">
-        <div class="section-header" data-reveal>
-          <p class="eyebrow">Prior and Earlier Work</p>
-          <h2 class="section-title">Work predating the current three-thrust agenda.</h2>
-          <p class="section-copy">These directions contributed to my research background and inform current work, but are not active primary thrusts.</p>
-        </div>
-
-        {nonPrimaryGroups.map((project) => (
-          <div class="project-prior-item" id={project.id} data-reveal>
-            <div class="project-prior-item__header">
-              <span class="pill">{project.period}</span>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-            </div>
-
-            <div class="publications-grid">
-              {project.publications.map((publication) => (
-                <PublicationCard
-                  publication={publication}
-                  showAbstract
-                  anchorId={`paper-${publication.id}`}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )}
+      ))}
+    </div>
+  </section>
 </BaseLayout>

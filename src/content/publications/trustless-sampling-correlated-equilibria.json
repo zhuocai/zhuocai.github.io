@@ -1,10 +1,10 @@
 {
   "title": "Smart Contracts for Trustless Sampling of Correlated Equilibria",
   "authors": [
-    "T. Barakbayeva",
+    "Togzhan Barakbayeva",
     "Zhuo Cai",
-    "A. Goharshady",
-    "K. Keypoor"
+    "Amir Goharshady",
+    "Karaneh Keypoor"
   ],
   "venue": "International Joint Conference on Artificial Intelligence",
   "venueShort": "IJCAI 2025",
@@ -18,13 +18,16 @@
     "blockchains"
   ],
   "selected": true,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "This paper gives two trustless smart-contract protocols for sampling correlated equilibria on blockchain, replacing the traditional trusted mediator with cryptographic techniques based on oblivious transfer and zkSNARKs.",
-  "abstractSourceUrl": "https://www.ijcai.org/proceedings/2025/0416.pdf",
+  "abstract": "A correlated equilibrium gives each player a private recommendation drawn from a joint distribution. Implementing it requires sampling the recommendations without revealing the other player’s component. The paper gives two smart-contract protocols, based on oblivious transfer and zero-knowledge succinct proofs, with privacy and incentive analysis. The construction addresses two-player games; extending it to more players requires additional techniques.",
   "localPdfPath": "/papers/trustless-sampling-correlated-equilibria-ijcai-2025.pdf",
   "contentAvailability": "local-pdf",
   "links": {
-    "paper": "https://www.ijcai.org/proceedings/2025/0416.pdf"
+    "paper": "https://www.ijcai.org/proceedings/2025/0416.pdf",
+    "doi": "https://doi.org/10.24963/ijcai.2025/416"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "selectedOrder": 2,
+  "summary": "Replaces the trusted mediator for sampling a two-player correlated equilibrium with cryptographic smart-contract protocols and incentives for participation.",
+  "abstractLabel": "Technical overview"
 }

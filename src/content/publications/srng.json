@@ -16,13 +16,15 @@
     "blockchains"
   ],
   "selected": false,
-  "note": "Alphabetical author order with Amir Goharshady.",
-  "abstract": "SRNG presents an efficient decentralized approach to secret random number generation, aiming to provide tamper-resistant randomness while preserving the privacy properties needed by higher-level blockchain protocols.",
-  "abstractSourceUrl": "https://hal.science/hal-04518059",
+  "abstract": "SRNG studies decentralized generation of a seed initially known to a designated recipient. Contributors submit encrypted inputs, and verifiable delay functions delay the availability of the resulting randomness. The recipient later reveals the result and supporting information for verification. Two variants trade an extra commit-and-reveal stage for stronger resistance to recipient-assisted manipulation.",
   "localPdfPath": "/papers/srng-icbc-2024.pdf",
   "contentAvailability": "local-pdf",
   "links": {
-    "preprint": "https://hal.science/hal-04518059/document"
+    "preprint": "https://hal.science/hal-04518059/document",
+    "doi": "https://ieeexplore.ieee.org/document/10634454"
   },
-  "alphaOrder": true
+  "alphaOrder": true,
+  "area": "incentives-resources",
+  "summary": "Uses verifiable delay functions to generate randomness that is temporarily secret to a recipient and later publicly auditable.",
+  "abstractLabel": "Technical overview"
 }

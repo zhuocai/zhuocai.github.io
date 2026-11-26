@@ -60,11 +60,13 @@ const hasEqualContrib = parsedAuthors.some((a) => a.equalContrib);
     )
   }
 
-  {
-    showAbstract && publication.abstract && (
-      <p class="publication-card__abstract">{publication.abstract}</p>
-    )
-  }
+  {publication.summary && <p class="publication-card__abstract">{publication.summary}</p>}
+  {showAbstract && publication.abstract && (
+    <details class="citation-abstract">
+      <summary>{publication.abstractLabel}</summary>
+      <p>{publication.abstract}</p>
+    </details>
+  )}
 
   <div class="tag-row">
     {

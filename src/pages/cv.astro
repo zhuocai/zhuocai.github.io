@@ -35,7 +35,7 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
 
         <article class="cv-panel" data-reveal>
           <h2 class="snapshot-card__label">Research focus</h2>
-          <p>Transaction order fairness, Byzantine agreement, and applied cryptography.</p>
+          <p>Decentralized system security and distributed algorithms, with a focus on blockchains. My work develops guarantees for transaction order fairness, coordination, and participation through protocol design, cryptography, incentives, and verification.</p>
         </article>
       </div>
 
@@ -115,10 +115,6 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
         </ul>
       </article>
 
-      <article class="cv-panel cv-embed" data-reveal>
-        <h2 class="snapshot-card__label">PDF preview</h2>
-        <iframe src={`${cvDocument.href}#view=FitH`} title={`${profile.name} English CV PDF`} loading="lazy"></iframe>
-      </article>
     </div>
   </section>
 </BaseLayout>
@@ -130,7 +126,4 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
     font: .875rem/1.6 var(--font-ui);
   }
 
-  .cv-embed > h2 {
-    margin-top: 1.25rem;
-  }
 </style>

@@ -12,7 +12,7 @@ const version = createHash("sha256")
 export const cvDocument = {
   href: `${pdfPath}?v=${version}`,
   downloadName: "Zhuo_Cai_CV.pdf",
-  updated: "2026-11-19",
+  updated: "2026-11-26",
   pageCount: 2,
   expectedGraduation: "July 2027"
 } as const;
